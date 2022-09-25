@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
@@ -35,6 +32,7 @@ public class Confiteria implements Serializable {
     @ManyToMany(mappedBy = "confiteria")
     private List<Compra> compras;
 
+    @Builder
     public Confiteria(String nombre, Float precio, String urlImagen) {
         this.nombre = nombre;
         this.precio = precio;

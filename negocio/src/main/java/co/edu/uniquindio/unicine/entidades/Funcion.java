@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class Funcion implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Positive
+    @Column(nullable = false)
+    private Float precio;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Sala sala;

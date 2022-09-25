@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -29,6 +30,7 @@ public class Cliente extends Persona implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Cupon> cupones;
 
+    @Builder
     public Cliente(String nombre, String correo, String password, String urlFoto, List<String> telefonos) {
         super(nombre, correo, password);
         this.urlFoto = urlFoto;

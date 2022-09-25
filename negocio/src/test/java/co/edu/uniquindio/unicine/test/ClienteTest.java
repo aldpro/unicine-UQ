@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -36,7 +38,11 @@ public class ClienteTest {
     public void obtener(){
 
     }
+    @Test
+    @Sql("classpath:dataset.sql")
     public void listar(){
+        List<Cliente> lista = clienteRepo.findAll();
 
+        lista.forEach(System.out::println);
     }
 }

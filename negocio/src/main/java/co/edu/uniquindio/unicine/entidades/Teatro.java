@@ -15,6 +15,7 @@ public class Teatro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer codigo;
 
     @Column(nullable = false, length = 100)

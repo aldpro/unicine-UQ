@@ -1,8 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
-import org.w3c.dom.stylesheets.LinkStyle;
-
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
@@ -46,21 +44,13 @@ public class Compra implements Serializable {
     @JoinColumn(nullable = false)
     private Funcion funcion;
 
-    @ManyToMany
-    @JoinTable(name = "entrada",
-            joinColumns = @JoinColumn(name = "compra_codigo"),
-            inverseJoinColumns = @JoinColumn(name = "silla_sala_codigo")
-    )
-    private List<SillaSala> sillaSala;
-
     @Builder
-    public Compra(MedioPago medioPago, List<Confiteria> confiteria, Cupon cupon, Cliente cliente, Funcion funcion, List<SillaSala> sillaSala) {
+    public Compra(MedioPago medioPago, List<Confiteria> confiteria, Cupon cupon, Cliente cliente, Funcion funcion) {
         this.medioPago = medioPago;
         this.fecha = LocalDateTime.now();
         this.confiteria = confiteria;
         this.cupon = cupon;
         this.cliente = cliente;
         this.funcion = funcion;
-        this.sillaSala = sillaSala;
     }
 }

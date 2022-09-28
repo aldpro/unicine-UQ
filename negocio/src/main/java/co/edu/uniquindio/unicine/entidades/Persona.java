@@ -18,10 +18,13 @@ public class Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
+
     @Column(nullable = false, length = 100)
     private String nombre;
+
     @Column(nullable = false, unique = true, length = 200)
     private String correo;
+
     @ToString.Exclude
     @Column(nullable = false,length = 100)
     private String password;
@@ -31,6 +34,4 @@ public class Persona implements Serializable {
         this.correo = correo;
         this.password = password;
     }
-
-
 }

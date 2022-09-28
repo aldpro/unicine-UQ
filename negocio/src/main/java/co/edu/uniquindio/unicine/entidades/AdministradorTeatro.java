@@ -16,8 +16,6 @@ public class AdministradorTeatro extends Persona implements Serializable {
 
     @Builder
     public AdministradorTeatro(String nombre, String correo, String password) {
-
         super(nombre, correo, password);
     }
-
 }

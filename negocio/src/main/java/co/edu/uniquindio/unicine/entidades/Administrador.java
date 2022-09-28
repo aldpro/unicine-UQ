@@ -11,9 +11,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Administrador extends Persona implements Serializable {
+
     @Builder
     public Administrador(String nombre, String correo, String password) {
         super(nombre, correo, password);
     }
-
 }

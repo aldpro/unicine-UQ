@@ -16,14 +16,11 @@ public class Sala implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
-
     @Column(nullable = false, length = 100)
     private String nombre;
-
     @ManyToOne
     @JoinColumn(nullable = false)
     private Teatro teatro;
-
     @Builder
     public Sala(String nombre, Teatro teatro) {
         this.nombre = nombre;

@@ -24,7 +24,7 @@ public class Compra implements Serializable {
     private MedioPago medioPago;
 
     @Column(nullable = false)
-    private LocalDateTime fecha;
+    private LocalDateTime fechaCompra;
 
     @Positive
     @Column(nullable = false)
@@ -44,10 +44,13 @@ public class Compra implements Serializable {
     @JoinColumn(nullable = false)
     private Funcion funcion;
 
+    @OneToMany(mappedBy = "compra")
+    private List<Entrada> entradas;
+
     @Builder
     public Compra(MedioPago medioPago, List<Confiteria> confiteria, Cupon cupon, Cliente cliente, Funcion funcion) {
         this.medioPago = medioPago;
-        this.fecha = LocalDateTime.now();
+        this.fechaCompra = LocalDateTime.now();
         this.confiteria = confiteria;
         this.cupon = cupon;
         this.cliente = cliente;

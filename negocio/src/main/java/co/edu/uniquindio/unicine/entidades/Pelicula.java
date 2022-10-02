@@ -1,18 +1,17 @@
 package co.edu.uniquindio.unicine.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Pelicula implements Serializable {
 
@@ -24,10 +23,33 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, length = 10)
     private String estado;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Genero genero;
+    @ManyToMany
+    private List<Genero> generos;
 
     @Column(nullable = false, length = 80)
     private String nombre;
+
+    @Column(nullable = false)
+    @Lob
+    private String reparto;
+
+    @Column(nullable = false)
+    @Lob
+    private String sinopsis;
+
+    @Column(nullable = false, length = 200)
+    private String urlImagen;
+
+    @Column(nullable = false,length = 200)
+    private String urlTrailer;
+    @Builder
+    public Pelicula(String estado, List<Genero> genero, String nombre, String reparto, String sinopsis, String urlImagen, String urlTrailer) {
+        this.estado = estado;
+        this.generos = genero;
+        this.nombre = nombre;
+        this.reparto = reparto;
+        this.sinopsis = sinopsis;
+        this.urlImagen = urlImagen;
+        this.urlTrailer = urlTrailer;
+    }
 }

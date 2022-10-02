@@ -11,28 +11,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Sala implements Serializable {
+public class CuponCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
-
-    @Column(nullable = false, length = 100)
-    private String nombre;
-
+    @Column(nullable = false)
+    private Boolean estado;
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Teatro teatro;
-
+    private Cupon cupon;
     @ManyToOne
     @JoinColumn(nullable = false)
-    private DistribucionSilla distribucionSilla;
+    private Cliente cliente;
 
     @Builder
-    public Sala(String nombre, Teatro teatro, DistribucionSilla distribucionSilla) {
-        this.nombre = nombre;
-        this.teatro = teatro;
-        this.distribucionSilla = distribucionSilla;
+    public CuponCliente(Boolean estado, Cupon cupon, Cliente cliente) {
+        this.estado = estado;
+        this.cupon = cupon;
+        this.cliente = cliente;
     }
 }

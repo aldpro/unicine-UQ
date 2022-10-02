@@ -5,37 +5,39 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Confiteria implements Serializable {
+public class compraConfiteria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(nullable = false, length = 100)
-    private String nombre;
-
     @Positive
     @Column(nullable = false)
     private Float precio;
 
-    @Column(nullable = false,length = 200)
-    private String urlImagen;
+    @Column(nullable = false)
+    private Integer unidades;
 
-    @OneToMany(mappedBy = "confiteria")
-    private List<compraConfiteria> compraConfiterias;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Compra compra;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Confiteria confiteria;
 
     @Builder
-    public Confiteria(String nombre, Float precio, String urlImagen) {
-        this.nombre = nombre;
+    public compraConfiteria(Float precio, Integer unidades, Compra compra, Confiteria confiteria) {
         this.precio = precio;
-        this.urlImagen = urlImagen;
+        this.unidades = unidades;
+        this.compra = compra;
+        this.confiteria = confiteria;
     }
 }

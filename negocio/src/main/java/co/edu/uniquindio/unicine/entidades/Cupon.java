@@ -19,29 +19,23 @@ public class Cupon implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
-
     @Positive
     @Column(nullable = false)
     private Float descuento;
-
     @Column(nullable = false)
     private LocalDateTime fechaVencimiento;
-
     @Column(nullable = false)
     private Boolean estado;
 
     @OneToOne(mappedBy = "cupon")
     private Compra compra;
 
-    @ManyToMany
-    @JoinColumn(nullable = false)
-    private List<Cliente> cliente;
-
+    @OneToMany(mappedBy = "cupon")
+    private List<CuponCliente> cuponClientes;
     @Builder
-    public Cupon(Float descuento, LocalDateTime fechaVencimiento, Boolean estado, List<Cliente> cliente) {
+    public Cupon(Float descuento, LocalDateTime fechaVencimiento, Boolean estado) {
         this.descuento = descuento;
         this.fechaVencimiento = fechaVencimiento;
         this.estado = estado;
-        this.cliente = cliente;
     }
 }

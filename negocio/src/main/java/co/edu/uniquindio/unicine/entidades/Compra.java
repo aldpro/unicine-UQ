@@ -31,7 +31,7 @@ public class Compra implements Serializable {
     private Float valorTotal;
 
     @OneToMany(mappedBy = "compra")
-    private List<compraConfiteria> compraConfiterias;
+    private List<CompraConfiteria> compraConfiterias;
 
     @OneToOne
     private Cupon cupon;

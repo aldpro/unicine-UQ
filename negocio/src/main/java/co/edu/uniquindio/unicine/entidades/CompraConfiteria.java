@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class compraConfiteria implements Serializable {
+public class CompraConfiteria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class compraConfiteria implements Serializable {
     private Confiteria confiteria;
 
     @Builder
-    public compraConfiteria(Float precio, Integer unidades, Compra compra, Confiteria confiteria) {
+    public CompraConfiteria(Float precio, Integer unidades, Compra compra, Confiteria confiteria) {
         this.precio = precio;
         this.unidades = unidades;
         this.compra = compra;

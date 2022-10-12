@@ -10,9 +10,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class DistribucionSilla implements Serializable {
 
     @Id
@@ -23,19 +23,20 @@ public class DistribucionSilla implements Serializable {
     @Column(nullable = false, length = 200)
     private String urlEsquema;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Integer total_sillas;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Integer filas;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Integer columnas;
 
     @OneToMany(mappedBy = "distribucionSilla")
+    @ToString.Exclude
     private List<Sala> salas;
 
     @Builder

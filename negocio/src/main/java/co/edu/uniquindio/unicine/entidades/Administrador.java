@@ -9,11 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
-@ToString(callSuper = true)
+@ToString
 public class Administrador extends Persona implements Serializable {
 
-    @Builder
-    public Administrador(String nombre, String correo, String password) {
-        super(nombre, correo, password);
-    }
 }

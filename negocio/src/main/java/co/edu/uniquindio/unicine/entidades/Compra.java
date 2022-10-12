@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Compra implements Serializable {
 
     @Id
@@ -19,22 +20,23 @@ public class Compra implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Enumerated(EnumType.STRING)
     @Column (nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
     private MedioPago medioPago;
 
     @Column(nullable = false)
     private LocalDateTime fechaCompra;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Float valorTotal;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<CompraConfiteria> compraConfiterias;
 
     @OneToOne
-    private Cupon cupon;
+    private CuponCliente cuponCliente;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -45,13 +47,14 @@ public class Compra implements Serializable {
     private Funcion funcion;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<Entrada> entradas;
 
     @Builder
-    public Compra(MedioPago medioPago, Cupon cupon, Cliente cliente, Funcion funcion) {
+    public Compra(MedioPago medioPago, CuponCliente cuponCliente, Cliente cliente, Funcion funcion) {
         this.medioPago = medioPago;
         this.fechaCompra = LocalDateTime.now();
-        this.cupon = cupon;
+        this.cuponCliente = cuponCliente;
         this.cliente = cliente;
         this.funcion = funcion;
     }

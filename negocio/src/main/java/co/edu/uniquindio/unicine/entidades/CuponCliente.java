@@ -11,20 +11,28 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class CuponCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
+
     @Column(nullable = false)
     private Boolean estado;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cupon cupon;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cliente cliente;
+
+    @OneToOne(mappedBy = "cuponCliente")
+    @ToString.Exclude
+    private Compra compra;
 
     @Builder
     public CuponCliente(Boolean estado, Cupon cupon, Cliente cliente) {

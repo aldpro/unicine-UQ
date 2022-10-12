@@ -1,14 +1,14 @@
 package co.edu.uniquindio.unicine.entidades;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class Cliente extends Persona implements Serializable {
@@ -22,19 +22,19 @@ public class Cliente extends Persona implements Serializable {
     @ElementCollection
     private List<String> telefonos;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<Compra> compras;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
     @Builder
-    public Cliente(String nombre, String correo, String password, String urlFoto, List<String> telefonos) {
-        super(nombre, correo, password);
+    public Cliente(Integer cedula, String nombre, String correo, String password, Boolean estado, String urlFoto, List<String> telefonos) {
+        super(cedula, nombre, correo, password);
+        this.estado = false;
         this.urlFoto = urlFoto;
         this.telefonos = telefonos;
-        this.estado = false;
     }
 }

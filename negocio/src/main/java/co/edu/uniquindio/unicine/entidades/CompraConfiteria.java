@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class CompraConfiteria implements Serializable {
 
     @Id
@@ -18,8 +19,8 @@ public class CompraConfiteria implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Float precio;
 
     @Column(nullable = false)

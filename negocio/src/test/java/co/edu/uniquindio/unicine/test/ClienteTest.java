@@ -23,23 +23,58 @@ public class ClienteTest {
     @Test
     public void registrar(){
 
-        String[] tels = new String[] {"423431", "532421"};
-        Cliente cliente = new Cliente("pepe", "pepe@mail.com", "1122", "ruta", Arrays.asList(tels));
-        Cliente guardado = clienteRepo.save(cliente);
+        String[] telefonos = new String[] {"3145876258", "3174085147"};
+        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
 
-        Assertions.assertEquals("pepe", guardado.getNombre());
+        Cliente registrado = clienteRepo.save(cliente);
+
+        Assertions.assertNotNull(registrado);
+        Assertions.assertEquals("Cristian", registrado.getNombre());
     }
+
+    @Test
     public void eliminar(){
 
-    }
-    public void actualizar(){
+        String[] telefonos = new String[] {"3145876258", "3174085147"};
+        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
 
-    }
-    public void obtener(){
+        Cliente registrado = clienteRepo.save(cliente);
 
+        clienteRepo.delete(registrado);
+
+        Cliente buscado = clienteRepo.findById(1007569040).orElse(null);
+        Assertions.assertNull(buscado);
     }
     @Test
-    @Sql("classpath:dataset.sql")
+    public void actualizar(){
+
+        String[] telefonos = new String[] {"3145876258", "3174085147"};
+        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
+
+        Cliente registrado = clienteRepo.save(cliente);
+
+        registrado.setEstado(true);
+
+        clienteRepo.save(registrado);
+
+        Cliente buscado = clienteRepo.findById(1007569040).orElse(null);
+        Assertions.assertEquals(true, buscado.getEstado());
+    }
+
+    @Test
+    public void obtener(){
+
+        String[] telefonos = new String[] {"3145876258", "3174085147"};
+        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
+
+        clienteRepo.save(cliente);
+
+        Cliente buscado = clienteRepo.findById(1007569040).orElse(null);
+        System.out.println(buscado);
+    }
+
+    @Test
+    //@Sql("classpath:dataset.sql")
     public void listar(){
         List<Cliente> lista = clienteRepo.findAll();
 

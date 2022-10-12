@@ -32,6 +32,7 @@ public class Compra implements Serializable {
     private Float valorTotal;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<CompraConfiteria> compraConfiterias;
 
     @OneToOne
@@ -46,6 +47,7 @@ public class Compra implements Serializable {
     private Funcion funcion;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<Entrada> entradas;
 
     @Builder

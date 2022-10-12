@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Cliente extends Persona implements Serializable {
 
     @Column(nullable = false)
@@ -22,12 +22,12 @@ public class Cliente extends Persona implements Serializable {
     @ElementCollection
     private List<String> telefonos;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<Compra> compras;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
     @Builder

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@ToString
 public class Persona implements Serializable {
 
     @Id

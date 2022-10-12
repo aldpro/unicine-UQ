@@ -23,6 +23,7 @@ public class Genero implements Serializable {
     private String nombre;
 
     @ManyToMany(mappedBy = "generos")
+    @ToString.Exclude
     private List<Pelicula> peliculas;
 
     @Builder

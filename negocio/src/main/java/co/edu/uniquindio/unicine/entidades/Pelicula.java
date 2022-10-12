@@ -44,6 +44,7 @@ public class Pelicula implements Serializable {
     private String urlTrailer;
 
     @OneToMany(mappedBy = "pelicula")
+    @ToString.Exclude
     private List<Funcion> funciones;
 
     @Builder

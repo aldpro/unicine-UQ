@@ -32,6 +32,7 @@ public class Cupon implements Serializable {
     private Boolean estado;
 
     @OneToMany(mappedBy = "cupon")
+    @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
     @Builder

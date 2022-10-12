@@ -11,8 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Pelicula implements Serializable {
 
     @Id
@@ -42,6 +42,10 @@ public class Pelicula implements Serializable {
 
     @Column(nullable = false,length = 200)
     private String urlTrailer;
+
+    @OneToMany(mappedBy = "pelicula")
+    private List<Funcion> funciones;
+
     @Builder
     public Pelicula(String estado, List<Genero> genero, String nombre, String reparto, String sinopsis, String urlImagen, String urlTrailer) {
         this.estado = estado;

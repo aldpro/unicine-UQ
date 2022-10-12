@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Genero implements Serializable {
 
     @Id
@@ -26,8 +26,7 @@ public class Genero implements Serializable {
     private List<Pelicula> peliculas;
 
     @Builder
-    public Genero(String nombre, List<Pelicula> peliculas) {
+    public Genero(String nombre) {
         this.nombre = nombre;
-        this.peliculas = peliculas;
     }
 }

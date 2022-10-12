@@ -20,6 +20,7 @@ public class ClienteTest {
     @Autowired
     private ClienteRepo clienteRepo;
 
+    /**
     @Test
     public void registrar(){
 
@@ -29,6 +30,7 @@ public class ClienteTest {
 
         Assertions.assertEquals("pepe", guardado.getNombre());
     }
+    */
     public void eliminar(){
 
     }

@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Funcion implements Serializable {
 
     @Id
@@ -19,9 +20,10 @@ public class Funcion implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Positive
     @Column(nullable = false)
+    @Positive
     private Float precio;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Sala sala;
@@ -38,7 +40,8 @@ public class Funcion implements Serializable {
     private List<Compra> compras;
 
     @Builder
-    public Funcion(Sala sala, Horario horario, Pelicula pelicula) {
+    public Funcion(Float precio, Sala sala, Horario horario, Pelicula pelicula) {
+        this.precio = precio;
         this.sala = sala;
         this.horario = horario;
         this.pelicula = pelicula;

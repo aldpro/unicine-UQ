@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Sala implements Serializable {
 
     @Id
@@ -28,6 +29,9 @@ public class Sala implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private DistribucionSilla distribucionSilla;
+
+    @OneToMany(mappedBy = "sala")
+    private List<Funcion> funciones;
 
     @Builder
     public Sala(String nombre, Teatro teatro, DistribucionSilla distribucionSilla) {

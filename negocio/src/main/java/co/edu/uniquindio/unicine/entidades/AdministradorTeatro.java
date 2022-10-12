@@ -7,15 +7,12 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@ToString(callSuper = true)
+@ToString
 public class AdministradorTeatro extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "administradorTeatro")
     private List<Teatro> teatros;
-
-    @Builder
-    public AdministradorTeatro(String nombre, String correo, String password) {
-        super(nombre, correo, password);
-    }
 }

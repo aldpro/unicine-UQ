@@ -74,7 +74,7 @@ insert into pelicula_generos values (5, 6);
 
 insert into sala values (1, "Atlantis", 2, 5);
 insert into sala values (2, "FLoresta", 1, 5);
-insert into sala values (3, "Gran Plaza Bosa", 1, 4);
+insert into sala values (3, "Gran Plaza", 1, 4);
 insert into sala values (4, "Multiplaza", 3, 3);
 insert into sala values (5, "Parque Colonia", 4, 2);
 insert into sala values (6, "Plaza Imperial", 5, 1);

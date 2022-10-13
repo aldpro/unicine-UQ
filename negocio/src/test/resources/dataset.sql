@@ -111,6 +111,12 @@ insert into funcion values (6, 6800, 6, 4, 1);
 =======
 >>>>>>> 0d19221af95baa8c2400344c258eff974413672a
 
+insert into cupon values (1, 0.2, 1, "2022-12-25 20:00:00");
+insert into cupon values (2, 0.1, 1, "2022-12-19 15:45:00");
+insert into cupon values (3, 0.1, 1, "2022-12-25 20:00:00");
+insert into cupon values (4, 0.2, 1, "2022-12-25 20:00:00");
+insert into cupon values (5, 0.15, 1, "2022-12-25 20:00:00");
+
 insert into confiteria values (1, "Perro Caliente + Gaseosa", 24000, "C://perroygaseosa.png");
 insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygaseosa.png");
 insert into confiteria values (3, "Crispeta + Gaseosa para Pareja", 54800, "C://crispetaygaseosa.png");

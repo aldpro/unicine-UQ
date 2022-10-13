@@ -4,6 +4,7 @@ insert into administrador_teatro values (1119000000,"jhon@yahoo.com","Jhon","02T
 insert into administrador_teatro values (1228000000,"henry@outlook.com","Henry","ESEq2BwzB0rH");
 insert into administrador_teatro values (1337000000,"valentina@gmail.com","Valentina","IRe05CXzA7dX");
 insert into administrador_teatro values (1446000000,"farit@gmail.com","Farit","69YuNC01u6Eq");
+insert into administrador_teatro values (1557000000,"rodolfo@gmail.com","Rodolfo","1Av3yEzA2Ts");
 
 insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1,"https://pepe.jpg");
 insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0,"http://juan.jpg");

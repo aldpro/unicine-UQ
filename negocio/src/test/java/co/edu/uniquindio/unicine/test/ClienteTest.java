@@ -58,6 +58,7 @@ public class ClienteTest {
 
         Optional<Cliente> buscado = clienteRepo.findById(1009000011);
         Assertions.assertNotNull(buscado.orElse(null));
+
     }
 
     @Test

@@ -62,19 +62,22 @@ public class ClienteTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void obtener(){
 
+        /**
         String[] telefonos = new String[] {"3145876258", "3174085147"};
         Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
 
         clienteRepo.save(cliente);
+        */
 
-        Cliente buscado = clienteRepo.findById(1007569040).orElse(null);
+        Cliente buscado = clienteRepo.findById(1007000033).orElse(null);
         System.out.println(buscado);
     }
 
     @Test
-    //@Sql("classpath:dataset.sql")
+    @Sql("classpath:dataset.sql")
     public void listar(){
         List<Cliente> lista = clienteRepo.findAll();
 

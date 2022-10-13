@@ -6,19 +6,6 @@ insert into administrador_teatro values (1337000000,"valentina@gmail.com","Valen
 insert into administrador_teatro values (1446000000,"farit@gmail.com","Farit","69YuNC01u6Eq");
 insert into administrador_teatro values (1557000000,"rodolfo@gmail.com","Rodolfo","1Av3yEzA2Ts");
 
-insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1,"https://pepe.jpg");
-insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0,"http://juan.jpg");
-insert into cliente values (1007000033,"luis@yahoo.com","Luis","kUL17Okt1SM",0,"http://luis.png");
-insert into cliente values (1006000044,"maria@gmail.com","Maria","Dss57UgC3QK",1,"http://maria.jpg");
-insert into cliente values (1005000055,"luisa@google.com","Luisa","MqG82VtF2Ob",0,"https://luis.png");
-
-insert into cliente_telefonos values (1009000011, "3146832477");
-insert into cliente_telefonos values (1009000011, "3008245984");
-insert into cliente_telefonos values (1008000022, "3176857415");
-insert into cliente_telefonos values (1007000033, "3126845287");
-insert into cliente_telefonos values (1006000044, "3139847645");
-insert into cliente_telefonos values (1005000055, "3101036478");
-
 insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
 insert into ciudad values (3,"Cali");
@@ -81,6 +68,19 @@ insert into funcion values (4, 6800, 4, 4, 3);
 insert into funcion values (5, 7100, 5, 5, 2);
 insert into funcion values (6, 6800, 6, 4, 1);
 
+insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1,"https://pepe.jpg");
+insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0,"http://juan.jpg");
+insert into cliente values (1007000033,"luis@yahoo.com","Luis","kUL17Okt1SM",0,"http://luis.png");
+insert into cliente values (1006000044,"maria@gmail.com","Maria","Dss57UgC3QK",1,"http://maria.jpg");
+insert into cliente values (1005000055,"luisa@google.com","Luisa","MqG82VtF2Ob",0,"https://luis.png");
+
+insert into cliente_telefonos values (1009000011, "3146832477");
+insert into cliente_telefonos values (1009000011, "3008245984");
+insert into cliente_telefonos values (1008000022, "3176857415");
+insert into cliente_telefonos values (1007000033, "3126845287");
+insert into cliente_telefonos values (1006000044, "3139847645");
+insert into cliente_telefonos values (1005000055, "3101036478");
+
 insert into cupon values (1, 0.2, 1, "2022-12-25 20:00:00");
 insert into cupon values (2, 0.1, 1, "2022-12-19 15:45:00");
 insert into cupon values (3, 0.1, 1, "2022-12-25 20:00:00");
@@ -92,3 +92,29 @@ insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygas
 insert into confiteria values (3, "Crispeta + Gaseosa para Pareja", 54800, "C://crispetaygaseosa.png");
 insert into confiteria values (4, "Crispeta", 15000, "C://crispeta.png");
 insert into confiteria values (5, "Bebida", 6000, "C://gaseosa.png");
+
+insert into cupon_cliente values (1, 1, 1005000055, 1);
+insert into cupon_cliente values (2, 0, 1006000044, 2);
+insert into cupon_cliente values (3, 1, 1006000044, 3);
+insert into cupon_cliente values (4, 1, 1007000033, 4);
+insert into cupon_cliente values (5, 0, 1008000022, 5);
+
+insert into compra values (1, "2022-12-20 18:32:25", "NEQUI", 17000, 1008000022, 1, 6);
+insert into compra values (2, "2022-12-15 14:47:41", "VISA", 59800, 1007000033, 2, 5);
+insert into compra values (3, "2022-12-16 19:12:04", "NEQUI", 24000, 1006000044, 3, 4);
+insert into compra values (4, "2022-12-17 15:32:07", "MASTERCARD", 54800, 1005000055, 4, 3);
+insert into compra values (5, "2022-12-16 20:30:12", "DAVIPLATA", 72000, 1008000022, 5, 2);
+
+insert into compra_confiteria values (1, 6000, 2, 1, 5);
+insert into compra_confiteria values (2, 15000, 1, 1, 4);
+insert into compra_confiteria values (3, 29900, 2, 2, 2);
+insert into compra_confiteria values (4, 24000, 1, 3, 1);
+insert into compra_confiteria values (5, 54800, 1, 4, 3);
+insert into compra_confiteria values (6, 24000, 3, 5, 1);
+
+insert into entrada values (1, 5, 2, 17000, 1);
+insert into entrada values (2, 4, 4, 59800, 2);
+insert into entrada values (3, 3, 5, 24000, 3);
+insert into entrada values (4, 4, 2, 54800, 4);
+insert into entrada values (5, 5, 2, 54800, 4);
+insert into entrada values (6, 5, 3, 72000, 5);

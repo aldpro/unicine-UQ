@@ -79,8 +79,8 @@ public class ClienteTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listar(){
-        List<Cliente> lista = clienteRepo.findAll();
 
+        List<Cliente> lista = clienteRepo.findAll();
         lista.forEach(System.out::println);
     }
 }

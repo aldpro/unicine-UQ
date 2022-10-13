@@ -5,9 +5,9 @@ insert into administrador_teatro values (1228000000,"henry@outlook.com","Henry",
 insert into administrador_teatro values (1337000000,"valentina@gmail.com","Valentina","IRe05CXzA7dX");
 insert into administrador_teatro values (1446000000,"farit@gmail.com","Farit","69YuNC01u6Eq");
 
-insert into ciudad values (1,"Armeniaxd");
+insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
-insert into ciudad values (3,"Cali pachanguero");
+insert into ciudad values (3,"Cali");
 insert into ciudad values (4,"Bogota");
 insert into ciudad values (5,"Choco");
 

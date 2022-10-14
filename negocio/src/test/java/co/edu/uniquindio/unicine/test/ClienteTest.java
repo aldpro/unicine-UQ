@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.test;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.repo.ClienteRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,6 @@ public class ClienteTest {
 
         Optional<Cliente> buscado = clienteRepo.findById(1009000011);
         Assertions.assertNotNull(buscado.orElse(null));
-
     }
 
     @Test
@@ -67,5 +67,21 @@ public class ClienteTest {
 
         List<Cliente> lista = clienteRepo.findAll();
         lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void comprobarAutenticacion(){
+
+        Cliente cliente = clienteRepo.comprobarAutenticacion("pepe@hotmail.com", "CjT30mNdV");
+        System.out.println(cliente);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCompras(){
+
+        List<Compra> compras = clienteRepo.obtenerCompras("juan@outlook.com");
+        compras.forEach(System.out::println);
     }
 }

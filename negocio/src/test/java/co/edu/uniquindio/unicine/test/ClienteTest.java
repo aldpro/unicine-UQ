@@ -76,12 +76,19 @@ public class ClienteTest {
         Cliente cliente = clienteRepo.comprobarAutenticacion("pepe@hotmail.com", "CjT30mNdV");
         System.out.println(cliente);
     }
-
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerCompras(){
 
         List<Compra> compras = clienteRepo.obtenerCompras("juan@outlook.com");
         compras.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerPorCorreo(){
+
+        Cliente cliente = clienteRepo.findByCorreo("pepe@hotmail.com").orElse(null);
+        System.out.println(cliente);
     }
 }

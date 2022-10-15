@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
+import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.repo.ClienteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,11 @@ import java.util.Optional;
 public class ClienteServicioImpl implements ClienteServicio{
 
     @Autowired
-    private ClienteRepo clienteRepo;
+    private final ClienteRepo clienteRepo;
+    private final EmailServicio emailServicio;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo) {
-
+    public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio) {
+        this.emailServicio = emailServicio;
         this.clienteRepo = clienteRepo;
     }
 
@@ -47,6 +49,7 @@ public class ClienteServicioImpl implements ClienteServicio{
         if (correoExiste){
             throw new Exception("Este correo ya esta registrado");
         }
+        emailServicio.enviarEmail("Registro en unicine","Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/",cliente.getCorreo());
         return clienteRepo.save(cliente);
     }
 
@@ -93,6 +96,16 @@ public class ClienteServicioImpl implements ClienteServicio{
 
     @Override
     public boolean redimirCupon(Integer codigoCupon) throws Exception{
+        return false;
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculas(String nombrePelicula) throws Exception {
+        return null;
+    }
+
+    @Override
+    public boolean cambiarPassword(Integer codigo) throws Exception {
         return false;
     }
 }

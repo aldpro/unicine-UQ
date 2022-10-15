@@ -2,10 +2,49 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.Funcion;
 import co.edu.uniquindio.unicine.entidades.Horario;
+import co.edu.uniquindio.unicine.entidades.Sala;
+import co.edu.uniquindio.unicine.entidades.Teatro;
+
+import java.util.List;
 
 public interface AdminTeatroServicio {
 
-    Horario crearHorario(Horario horario) throws Exception;
+    Horario crearHorario(Horario horario);
 
-    Funcion crearFuncion(Funcion funcion) throws Exception;
+    List<Horario> listarHorarios();
+
+    Horario obtenerHorario(Integer codigoHorario) throws Exception;
+
+    void eliminarHorario(Integer codigoHorario) throws Exception;
+
+    Funcion crearFuncion(Funcion funcion);
+
+    Funcion actualizarFuncion(Funcion funcion)throws Exception;
+
+    void eliminarFuncion(Integer codigoFuncion) throws Exception;
+
+    List<Funcion> listarFuncion();
+
+    Funcion obtenerFuncion(Integer codigoFuncion)throws Exception;
+
+    Sala crearSala(Sala sala);
+
+    Sala actualizarSala(Sala sala)throws Exception;
+
+    void eliminarSala(Integer codigoSala) throws Exception;
+
+    List<Sala> listarSalas();
+
+    Sala obtenerSala(Integer codigoSala)throws Exception;
+
+    Teatro crearTeatro(Teatro teatro);
+
+    Teatro actualizarTeatro(Teatro teatro)throws Exception;
+
+    void eliminarTeatro(Integer codigoTeatro) throws Exception;
+
+    List<Teatro> listarTeatros();
+
+    Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
+
 }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.test;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
+import co.edu.uniquindio.unicine.servicios.EmailServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ClienteServicioTest {
 
     @Autowired
     private ClienteServicio clienteServicio;
+
+    @Autowired
+    private EmailServicio emailServicio;
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -64,5 +68,10 @@ public class ClienteServicioTest {
     public void listarClienteTest(){
         List<Cliente> lista = clienteServicio.listarClientes();
         lista.forEach(System.out::println);
+    }
+
+    @Test
+    public void enviarCorreoTest(){
+        emailServicio.enviarEmail("Prueba envio", "Siganme pues :) https://www.instagram.com/henry_barraganp/", "henrya.barraganp@uqvirtual.edu.co");
     }
 }

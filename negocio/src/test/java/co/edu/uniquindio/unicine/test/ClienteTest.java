@@ -77,6 +77,7 @@ public class ClienteTest {
         Cliente cliente = clienteRepo.comprobarAutenticacion("pepe@hotmail.com", "CjT30mNQ1dV");
         System.out.println(cliente);
     }
+    
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerCompras(){

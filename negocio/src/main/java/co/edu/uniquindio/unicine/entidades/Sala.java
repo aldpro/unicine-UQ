@@ -22,6 +22,10 @@ public class Sala implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombre;
 
+    @Column (nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
+    private TipoSala tipoSala;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Teatro teatro;
@@ -35,8 +39,9 @@ public class Sala implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Sala(String nombre, Teatro teatro, DistribucionSilla distribucionSilla) {
+    public Sala(String nombre, TipoSala tipoSala, Teatro teatro, DistribucionSilla distribucionSilla) {
         this.nombre = nombre;
+        this.tipoSala = tipoSala;
         this.teatro = teatro;
         this.distribucionSilla = distribucionSilla;
     }

@@ -25,12 +25,12 @@ insert into teatro values (4, "Carrera 7 # B 12-13 Sur", "3001247585", 133700000
 insert into teatro values (5, "Carrera 9 # 4-7 Oeste", "3186347896", 1446000000, 2);
 insert into teatro values (6, "Calle 4 # 4-2 Sur", "3178532410", 1446000000, 1);
 
-insert into sala values (1, "Atlantis", 2, 5);
-insert into sala values (2, "FLoresta", 1, 5);
-insert into sala values (3, "Gran Plaza Bosa", 1, 4);
-insert into sala values (4, "Multiplaza", 3, 3);
-insert into sala values (5, "Parque Colonia", 4, 2);
-insert into sala values (6, "Plaza Imperial", 5, 1);
+insert into sala values (1, "Atlantis", "XD", 2, 5);
+insert into sala values (2, "FLoresta", "NORMAL", 1, 5);
+insert into sala values (3, "Gran Plaza Bosa", "IMAX", 1, 4);
+insert into sala values (4, "Multiplaza", "XD", 3, 3);
+insert into sala values (5, "Parque Colonia", "NORMAL", 4, 2);
+insert into sala values (6, "Plaza Imperial", "DX4", 5, 1);
 
 insert into horario values (1, "2022-12-20 23:15:32", "2022-12-20 21:30:32");
 insert into horario values (2, "2022-12-15 20:31:05", "2022-12-15 18:50:45");
@@ -46,11 +46,11 @@ insert into genero values (4, "Deporte");
 insert into genero values (5, "Animado");
 insert into genero values (6, "Fantasia");
 
-insert into pelicula values (1, "Cartelera", "Pinocho", "Tom Hanks : Cynthia Erivo : Benjamin Evan : Luke Evans : Joseph Gordon : Kegan Michael : Giuseppe Bautista : Sheila Atim.", "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
-insert into pelicula values (2, "Preventa", "Dragon Ball: Super Hero", "Masako Nozawa : Hiroshi Kamiya : Mamoru Miyano Aya Hisakawa : Ota Pile : Charles Martinet : Mayumi Tanaka : Sean Shemmel.", "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
-insert into pelicula values (3, "Preventa", "Smile", "Sosie Bacon : Caitlin Stasey : Jessie Usher : Kyle Galllner : Rob Morgan : Nick Arapoglou : Dora Kiss : Robin Weigert : Gillian Zinser.", "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
-insert into pelicula values (4, "Cartelera", "Minions", "Steve Carell : Pierre Coffin : Sandra Bullock : Steve Coogan : Jon Hamm : Bob Bergen : Michael Keaton : Michael Beattie.", "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
-insert into pelicula values (5, "Cartelera", "Encanto", "Stephanie Beatriz : Wilmer Valderrama : John Leguizamo : Alan Tudyk : Sarah Nicole : Maluma : Diane Guerrero : Jessica Darrow.", "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
+insert into pelicula values (1, "Cartelera", "Pinocho", 4.2, "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
+insert into pelicula values (2, "Preventa", "Dragon Ball: Super Hero", 3.5, "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
+insert into pelicula values (3, "Preventa", "Smile", 4.0, "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
+insert into pelicula values (4, "Cartelera", "Minions", 4.5, "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
+insert into pelicula values (5, "Cartelera", "Encanto", 4.1, "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
 
 insert into pelicula_generos values (1, 6);
 insert into pelicula_generos values (1, 5);
@@ -60,6 +60,37 @@ insert into pelicula_generos values (3, 1);
 insert into pelicula_generos values (4, 3);
 insert into pelicula_generos values (4, 5);
 insert into pelicula_generos values (5, 6);
+
+insert into pelicula_repartos values (1, "Tom Hanks");
+insert into pelicula_repartos values (1, "Cynthia Erivo");
+insert into pelicula_repartos values (1, "Benjamin Evan");
+insert into pelicula_repartos values (1, "Luke Evans");
+insert into pelicula_repartos values (1, "Joseph Gordon");
+insert into pelicula_repartos values (1, "Kegan Michael");
+insert into pelicula_repartos values (2, "Masako Nozawa");
+insert into pelicula_repartos values (2, "Hiroshi Kamiya");
+insert into pelicula_repartos values (2, "Mamoru Miyano");
+insert into pelicula_repartos values (2, "Aya Hisakawa");
+insert into pelicula_repartos values (2, "Ota Pile");
+insert into pelicula_repartos values (2, "Charles Martinet");
+insert into pelicula_repartos values (3, "Sosie Bacon");
+insert into pelicula_repartos values (3, "Caitlin Stasey");
+insert into pelicula_repartos values (3, "Jessie Usher");
+insert into pelicula_repartos values (3, "Kyle Galllner");
+insert into pelicula_repartos values (3, "Rob Morgan");
+insert into pelicula_repartos values (3, "Nick Arapoglou");
+insert into pelicula_repartos values (4, "Steve Carell");
+insert into pelicula_repartos values (4, "Pierre Coffin");
+insert into pelicula_repartos values (4, "Sandra Bullock");
+insert into pelicula_repartos values (4, "Steve Coogan");
+insert into pelicula_repartos values (4, "Jon Hamm");
+insert into pelicula_repartos values (4, "Bob Bergen");
+insert into pelicula_repartos values (5, "Stephanie Beatriz");
+insert into pelicula_repartos values (5, "Wilmer Valderrama");
+insert into pelicula_repartos values (5, "John Leguizamo");
+insert into pelicula_repartos values (5, "Alan Tudyk");
+insert into pelicula_repartos values (5, "Sarah Nicole");
+insert into pelicula_repartos values (5, "Maluma");
 
 insert into funcion values (1, 7000, 1, 1, 6);
 insert into funcion values (2, 6500, 2, 2, 5);

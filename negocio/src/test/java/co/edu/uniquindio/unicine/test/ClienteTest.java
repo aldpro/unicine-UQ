@@ -74,7 +74,7 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void comprobarAutenticacion(){
 
-        Cliente cliente = clienteRepo.comprobarAutenticacion("pepe@hotmail.com", "CjT30mNdV");
+        Cliente cliente = clienteRepo.comprobarAutenticacion("pepe@hotmail.com", "CjT30mNQ1dV");
         System.out.println(cliente);
     }
     @Test

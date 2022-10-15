@@ -54,6 +54,7 @@ public class ClienteServicioImpl implements ClienteServicio{
     }
 
     private boolean esRepetido(String correo){
+
         return clienteRepo.findByCorreo(correo).orElse(null) != null;
     }
 

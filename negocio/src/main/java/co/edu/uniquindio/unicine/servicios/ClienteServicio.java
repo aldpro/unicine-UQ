@@ -10,6 +10,7 @@ import java.util.List;
 public interface ClienteServicio {
 
     Cliente obtenerCliente(Integer cedulaCliente) throws Exception;
+
     Cliente login(String correo, String password) throws Exception;
 
     Cliente registrarCliente(Cliente cliente) throws Exception;

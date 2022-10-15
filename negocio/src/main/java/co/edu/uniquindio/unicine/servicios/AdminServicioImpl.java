@@ -18,9 +18,7 @@ public class AdminServicioImpl implements AdminServicio{
     private final CiudadRepo ciudadRepo;
     private final ConfiteriaRepo confiteriaRepo;
 
-    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo,
-                             PeliculaRepo peliculaRepo, CuponRepo cuponRepo,
-                             CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo) {
+    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
@@ -35,6 +33,7 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Ciudad obtenerCiudad(Integer codigoCiudad) throws Exception {
+
         Optional<Ciudad> ciudad = ciudadRepo.findById(codigoCiudad);
 
         if (ciudad.isEmpty()){

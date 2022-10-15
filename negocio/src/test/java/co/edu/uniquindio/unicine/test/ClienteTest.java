@@ -41,6 +41,7 @@ public class ClienteTest {
         clienteRepo.delete(buscado);
         Assertions.assertNull(clienteRepo.findById(1009000011).orElse(null));
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizar(){

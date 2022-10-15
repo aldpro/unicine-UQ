@@ -46,5 +46,4 @@ public interface AdminTeatroServicio {
     List<Teatro> listarTeatros();
 
     Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
-
 }

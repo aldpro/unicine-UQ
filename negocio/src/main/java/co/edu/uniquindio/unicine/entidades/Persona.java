@@ -22,12 +22,14 @@ public class Persona implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String nombre;
+
+    @Column(nullable = false, unique = true, length = 200)
     @NotNull
     @Email
-    @Column(nullable = false, unique = true, length = 200)
     private String correo;
 
     @Column(nullable = false,length = 100)
+    @ToString.Exclude
     private String password;
 
     public Persona(Integer cedula, String nombre, String correo, String password) {

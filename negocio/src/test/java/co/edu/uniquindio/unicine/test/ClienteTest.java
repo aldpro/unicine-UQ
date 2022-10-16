@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 import java.util.Arrays;
 import java.util.List;
@@ -92,5 +93,13 @@ public class ClienteTest {
 
         Cliente cliente = clienteRepo.findByCorreo("pepe@hotmail.com").orElse(null);
         System.out.println(cliente);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void OrdenarNombre(){
+
+        List<Cliente> clientes = clienteRepo.findAll(Sort.by("nombre"));
+        clientes.forEach(System.out::println);
     }
 }

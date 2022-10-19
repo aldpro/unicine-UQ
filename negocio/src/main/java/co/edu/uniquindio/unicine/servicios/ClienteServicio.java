@@ -23,9 +23,11 @@ public interface ClienteServicio {
 
     List<Compra> listarHistorialCompras(Integer cedulaCliente)throws Exception;
 
+    List<Compra> listarComprasPorCorreo(String correo) throws Exception;
+
     Compra hacerCompra(Compra compra)throws Exception;
 
-    boolean redimirCupon(Integer codigoCupon)throws Exception;
+    Float redimirCupon(Integer codigoCupon, Float valorInicialCompra) throws Exception;
 
     List<Pelicula> buscarPeliculas(String nombrePelicula) throws Exception;
 

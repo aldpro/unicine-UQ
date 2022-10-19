@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ public class Cupon implements Serializable {
 
     @Column(nullable = false)
     @Positive
+    @Max(100)
     private Float descuento;
 
     @Column(nullable = false)

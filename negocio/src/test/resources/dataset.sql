@@ -46,11 +46,11 @@ insert into genero values (4, "Deporte");
 insert into genero values (5, "Animado");
 insert into genero values (6, "Fantasia");
 
-insert into pelicula values (1, "Cartelera", "Pinocho", 4.2, "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
-insert into pelicula values (2, "Preventa", "Dragon Ball: Super Hero", 3.5, "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
-insert into pelicula values (3, "Preventa", "Smile", 4.0, "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
-insert into pelicula values (4, "Cartelera", "Minions", 4.5, "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
-insert into pelicula values (5, "Cartelera", "Encanto", 4.1, "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
+insert into pelicula values (1, "PREVENTA", "Pinocho", 4.2, "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
+insert into pelicula values (2, "CARTELERA", "Dragon Ball: Super Hero", 3.5, "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
+insert into pelicula values (3, "CARTELERA", "Smile", 4.0, "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
+insert into pelicula values (4, "CARTELERA", "Minions", 4.5, "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
+insert into pelicula values (5, "PREVENTA", "Encanto", 4.1, "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
 
 insert into pelicula_generos values (1, 6);
 insert into pelicula_generos values (1, 5);
@@ -112,11 +112,8 @@ insert into cliente_telefonos values (1007000033, "3126845287");
 insert into cliente_telefonos values (1006000044, "3139847645");
 insert into cliente_telefonos values (1005000055, "3101036478");
 
-insert into cupon values (1, 0.2, 1, "2022-12-25 20:00:00");
-insert into cupon values (2, 0.1, 1, "2022-12-19 15:45:00");
-insert into cupon values (3, 0.1, 1, "2022-12-25 20:00:00");
-insert into cupon values (4, 0.2, 1, "2022-12-25 20:00:00");
-insert into cupon values (5, 0.15, 1, "2022-12-25 20:00:00");
+insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, 1, "2022-12-25 20:00:00");
+insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, 1, "2022-12-19 15:45:00");
 
 insert into confiteria values (1, "Perro Caliente + Gaseosa", 24000, "C://perroygaseosa.png");
 insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygaseosa.png");
@@ -126,9 +123,9 @@ insert into confiteria values (5, "Bebida", 6000, "C://gaseosa.png");
 
 insert into cupon_cliente values (1, 1, 1005000055, 1);
 insert into cupon_cliente values (2, 0, 1006000044, 2);
-insert into cupon_cliente values (3, 1, 1006000044, 3);
-insert into cupon_cliente values (4, 1, 1007000033, 4);
-insert into cupon_cliente values (5, 0, 1008000022, 5);
+insert into cupon_cliente values (3, 1, 1006000044, 1);
+insert into cupon_cliente values (4, 1, 1007000033, 2);
+insert into cupon_cliente values (5, 0, 1008000022, 1);
 
 insert into compra values (1, "2022-12-20 18:32:25", "NEQUI", 17000, 1008000022, 1, 6);
 insert into compra values (2, "2022-12-15 14:47:41", "VISA", 59800, 1007000033, 2, 5);

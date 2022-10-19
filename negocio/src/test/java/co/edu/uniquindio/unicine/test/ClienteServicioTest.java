@@ -57,7 +57,6 @@ public class ClienteServicioTest {
         }
         try {
             clienteServicio.obtenerCliente(1009000011);
-
         } catch (Exception e) {
             Assertions.assertTrue(true);
         }

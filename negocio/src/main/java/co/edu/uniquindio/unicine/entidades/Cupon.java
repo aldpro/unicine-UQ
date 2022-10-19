@@ -3,7 +3,6 @@ package co.edu.uniquindio.unicine.entidades;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -22,10 +21,16 @@ public class Cupon implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Lob
     @Column(nullable = false)
+    private String descripcion;
+
     @Positive
-    @Max(100)
-    private Float descuento;
+    @Column(nullable = false)
+    private Double descuento;
+
+    @Column(nullable = false, length = 100)
+    private String criterio;
 
     @Column(nullable = false)
     private LocalDateTime fechaVencimiento;
@@ -38,8 +43,10 @@ public class Cupon implements Serializable {
     private List<CuponCliente> cuponClientes;
 
     @Builder
-    public Cupon(Float descuento, LocalDateTime fechaVencimiento, Boolean estado) {
-        this.descuento = descuento;
+    public Cupon(String descripcion, Double descuento, String criterio, LocalDateTime fechaVencimiento, Boolean estado) {
+        this.descripcion = descripcion;
+        this.descuento = descuento/100;
+        this.criterio = criterio;
         this.fechaVencimiento = fechaVencimiento;
         this.estado = estado;
     }

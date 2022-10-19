@@ -22,7 +22,8 @@ public class Pelicula implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false, length = 10)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private EstadoPelicula estado;
 
     @ManyToMany
     private List<Genero> generos;
@@ -53,7 +54,7 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(String estado, List<Genero> genero, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer) {
+    public Pelicula(EstadoPelicula estado, List<Genero> genero, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer) {
         this.estado = estado;
         this.generos = genero;
         this.nombre = nombre;

@@ -5,6 +5,8 @@ import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,13 +19,31 @@ public class AdminServicioImpl implements AdminServicio{
     private final CuponRepo cuponRepo;
     private final CiudadRepo ciudadRepo;
     private final ConfiteriaRepo confiteriaRepo;
+    private  final  AdministradorRepo administradorRepo;
 
-    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo) {
+    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo, AdministradorRepo administradorRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
         this.ciudadRepo = ciudadRepo;
         this.confiteriaRepo = confiteriaRepo;
+        this.administradorRepo = administradorRepo;
+    }
+
+    @Override
+    public Administrador iniciarSesion(String email, String password) throws Exception {
+
+        if(email.isEmpty() || password.isEmpty()){
+            throw new Exception("Por favor rellenar todo los campos de texto");
+        }
+
+        Optional<Administrador> administrador = administradorRepo.findByCorreo(email);
+
+        if(administrador.equals(null)){
+            throw new Exception("Los datos de autenticacion son incorrectos");
+        }
+
+        return administrador.get();
     }
 
     @Override
@@ -37,64 +57,107 @@ public class AdminServicioImpl implements AdminServicio{
         Optional<Ciudad> ciudad = ciudadRepo.findById(codigoCiudad);
 
         if (ciudad.isEmpty()){
-            throw new Exception("No hay una ciudad con ese codigo");
+            throw new Exception("La ciudad no existe");
         }
         return ciudad.get();
     }
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) {
+
         return null;
     }
 
     @Override
     public Pelicula actualizarPelicula(Pelicula pelicula) throws Exception {
-        return null;
+        Optional<Pelicula> guardado = peliculaRepo.findById(pelicula.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return peliculaRepo.save(pelicula);
     }
 
     @Override
     public void eliminarPelicula(Integer codigoPelicula) throws Exception {
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
 
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        peliculaRepo.delete(guardado.get());
     }
 
     @Override
     public List<Pelicula> listarPeliculas() {
-        return null;
+        return peliculaRepo.findAll();
     }
 
     @Override
-    public Pelicula obtenerPelicula(Pelicula pelicula) throws Exception {
-        return null;
+    public Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception {
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
     }
 
     @Override
-    public Cupon crearCupon(Cupon cupon) throws Exception {
-        return null;
+    public Cupon crearCupon(Cupon cupon) throws Exception{
+
+        if (cupon.getDescuento()>0){
+            return cuponRepo.save(cupon);
+        }else{
+            throw new Exception("El descuento debe ser un numero mayor a cero");
+        }
     }
 
     @Override
     public Cupon actualizarCupon(Cupon cupon) throws Exception {
-        return null;
+        Optional<Cupon> guardado = cuponRepo.findById(cupon.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        }
+        return cuponRepo.save(cupon);
     }
 
     @Override
     public void eliminarCupon(Integer codigoCupon) throws Exception {
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
 
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        }
+        cuponRepo.delete(guardado.get());
     }
 
     @Override
     public List<Cupon> listaCupones() {
-        return null;
+        return cuponRepo.findAll();
     }
 
     @Override
     public Cupon obtenerCupon(Integer codigoCupon) throws Exception {
-        return null;
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        }
+        return guardado.get();
     }
 
     @Override
     public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+
+        Optional<Confiteria> confiteriaBuscada = confiteriaRepo.findByUrlImagen(confiteria.getUrlImagen());
+
+        if(confiteriaBuscada.equals(null)) {
+            throw new Exception("Dos imagenes no pueden ser iguales");
+        }
+
+        return confiteriaRepo.save(confiteria);
     }
 
     @Override

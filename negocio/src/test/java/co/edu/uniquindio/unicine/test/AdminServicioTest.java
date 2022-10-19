@@ -114,7 +114,7 @@ public class AdminServicioTest {
     public void crearCupontest(){
         LocalDateTime ahora = LocalDateTime.now();
         try{
-            Cupon cupon = new Cupon("Nuevo cupon",15.0,"Nuevo cupon",ahora,true);
+            Cupon cupon = new Cupon("Nuevo cupon", 15.0,"Nuevo cupon",ahora,true);
             adminServicio.crearCupon(cupon);
             System.out.println(cupon);
         }catch (Exception e) {

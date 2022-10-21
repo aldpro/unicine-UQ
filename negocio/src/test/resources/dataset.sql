@@ -39,27 +39,11 @@ insert into horario values (4, "2022-12-17 19:00:23", "2022-12-17 17:30:06");
 insert into horario values (5, "2022-12-22 20:30:18", "2022-12-22 18:40:28");
 insert into horario values (6, "2022-12-17 23:11:02", "2022-12-17 21:40:12");
 
-insert into genero values (1, "Terror");
-insert into genero values (2, "Accion");
-insert into genero values (3, "Comedia");
-insert into genero values (4, "Deporte");
-insert into genero values (5, "Animado");
-insert into genero values (6, "Fantasia");
-
-insert into pelicula values (1, "PREVENTA", "Pinocho", 4.2, "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
-insert into pelicula values (2, "CARTELERA", "Dragon Ball: Super Hero", 3.5, "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
-insert into pelicula values (3, "CARTELERA", "Smile", 4.0, "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
-insert into pelicula values (4, "CARTELERA", "Minions", 4.5, "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
-insert into pelicula values (5, "PREVENTA", "Encanto", 4.1, "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
-
-insert into pelicula_generos values (1, 6);
-insert into pelicula_generos values (1, 5);
-insert into pelicula_generos values (2, 2);
-insert into pelicula_generos values (2, 5);
-insert into pelicula_generos values (3, 1);
-insert into pelicula_generos values (4, 3);
-insert into pelicula_generos values (4, 5);
-insert into pelicula_generos values (5, 6);
+insert into pelicula values (1, "PREVENTA", "AVENTURAS", "Pinocho", 4.2, "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://pinocho.png", "https://youtube//wQls8fn.com");
+insert into pelicula values (2, "CARTELERA", "ACCION", "Dragon Ball: Super Hero", 3.5, "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://dragonbll.jpg", "https://youtube//SxtZ8fU.com");
+insert into pelicula values (3, "CARTELERA", "SUSPENSO", "Smile", 4.0, "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://smile.html", "https://youtube//Ab4e8fI.com");
+insert into pelicula values (4, "CARTELERA", "AVENTURAS", "Minions", 4.5, "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://minions(2022).jpg", "https://youtube//QsrT0jE.com");
+insert into pelicula values (5, "PREVENTA", "FANTASIA", "Encanto", 4.1, "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://encantio.png", "https://youtube//wQls8fn.com");
 
 insert into pelicula_repartos values (1, "Tom Hanks");
 insert into pelicula_repartos values (1, "Cynthia Erivo");

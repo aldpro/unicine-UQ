@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface ConfiteriaRepo extends JpaRepository<Confiteria, Integer> {
 
 
-    Optional<Confiteria> findByUrlImagen(String imagen);
+    Optional<Confiteria> findByUrlImagen(String url);
 }

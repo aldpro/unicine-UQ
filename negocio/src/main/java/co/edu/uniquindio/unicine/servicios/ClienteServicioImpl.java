@@ -123,12 +123,13 @@ public class ClienteServicioImpl implements ClienteServicio {
 
             valorFinalCompra = valorInicialCompra *(cupon.getDescuento()/100);
             cupon.setEstado(true);
+        }else{
+            throw new Exception("La fecha de vencimiento debe ser mayor a la fecha actual");
         }
 
 
         return valorFinalCompra;
     }
-
 
     @Override
     public List<Pelicula> buscarPeliculas(String nombrePelicula) throws Exception {

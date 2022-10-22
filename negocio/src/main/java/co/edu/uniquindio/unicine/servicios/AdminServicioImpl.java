@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +63,7 @@ public class AdminServicioImpl implements AdminServicio{
 
     @Override
     public Pelicula crearPelicula(Pelicula pelicula) {
-
-        return null;
+        return peliculaRepo.save(pelicula);
     }
 
     @Override
@@ -106,11 +104,15 @@ public class AdminServicioImpl implements AdminServicio{
     @Override
     public Cupon crearCupon(Cupon cupon) throws Exception{
 
-        if (cupon.getDescuento()>0){
-            return cuponRepo.save(cupon);
+        LocalDateTime fechaActual = LocalDateTime.now();
+        if (cupon.getDescuento()<=0){
+            throw new Exception("El valor del decuento debe ser mayor a 0");
         }else{
-            throw new Exception("El descuento debe ser un numero mayor a cero");
+            if(fechaActual.isAfter(cupon.getFechaVencimiento())){
+                throw new Exception("La fecha de vencimineto no puede ser menor a la fecha actual");
+            }
         }
+        return cuponRepo.save(cupon);
     }
 
     @Override
@@ -153,55 +155,103 @@ public class AdminServicioImpl implements AdminServicio{
 
         Optional<Confiteria> confiteriaBuscada = confiteriaRepo.findByUrlImagen(confiteria.getUrlImagen());
 
-        if(confiteriaBuscada.equals(null)) {
+        if(confiteriaBuscada.isPresent()) {
             throw new Exception("Dos imagenes no pueden ser iguales");
         }
-
         return confiteriaRepo.save(confiteria);
     }
 
     @Override
     public Confiteria actualizarConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+        Optional<Confiteria> guardado = confiteriaRepo.findById(confiteria.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("La confiteria no existe");
+        }
+        return confiteriaRepo.save(confiteria);
     }
 
     @Override
     public void eliminarConfiteria(Integer codigoConfiteria) throws Exception {
+        Optional<Confiteria> guardado = confiteriaRepo.findById(codigoConfiteria);
 
+        if (guardado.isEmpty()){
+            throw new Exception("Esta confiteria no existe");
+        }
+        confiteriaRepo.delete(guardado.get());
     }
 
     @Override
     public List<Confiteria> listarConfiteria() {
-        return null;
+        return confiteriaRepo.findAll();
     }
 
     @Override
     public Confiteria obtenerConfiteria(Integer codigoConfiteria) throws Exception {
-        return null;
+        Optional<Confiteria> guardado = confiteriaRepo.findById(codigoConfiteria);
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cupon no existe");
+        }
+        return guardado.get();
     }
 
     @Override
     public AdministradorTeatro crearAdminTeatro(AdministradorTeatro administradorTeatro) throws Exception {
-        return null;
+
+        Optional<AdministradorTeatro> cedulaRegistrada = administradorTeatroRepo.findById(administradorTeatro.getCedula());
+        Optional<AdministradorTeatro> correoRegistrado = administradorTeatroRepo.findByCorreo(administradorTeatro.getCorreo());
+
+        if (cedulaRegistrada.isPresent()) {
+            throw new Exception("Esta cedula ya esta registrada");
+        }
+        if (correoRegistrado.isPresent()){
+            throw new Exception("El correo electronico ya se encuentra registrado");
+        }
+        return administradorTeatroRepo.save(administradorTeatro);
     }
 
     @Override
     public AdministradorTeatro actualizarAdminTeatro(AdministradorTeatro administradorTeatro) throws Exception {
-        return null;
+        Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(administradorTeatro.getCedula());
+        Optional<AdministradorTeatro> correoRegistrado = administradorTeatroRepo.findByCorreo(administradorTeatro.getCorreo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El administrador de teatro no existe");
+        }
+        if (correoRegistrado.isPresent() && administradorTeatro.getCorreo().equals(correoRegistrado)){
+            throw new Exception("Este correo ya existe");
+        }
+
+        return administradorTeatroRepo.save(administradorTeatro);
     }
 
     @Override
     public void eliminarAdminTeatro(Integer cedulaAdminTeatro) throws Exception {
+        Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(cedulaAdminTeatro);
 
+        if (guardado.isEmpty()){
+            throw new Exception("Este administrador de teatro no existe");
+        }
+        administradorTeatroRepo.delete(guardado.get());
     }
 
     @Override
     public List<AdministradorTeatro> listarAdminsTeatros() {
-        return null;
+        return administradorTeatroRepo.findAll();
     }
 
     @Override
     public AdministradorTeatro obtenerAdminTeatro(Integer cedulaAdminTeatro) throws Exception {
-        return null;
+        Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(cedulaAdminTeatro);
+
+        if(cedulaAdminTeatro == null){
+            throw new Exception("Por favor envie una cedula");
+        }
+
+        if (guardado.isEmpty()){
+            throw new Exception("El administrador de teatro no existe");
+        }
+        return guardado.get();
     }
 }

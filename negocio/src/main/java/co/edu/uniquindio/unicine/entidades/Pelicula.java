@@ -25,8 +25,9 @@ public class Pelicula implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPelicula estado;
 
-    @ManyToMany
-    private List<Genero> generos;
+    @Column(nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
+    private GeneroPelicula generoPelicula;
 
     @Column(nullable = false, length = 80)
     private String nombre;
@@ -47,20 +48,21 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, precision = 1, scale = 2)
     @Max(5)
     @Positive
-    private float puntuacion;
+    private Float puntuacion;
 
     @OneToMany(mappedBy = "pelicula")
     @ToString.Exclude
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, List<Genero> genero, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer) {
+    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer, Float puntuacion) {
         this.estado = estado;
-        this.generos = genero;
+        this.generoPelicula = generoPelicula;
         this.nombre = nombre;
         this.repartos = reparto;
         this.sinopsis = sinopsis;
         this.urlImagen = urlImagen;
         this.urlTrailer = urlTrailer;
+        this.puntuacion = puntuacion;
     }
 }

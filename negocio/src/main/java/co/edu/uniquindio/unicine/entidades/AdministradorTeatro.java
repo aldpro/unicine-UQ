@@ -10,10 +10,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class AdministradorTeatro extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "administradorTeatro")
     @ToString.Exclude
     private List<Teatro> teatros;
+
+    @Builder
+    public AdministradorTeatro(Integer cedula, String nombre, String correo, String password) {
+        super(cedula, nombre, correo, password);
+    }
 }

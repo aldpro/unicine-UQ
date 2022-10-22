@@ -23,11 +23,21 @@ public interface ClienteServicio {
 
     List<Compra> listarComprasPorCorreo(String correo);
 
-    Compra hacerCompra(Cupon cupon, List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente)throws Exception;
+    Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente)throws Exception;
 
     Float redimirCupon(Integer codigoCupon, Float valorInicialCompra) throws Exception;
 
-    List<Pelicula> buscarPeliculas(String nombrePelicula) throws Exception;
+    List<Pelicula> buscarPeliculas(String nombrePelicula);
 
     boolean cambiarPassword (Integer codigo) throws Exception;
+
+    Compra obtenercompra(Integer codigo)throws Exception;
+
+    Confiteria obtenerConfiteria(Integer codigoConfiteria)throws Exception;
+
+    Funcion obtenerFuncion(Integer codigo)throws Exception;
+
+    CuponCliente obtenerCuponCliente(Integer codigo)throws Exception;
+
+    Entrada obtenerEntrada(Integer codigoEntrada)throws Exception;
 }

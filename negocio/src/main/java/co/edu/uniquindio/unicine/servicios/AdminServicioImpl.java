@@ -36,13 +36,13 @@ public class AdminServicioImpl implements AdminServicio{
             throw new Exception("Por favor rellenar todo los campos de texto");
         }
 
-        Optional<Administrador> administrador = administradorRepo.findByCorreo(email);
+        Administrador administrador = administradorRepo.comprobarAutenticacion(email, password);
 
-        if(administrador.equals(null)){
-            throw new Exception("Los datos de autenticacion son incorrectos");
+        if (administrador == null) {
+            throw new Exception("Los datos de autentificacion son incorrectos");
         }
 
-        return administrador.get();
+        return administrador;
     }
 
     @Override
@@ -214,15 +214,10 @@ public class AdminServicioImpl implements AdminServicio{
     @Override
     public AdministradorTeatro actualizarAdminTeatro(AdministradorTeatro administradorTeatro) throws Exception {
         Optional<AdministradorTeatro> guardado = administradorTeatroRepo.findById(administradorTeatro.getCedula());
-        Optional<AdministradorTeatro> correoRegistrado = administradorTeatroRepo.findByCorreo(administradorTeatro.getCorreo());
 
         if (guardado.isEmpty()){
             throw new Exception("El administrador de teatro no existe");
         }
-        if (correoRegistrado.isPresent() && administradorTeatro.getCorreo().equals(correoRegistrado)){
-            throw new Exception("Este correo ya existe");
-        }
-
         return administradorTeatroRepo.save(administradorTeatro);
     }
 

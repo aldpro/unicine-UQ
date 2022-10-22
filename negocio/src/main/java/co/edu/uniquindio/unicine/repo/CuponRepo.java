@@ -10,9 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CuponRepo extends JpaRepository<Cupon, Integer> {
 
-    @Query("select c from Cupon c where c.codigo= :codigoCupon")
-    Cupon obtenerCuponPorCodigo(Integer codigoCupon);
-
     @Override
     Optional<Cupon> findById(Integer codigoCupon);
 }

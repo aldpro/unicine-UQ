@@ -96,8 +96,8 @@ insert into cliente_telefonos values (1007000033, "3126845287");
 insert into cliente_telefonos values (1006000044, "3139847645");
 insert into cliente_telefonos values (1005000055, "3101036478");
 
-insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, 1, "2022-12-25 20:00:00");
-insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, 1, "2022-12-19 15:45:00");
+insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, "2022-12-25 20:00:00");
+insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, "2022-12-19 15:45:00");
 
 insert into confiteria values (1, "Perro Caliente + Gaseosa", 24000, "C://perroygaseosa.png");
 insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygaseosa.png");

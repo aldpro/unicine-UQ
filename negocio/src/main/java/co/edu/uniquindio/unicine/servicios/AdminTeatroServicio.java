@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface AdminTeatroServicio {
 
-    AdministradorTeatro validarLogin(String email, String password)throws Exception;
+    AdministradorTeatro validarLogin(String correo, String password)throws Exception;
+
     Horario crearHorario(Horario horario);
 
     List<Horario> listarHorarios();

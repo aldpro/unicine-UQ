@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdminServicio {
     //Administrador Aplicacion
-    Administrador iniciarSesion(String email, String password)throws Exception;
+    Administrador iniciarSesion(String correo, String password)throws Exception;
 
     //Gestion de ciudades
     Ciudad crearCiudad(Ciudad ciudad);

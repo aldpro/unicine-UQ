@@ -21,6 +21,7 @@ public class AdminServicioTest {
     @Autowired
     private AdminServicio adminServicio;
 
+
     @Test
     @Sql("classpath:dataset.sql")
     public void iniciarSesionTest(){
@@ -126,9 +127,9 @@ public class AdminServicioTest {
     public void actualizarCuponText(){
         try {
             Cupon cupon = adminServicio.obtenerCupon(1);
-            cupon.setEstado(true);
+            cupon.setCriterio("primera compra");
             Cupon nuevo = adminServicio.actualizarCupon(cupon);
-            Assertions.assertEquals(true, nuevo.getEstado());
+            Assertions.assertEquals("primera compra", nuevo.getCriterio());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

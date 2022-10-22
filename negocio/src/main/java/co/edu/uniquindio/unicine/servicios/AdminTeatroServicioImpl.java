@@ -27,12 +27,12 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public AdministradorTeatro validarLogin(String email, String password) throws Exception {
-        if(email.isEmpty() || password.isEmpty()){
+    public AdministradorTeatro validarLogin(String correo, String password) throws Exception {
+        if(correo.isEmpty() || password.isEmpty()){
             throw new Exception("Por favor rellenar todo los campos de texto");
         }
 
-        AdministradorTeatro administradorTeatro = adminTeatroRepo.comprobarAutenticacion(email, password);
+        AdministradorTeatro administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
 
         if (administradorTeatro == null) {
             throw new Exception("Los datos de autentificacion son incorrectos");

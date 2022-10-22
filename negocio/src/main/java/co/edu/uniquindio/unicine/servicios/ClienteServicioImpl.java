@@ -2,13 +2,11 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +44,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente login(String correo, String password) throws Exception {
-        Cliente cliente = clienteRepo.comprobarAutenticacion(correo, password);
+        Cliente cliente = clienteRepo.comprobarAutenticacionCliente(correo, password);
 
         if (cliente == null) {
             throw new Exception("Los datos de autentificacion son incorrectos");
@@ -129,8 +127,9 @@ public class ClienteServicioImpl implements ClienteServicio {
             total += c.getPrecio() * c.getUnidades();
         }
 
-        if (cupon == null || cupon.getEstado()==false) {
-            throw new Exception("El cupon no esta disponible");
+        if (cuponCliente == null) {
+            throw new Exception("El cupon del cliente no existe");
+            //Validar que el cupón exista y que esté disponible
         }
 
         total += funcion.getPrecio();
@@ -140,8 +139,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         compra.setCliente(cliente);
         compra.setFuncion(funcion);
         compra.setCompraConfiterias(confiterias);
-        redimirCupon(cupon.getCodigo(), total);
-        compra.setCuponCliente(cupon);
+        compra.setCuponCliente(cuponCliente);
 
         Compra registro = compraRepo.save(compra);
 
@@ -161,7 +159,7 @@ public class ClienteServicioImpl implements ClienteServicio {
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
             Cupon cuponPrimeraCompra = new Cupon("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1f, "Primera compra",fechaVencimiento.plus(periodoVencimiento));
-            CuponCliente cuponCliente = new CuponCliente(true,cuponPrimeraCompra,cliente);
+            cuponCliente = new CuponCliente(true,cuponPrimeraCompra,cliente);
             emailServicio.enviarEmail("Primera compra","Obtuvo cupon por realizar la primera compra", cliente.getCorreo());
             cliente.getCuponClientes().add(cuponCliente);
         }

@@ -36,7 +36,7 @@ public class CuponCliente implements Serializable {
 
     @Builder
     public CuponCliente(Boolean estado, Cupon cupon, Cliente cliente) {
-        this.estado = estado;
+        this.estado = false;
         this.cupon = cupon;
         this.cliente = cliente;
     }

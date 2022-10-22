@@ -113,7 +113,7 @@ public class AdminServicioTest {
     public void crearCupontest(){
         LocalDateTime vencimiento = LocalDateTime.of(2023, 06,21,11,42);
         try{
-            Cupon cupon = new Cupon("Nuevo cupon", 0.15f,"Nuevo cupon",vencimiento,true);
+            Cupon cupon = new Cupon("Nuevo cupon", 0.15f,"Nuevo cupon",vencimiento);
             Cupon cuponCreado = adminServicio.crearCupon(cupon);
             Assertions.assertNotNull(cuponCreado);
         }catch (Exception e) {

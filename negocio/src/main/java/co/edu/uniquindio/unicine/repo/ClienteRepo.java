@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.repo;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
+import co.edu.uniquindio.unicine.entidades.Entrada;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +22,9 @@ public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
 
     @Query("select c from Cliente cl join cl.compras c where cl.cedula = :cedula")
     List<Compra> obtenerComprasCedula(Integer cedula);
+
+    @Query("select compra from Cliente cliente, in(cliente.compras) compra where cliente.email = :email")
+    List<Compra> obtenerComprasPorEmail(String email);
 
     Optional<Cliente> findByCorreo(String correo);
 

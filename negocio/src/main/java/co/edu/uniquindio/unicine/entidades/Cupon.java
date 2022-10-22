@@ -37,19 +37,15 @@ public class Cupon implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaVencimiento;
 
-    @Column(nullable = false)
-    private Boolean estado;
-
     @OneToMany(mappedBy = "cupon")
     @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
     @Builder
-    public Cupon(String descripcion, Float descuento, String criterio, LocalDateTime fechaVencimiento, Boolean estado) {
+    public Cupon(String descripcion, Float descuento, String criterio, LocalDateTime fechaVencimiento) {
         this.descripcion = descripcion;
         this.descuento = descuento;
         this.criterio = criterio;
         this.fechaVencimiento = fechaVencimiento;
-        this.estado = estado;
     }
 }

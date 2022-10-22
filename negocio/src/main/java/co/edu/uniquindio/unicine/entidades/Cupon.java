@@ -29,7 +29,7 @@ public class Cupon implements Serializable {
     @Positive
     @Column(nullable = false)
     @Max(100)
-    private double descuento;
+    private Float descuento;
 
     @Column(nullable = false, length = 100)
     private String criterio;
@@ -45,7 +45,7 @@ public class Cupon implements Serializable {
     private List<CuponCliente> cuponClientes;
 
     @Builder
-    public Cupon(String descripcion, double descuento, String criterio, LocalDateTime fechaVencimiento, Boolean estado) {
+    public Cupon(String descripcion, Float descuento, String criterio, LocalDateTime fechaVencimiento, Boolean estado) {
         this.descripcion = descripcion;
         this.descuento = descuento;
         this.criterio = criterio;

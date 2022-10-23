@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Pelicula implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false, length = 10)
@@ -50,7 +52,7 @@ public class Pelicula implements Serializable {
     @Positive
     private Float puntuacion;
 
-    @OneToMany(mappedBy = "pelicula")
+    @OneToMany(mappedBy = "pelicula", cascade =  CascadeType.ALL)
     @ToString.Exclude
     private List<Funcion> funciones;
 
@@ -64,5 +66,6 @@ public class Pelicula implements Serializable {
         this.urlImagen = urlImagen;
         this.urlTrailer = urlTrailer;
         this.puntuacion = puntuacion;
+        this.funciones =  new ArrayList<>();
     }
 }

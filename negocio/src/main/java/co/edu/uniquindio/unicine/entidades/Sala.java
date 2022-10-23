@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class Sala implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false, length = 100)
@@ -27,14 +29,12 @@ public class Sala implements Serializable {
     private TipoSala tipoSala;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Teatro teatro;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private DistribucionSilla distribucionSilla;
 
-    @OneToMany(mappedBy = "sala")
+    @OneToMany(mappedBy = "sala",cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Funcion> funciones;
 
@@ -44,6 +44,7 @@ public class Sala implements Serializable {
         this.tipoSala = tipoSala;
         this.teatro = teatro;
         this.distribucionSilla = distribucionSilla;
+        this.funciones = new ArrayList<>();
     }
 
 }

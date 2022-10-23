@@ -8,6 +8,7 @@ import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -40,11 +41,14 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void crearHorarioTest(){
 
-        LocalDateTime fechaInicio = LocalDateTime.of(2022, 6,20,9,42);
-        LocalDateTime fechaFin = LocalDateTime.of(2022, 7,11,10,21);
         try{
+
+            LocalDateTime fechaInicio = LocalDateTime.of(2022, 6,20,9,42);
+            LocalDateTime fechaFin = LocalDateTime.of(2022, 7,11,10,21);
+
             Horario horario = new Horario( fechaInicio,fechaFin);
             Horario horarioCreado = adminTeatroServicio.crearHorario(horario);
+
             Assertions.assertNotNull(horarioCreado);
         }catch (Exception e) {
             Assertions.assertTrue(false);
@@ -56,18 +60,28 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void listarHorarioTest(){
 
-        List<Horario> horarios = adminTeatroServicio.listarHorarios();
-        horarios.forEach(System.out::println);
-        Assertions.assertEquals(6, horarios.size());
+        try {
+            List<Horario> horarios = adminTeatroServicio.listarHorarios();
+            horarios.forEach(System.out::println);
+
+            Assertions.assertEquals(6, horarios.size());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
     public  void obtenerHorarioTest() throws Exception {
 
-        Horario horario = adminTeatroServicio.obtenerHorario(5);
-        System.out.println(horario);
-        Assertions.assertEquals(5, horario.getCodigo());
+        try {
+            Horario horario = adminTeatroServicio.obtenerHorario(5);
+            System.out.println(horario);
+            Assertions.assertEquals(5, horario.getCodigo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -90,32 +104,38 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void crearFuncionTest() {
 
-        AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
-        Ciudad ciudad = new Ciudad("Pereira");
-        Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
-        DistribucionSilla distribucionSilla = new DistribucionSilla("distribucion", 25, 5,5);
+        try {
 
-        Sala sala = new Sala("nueva sala", TipoSala.VIP,teatro,distribucionSilla);
+            AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
+            Ciudad ciudad = new Ciudad("Pereira");
+            Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
+            administradorTeatro.getTeatros().add(teatro);
+            DistribucionSilla distribucionSilla = new DistribucionSilla("distribucion", 25, 5,5);
 
-        LocalDateTime fechaInicio = LocalDateTime.of(2022, 6,20,9,42);
-        LocalDateTime fechaFin = LocalDateTime.of(2022, 7,11,10,21);
+            Sala sala = new Sala("nueva sala", TipoSala.VIP,teatro,distribucionSilla);
 
-        Horario horario = new Horario( fechaInicio,fechaFin);
+            LocalDateTime fechaInicio = LocalDateTime.of(2022, 6,20,9,42);
+            LocalDateTime fechaFin = LocalDateTime.of(2022, 7,11,10,21);
 
-        List<String> listaReparto = new ArrayList<>();
-        listaReparto.add("Leonardo Di Caprio");
-        listaReparto.add("Brad Pitt");
-        listaReparto.add("Margot Robbie");
+            Horario horario = new Horario( fechaInicio,fechaFin);
 
-        Pelicula pelicula = new Pelicula(EstadoPelicula.CARTELERA, GeneroPelicula.ACCION, "Nueva pelicula", listaReparto, "Un nuevo amane...", "nuevapelicula.png", "www.youtube.nuevapelicula", 3.5f);
+            List<String> listaReparto = new ArrayList<>();
+            listaReparto.add("Leonardo Di Caprio");
+            listaReparto.add("Brad Pitt");
+            listaReparto.add("Margot Robbie");
 
-        Funcion funcion = new Funcion(35000f, sala,horario,pelicula);
+            Pelicula pelicula = new Pelicula(EstadoPelicula.CARTELERA, GeneroPelicula.ACCION, "Nueva pelicula", listaReparto, "Un nuevo amane...", "nuevapelicula.png", "www.youtube.nuevapelicula", 3.5f);
 
-        Funcion funcionRegistrada = adminTeatroServicio.crearFuncion(funcion);
-        Assertions.assertNotNull(funcionRegistrada);
+            Funcion funcion = new Funcion(35000f, sala,horario,pelicula);
 
+            Funcion funcionRegistrada = adminTeatroServicio.crearFuncion(funcion);
+
+            Assertions.assertNotNull(funcionRegistrada);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
 
 
     @Test
@@ -129,9 +149,8 @@ public class AdminTeatroServicioTest {
             Funcion nuevaFuncion = adminTeatroServicio.actualizarFuncion(funcion);
             Assertions.assertEquals(3, nuevaFuncion.getPelicula().getCodigo());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
     }
 
     @Test
@@ -148,54 +167,65 @@ public class AdminTeatroServicioTest {
         } catch (Exception e) {
             Assertions.assertTrue(true);
         }
-
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void listarFuncionTest(){
 
-        List<Funcion> funciones = adminTeatroServicio.listarFuncion();
-        funciones.forEach(System.out::println);
-        Assertions.assertEquals(6, funciones.size());
+        try {
+            List<Funcion> funciones = adminTeatroServicio.listarFuncion();
+            funciones.forEach(System.out::println);
 
+            Assertions.assertEquals(6, funciones.size());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerFuncionTest() throws Exception {
 
-        Funcion funcion = adminTeatroServicio.obtenerFuncion(3);
-        System.out.println(funcion);
-        Assertions.assertEquals(3, funcion.getCodigo());
-
+        try {
+            Funcion funcion = adminTeatroServicio.obtenerFuncion(3);
+            System.out.println(funcion);
+            Assertions.assertEquals(3, funcion.getCodigo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
-    @Sql("classpath:dataset.sql")
     public void crearSalaTest(){
 
-        AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
-        Ciudad ciudad = new Ciudad("Pereira");
-        Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
-        DistribucionSilla distribucionSilla = new DistribucionSilla("distribucion", 25, 5,5);
-
-        Sala sala = new Sala("nueva sala", TipoSala.VIP,teatro,distribucionSilla);
-
-        Sala salaRegistrada = adminTeatroServicio.crearSala(sala);
-        System.out.println(salaRegistrada);
-       // Assertions.assertEquals(25, salaRegistrada.getDistribucionSilla().getTotal_sillas());
-        Assertions.assertNotNull(salaRegistrada);
-
-        /*Sala sala = Sala.builder().nombre("Sala para llorar").build();
-
         try {
-            Sala nuevo = adminTeatroServicio.crearSala(sala);
-            Assertions.assertNotNull(nuevo);
-        } catch (Exception e) {
-            Assertions.assertTrue(false);
-        }*/
+
+            AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
+            Ciudad ciudad = new Ciudad("Pereira");
+            Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
+            administradorTeatro.getTeatros().add(teatro);
+            DistribucionSilla distribucionSilla = new DistribucionSilla("distribucion", 25, 5,5);
+
+            Sala sala = new Sala();
+            sala.setTeatro(teatro);
+            sala.setTipoSala(TipoSala.VIP);
+            sala.setDistribucionSilla(distribucionSilla);
+            sala.setNombre("x");
+
+
+            distribucionSilla.getSalas().add(sala);
+            teatro.getSalas().add(sala);
+
+            Sala salaRegistrada = adminTeatroServicio.crearSala(sala);
+
+            Assertions.assertNotNull(salaRegistrada);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -209,7 +239,6 @@ public class AdminTeatroServicioTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Test
@@ -233,9 +262,14 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void listarSalaTest(){
 
-        List<Sala> salas = adminTeatroServicio.listarSalas();
-        salas.forEach(System.out::println);
-        Assertions.assertEquals(6, salas.size());
+      try {
+          List<Sala> salas = adminTeatroServicio.listarSalas();
+          salas.forEach(System.out::println);
+
+          Assertions.assertEquals(6, salas.size());
+      }catch (Exception e){
+          e.printStackTrace();
+      }
 
     }
 
@@ -243,9 +277,14 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void obtenerSalaTest() throws Exception {
 
-        Sala sala = adminTeatroServicio.obtenerSala(6);
-        System.out.println(sala);
-        Assertions.assertEquals(6, sala.getCodigo());
+        try {
+            Sala sala = adminTeatroServicio.obtenerSala(6);
+            System.out.println(sala);
+
+            Assertions.assertEquals(6, sala.getCodigo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -253,13 +292,22 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void crearTeatroTest(){
 
-        Ciudad ciudad = new Ciudad("Pereira");
+        try {
 
-        AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
+            Ciudad ciudad = new Ciudad("Pereira");
 
-        Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
-        Teatro teatro1 = adminTeatroServicio.crearTeatro(teatro);
-        Assertions.assertNotNull(teatro1);
+            AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
+
+            Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
+
+            Teatro teatro1 = adminTeatroServicio.crearTeatro(teatro);
+            administradorTeatro.getTeatros().add(teatro);
+
+            Assertions.assertNotNull(teatro1);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -299,9 +347,14 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void listarTeatrosTest(){
 
-        List<Teatro> teatros = adminTeatroServicio.listarTeatros();
-        teatros.forEach(System.out::println);
-        Assertions.assertEquals(6, teatros.size());
+        try {
+            List<Teatro> teatros = adminTeatroServicio.listarTeatros();
+            teatros.forEach(System.out::println);
+
+            Assertions.assertEquals(6, teatros.size());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -309,10 +362,14 @@ public class AdminTeatroServicioTest {
     @Sql("classpath:dataset.sql")
     public void obtenerTeatroTest() throws Exception {
 
-        Teatro teatro = adminTeatroServicio.obtenerTeatro(4);
-        System.out.println(teatro);
-        Assertions.assertEquals(4, teatro.getCodigo());
+        try {
+            Teatro teatro = adminTeatroServicio.obtenerTeatro(4);
+            System.out.println(teatro);
 
+            Assertions.assertEquals(4, teatro.getCodigo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

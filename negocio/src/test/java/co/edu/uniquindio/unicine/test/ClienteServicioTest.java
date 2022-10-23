@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.test;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.*;
+import co.edu.uniquindio.unicine.repo.EntradaRepo;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import co.edu.uniquindio.unicine.servicios.EmailServicio;
 import org.junit.jupiter.api.Assertions;
@@ -24,8 +25,18 @@ public class ClienteServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
+    public void loginTest(){
+        try {
+            clienteServicio.login("henryalejandro.702@gmail.com", "CjT30mNQ1dV");
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
     public void registrarClienteTest(){
-        Cliente cliente = Cliente.builder().cedula(1003496468).nombre("aldo").password("2312").correo("aldo@mail.com").urlFoto("C/gfeds").build();
+        Cliente cliente = Cliente.builder().cedula(1003496468).nombre("aldo").password("2312").correo("henryalejandro.702@gmail.com").urlFoto("C/gfeds").build();
         try {
             Cliente nuevo = clienteServicio.registrarCliente(cliente);
             Assertions.assertNotNull(nuevo);
@@ -46,6 +57,18 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarHistorialComprasTest(){
+        List<Compra> lista = clienteServicio.listarHistorialCompras(1008000022);
+        lista.forEach(System.out::println);
+    }
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarHistorialComprasCorreoTest(){
+        List<Compra> lista = clienteServicio.listarComprasPorCorreo("luisa@google.com");
+        lista.forEach(System.out::println);
+    }
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -61,11 +84,25 @@ public class ClienteServicioTest {
             Assertions.assertTrue(true);
         }
     }
+/*
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void hacerCompraTest(){
+
+    }
+ */
 
     @Test
     @Sql("classpath:dataset.sql")
     public void listarClienteTest(){
         List<Cliente> lista = clienteServicio.listarClientes();
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void buscarPeliculasTest(){
+        List<Pelicula> lista = clienteServicio.buscarPeliculas("Pinocho");
         lista.forEach(System.out::println);
     }
 

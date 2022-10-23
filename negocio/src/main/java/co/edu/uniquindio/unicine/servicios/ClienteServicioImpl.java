@@ -19,17 +19,22 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final CompraConfiteriaRepo compraConfiteriaRepo;
     private final CompraRepo compraRepo;
     private final EntradaRepo entradaRepo;
+    private final FuncionRepo funcionRepo;
     private final CuponClienteRepo cuponClienteRepo;
+    private final ConfiteriaRepo confiteriaRepo;
 
     public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio,
                                CompraConfiteriaRepo compraConfiteriaRepo, CompraRepo compraRepo,
-                               EntradaRepo entradaRepo, CuponClienteRepo cuponClienteRepo) {
+                               EntradaRepo entradaRepo, CuponClienteRepo cuponClienteRepo,
+                               FuncionRepo funcionRepo, ConfiteriaRepo confiteriaRepo) {
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
         this.compraConfiteriaRepo = compraConfiteriaRepo;
         this.compraRepo = compraRepo;
         this.entradaRepo = entradaRepo;
         this.cuponClienteRepo =cuponClienteRepo;
+        this.funcionRepo = funcionRepo;
+        this.confiteriaRepo = confiteriaRepo;
     }
 
     @Override
@@ -59,9 +64,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     public Cliente registrarCliente(Cliente cliente) throws Exception {
 
         boolean correoExiste = esRepetido(cliente.getCorreo());
+
         if (correoExiste) {
             throw new Exception("Este correo ya esta registrado");
         }
+
         emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/", cliente.getCorreo());
         cliente.setEstado(true);
         return clienteRepo.save(cliente);
@@ -111,7 +118,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
     
     @Override
-    public Compra hacerCompra(Cupon cupon, List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente) throws Exception {
+    public Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente) throws Exception {
 
         float total = 0;
 
@@ -127,15 +134,18 @@ public class ClienteServicioImpl implements ClienteServicio {
             total += c.getPrecio() * c.getUnidades();
         }
 
-        if (cuponCliente == null) {
-            throw new Exception("El cupon del cliente no existe");
-            //Validar que el cupón exista y que esté disponible
-        }
-
         total += funcion.getPrecio();
 
+        if (verificarDisponibilidadCupon(cuponCliente.getCodigo())) {
+            redimirCupon(cuponCliente.getCodigo(),total);
+            cuponCliente.setEstado(false);
+        }
+
+
         Compra compra = new Compra();
-        compra.setValorTotal(total); //antes validar el cupón y restar el descuento
+
+        compra.setFechaCompra(LocalDateTime.now());
+        compra.setValorTotal(total);
         compra.setCliente(cliente);
         compra.setFuncion(funcion);
         compra.setCompraConfiterias(confiterias);
@@ -155,7 +165,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         //enviar correo de compra
         //si es la primera enviar cupón
-        if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo())==null){
+        if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).isEmpty()){
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
             Cupon cuponPrimeraCompra = new Cupon("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1f, "Primera compra",fechaVencimiento.plus(periodoVencimiento));
@@ -166,9 +176,18 @@ public class ClienteServicioImpl implements ClienteServicio {
         return  compra;
     }
 
+    private boolean verificarDisponibilidadCupon(Integer codigo) {
+        CuponCliente cuponCliente = cuponClienteRepo.getReferenceById(codigo);
+
+        if (cuponCliente.getEstado()==true){
+            return true;
+        }
+        return false;
+    }
+
     private boolean verificarDisponibilidad(Entrada entrada) {
         Optional<Entrada> disponibilidadBuscada = entradaRepo.findByFilaAndColumna(entrada.getFila(),entrada.getColumna());
-        if (disponibilidadBuscada == null){
+        if (disponibilidadBuscada != null){
             return true;
         }
         return false;
@@ -190,7 +209,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public List<Pelicula> buscarPeliculas(String nombrePelicula) throws Exception {
+    public List<Pelicula> buscarPeliculas(String nombrePelicula){
 
         return clienteRepo.buscarPeliculas(nombrePelicula);
     }
@@ -199,4 +218,56 @@ public class ClienteServicioImpl implements ClienteServicio {
     public boolean cambiarPassword(Integer codigo) throws Exception {
         return false;
     }
+
+    @Override
+    public Compra obtenercompra(Integer codigo) throws Exception {
+        Optional<Compra> guardado = compraRepo.findById(codigo);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("La compra no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Confiteria obtenerConfiteria(Integer codigoConfiteria) throws Exception{
+        Optional<Confiteria> guardado = confiteriaRepo.findById(codigoConfiteria);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("La confiteria no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Funcion obtenerFuncion(Integer codigo) throws Exception {
+        Optional<Funcion> guardado = funcionRepo.findById(codigo);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("La funcion no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public CuponCliente obtenerCuponCliente(Integer codigo) throws Exception {
+        Optional<CuponCliente> guardado = cuponClienteRepo.findById(codigo);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("El cupon no existe no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Entrada obtenerEntrada(Integer codigoEntrada)throws Exception {
+        Optional<Entrada> guardado = entradaRepo.findById(codigoEntrada);
+
+        if (guardado.isEmpty()) {
+            throw new Exception("La entrada no existe no existe");
+        }
+        return guardado.get();
+    }
+
+
 }

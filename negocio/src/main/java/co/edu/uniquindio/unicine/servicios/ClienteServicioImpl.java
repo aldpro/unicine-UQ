@@ -142,7 +142,6 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         Compra compra = new Compra();
 
-        compra.setCodigo(1);
         compra.setFechaCompra(LocalDateTime.now());
         compra.setValorTotal(total);
         compra.setCliente(cliente);
@@ -162,8 +161,7 @@ public class ClienteServicioImpl implements ClienteServicio {
             entradaRepo.save(e);
         }
 
-        //enviar correo de compra
-        //si es la primera enviar cupón
+
         if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).isEmpty()){
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
@@ -214,8 +212,15 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public boolean cambiarPassword(Integer codigo) throws Exception {
-        return false;
+    public Cliente cambiarPassword(Cliente cliente,String nuevaPassword) throws Exception {
+        Optional<Cliente> guardado = clienteRepo.findById(cliente.getCedula());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El cliente no existe");
+        }
+        emailServicio.enviarEmail("Cambio de Contraseña","Para reestablecer tu contraseña ve al siguiente enlace: ", cliente.getCorreo());
+        cliente.setPassword(nuevaPassword);
+        return clienteRepo.save(cliente);
     }
 
     @Override

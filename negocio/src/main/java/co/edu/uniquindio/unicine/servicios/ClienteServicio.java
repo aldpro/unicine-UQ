@@ -29,7 +29,7 @@ public interface ClienteServicio {
 
     List<Pelicula> buscarPeliculas(String nombrePelicula);
 
-    boolean cambiarPassword (Integer codigo) throws Exception;
+    Cliente cambiarPassword(Cliente cliente, String nuevaPassword) throws Exception;
 
     Compra obtenercompra(Integer codigo)throws Exception;
 

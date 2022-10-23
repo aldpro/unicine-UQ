@@ -100,8 +100,7 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-
-/*
+    
     @Test
     @Sql("classpath:dataset.sql")
     public void hacerCompra(){
@@ -133,8 +132,7 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-
- */
+    
 
     @Test
     @Sql("classpath:dataset.sql")

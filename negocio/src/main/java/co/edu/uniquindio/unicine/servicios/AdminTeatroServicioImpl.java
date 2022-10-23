@@ -13,9 +13,13 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Autowired
     private final AdministradorTeatroRepo adminTeatroRepo;
+    @Autowired
     private final HorarioRepo horarioRepo;
+    @Autowired
     private final FuncionRepo funcionRepo;
+    @Autowired
     private final SalaRepo salaRepo;
+    @Autowired
     private final TeatroRepo teatroRepo;
 
     public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo, FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo) {
@@ -43,6 +47,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public Horario crearHorario(Horario horario) {
+
         return horarioRepo.save(horario);
     }
 

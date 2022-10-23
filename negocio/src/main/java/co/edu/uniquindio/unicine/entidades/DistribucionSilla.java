@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class DistribucionSilla implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false, length = 200)
@@ -35,7 +37,7 @@ public class DistribucionSilla implements Serializable {
     @Positive
     private Integer columnas;
 
-    @OneToMany(mappedBy = "distribucionSilla")
+    @OneToMany(mappedBy = "distribucionSilla",cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Sala> salas;
 
@@ -45,5 +47,7 @@ public class DistribucionSilla implements Serializable {
         this.total_sillas = total_sillas;
         this.filas = filas;
         this.columnas = columnas;
+        this.salas = new ArrayList<>();
     }
+
 }

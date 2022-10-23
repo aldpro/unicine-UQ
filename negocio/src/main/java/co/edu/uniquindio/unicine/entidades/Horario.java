@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Horario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false)
@@ -26,7 +28,7 @@ public class Horario implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaFin;
 
-    @OneToMany(mappedBy = "horario")
+    @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Funcion> funciones;
 
@@ -34,5 +36,7 @@ public class Horario implements Serializable {
     public Horario(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.funciones =  new ArrayList<>();
     }
+
 }

@@ -192,7 +192,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Float redimirCupon(Integer codigoCupon, Float valorInicialCompra) throws Exception {
-        Float valorFinalCompra = valorInicialCompra;
+        float valorFinalCompra = valorInicialCompra;
 
         CuponCliente cuponCliente = cuponClienteRepo.obtenerCuponPorCodigo(codigoCupon);
 

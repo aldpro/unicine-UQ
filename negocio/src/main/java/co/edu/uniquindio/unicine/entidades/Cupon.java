@@ -7,6 +7,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class Cupon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Lob
@@ -37,7 +39,7 @@ public class Cupon implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaVencimiento;
 
-    @OneToMany(mappedBy = "cupon")
+    @OneToMany(mappedBy = "cupon", cascade =  CascadeType.ALL)
     @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
@@ -47,5 +49,6 @@ public class Cupon implements Serializable {
         this.descuento = descuento;
         this.criterio = criterio;
         this.fechaVencimiento = fechaVencimiento;
+        this.cuponClientes =  new ArrayList<>();
     }
 }

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Compra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column (nullable = false, length = 10)
@@ -39,14 +41,12 @@ public class Compra implements Serializable {
     private CuponCliente cuponCliente;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Funcion funcion;
 
-    @OneToMany(mappedBy = "compra")
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Entrada> entradas;
 
@@ -57,5 +57,6 @@ public class Compra implements Serializable {
         this.cuponCliente = cuponCliente;
         this.cliente = cliente;
         this.funcion = funcion;
+        this.entradas = new ArrayList<>();
     }
 }

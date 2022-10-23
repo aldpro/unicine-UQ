@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Confiteria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false, length = 100)
@@ -30,7 +32,7 @@ public class Confiteria implements Serializable {
     @Column(nullable = false,length = 200)
     private String urlImagen;
 
-    @OneToMany(mappedBy = "confiteria")
+    @OneToMany(mappedBy = "confiteria", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<CompraConfiteria> compraConfiterias;
 
@@ -39,5 +41,6 @@ public class Confiteria implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.urlImagen = urlImagen;
+        this.compraConfiterias =  new ArrayList<>();
     }
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Funcion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false)
@@ -25,18 +27,15 @@ public class Funcion implements Serializable {
     private Float precio;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Sala sala;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Horario horario;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Pelicula pelicula;
 
-    @OneToMany(mappedBy = "funcion")
+    @OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Compra> compras;
 
@@ -46,5 +45,6 @@ public class Funcion implements Serializable {
         this.sala = sala;
         this.horario = horario;
         this.pelicula = pelicula;
+        this.compras = new ArrayList<>();
     }
 }

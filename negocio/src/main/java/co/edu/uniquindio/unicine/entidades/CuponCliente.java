@@ -17,6 +17,7 @@ public class CuponCliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false)
@@ -30,7 +31,7 @@ public class CuponCliente implements Serializable {
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
-    @OneToOne(mappedBy = "cuponCliente")
+    @OneToOne(mappedBy = "cuponCliente", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Compra compra;
 

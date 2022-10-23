@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,11 +23,11 @@ public class Cliente extends Persona implements Serializable {
     @ElementCollection
     private List<String> telefonos;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Compra> compras;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<CuponCliente> cuponClientes;
 
@@ -36,5 +37,7 @@ public class Cliente extends Persona implements Serializable {
         this.estado = false;
         this.urlFoto = urlFoto;
         this.telefonos = telefonos;
+        this.compras = new ArrayList<>();
+        this.cuponClientes = new ArrayList<>();
     }
 }

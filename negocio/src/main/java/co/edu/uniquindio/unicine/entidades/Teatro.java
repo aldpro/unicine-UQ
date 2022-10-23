@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class Teatro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false, length = 100)
@@ -26,14 +28,12 @@ public class Teatro implements Serializable {
     private String telefono;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Ciudad ciudad;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private AdministradorTeatro administradorTeatro;
 
-    @OneToMany(mappedBy = "teatro")
+    @OneToMany(mappedBy = "teatro", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Sala> salas;
     
@@ -43,5 +43,7 @@ public class Teatro implements Serializable {
         this.telefono = telefono;
         this.ciudad = ciudad;
         this.administradorTeatro = administradorTeatro;
+        this.salas = new ArrayList<>();
     }
+
 }

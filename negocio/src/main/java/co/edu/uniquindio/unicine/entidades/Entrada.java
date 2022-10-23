@@ -17,6 +17,7 @@ public class Entrada implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false)
@@ -30,7 +31,6 @@ public class Entrada implements Serializable {
     private Integer columna;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Compra compra;
 
     @Builder

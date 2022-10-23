@@ -45,4 +45,5 @@ public class Sala implements Serializable {
         this.teatro = teatro;
         this.distribucionSilla = distribucionSilla;
     }
+
 }

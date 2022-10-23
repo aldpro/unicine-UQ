@@ -43,6 +43,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public Horario crearHorario(Horario horario) {
+
         return horarioRepo.save(horario);
     }
 

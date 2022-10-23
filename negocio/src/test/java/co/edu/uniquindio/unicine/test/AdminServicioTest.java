@@ -100,6 +100,7 @@ public class AdminServicioTest {
     public void listarPeliculasTest(){
         List<Pelicula> lista = adminServicio.listarPeliculas();
         lista.forEach(System.out::println);
+        Assertions.assertEquals(5, lista.size());
     }
 
     @Test
@@ -107,6 +108,7 @@ public class AdminServicioTest {
     public void listarCuponesTest(){
         List<Cupon> lista = adminServicio.listaCupones();
         lista.forEach(System.out::println);
+        Assertions.assertEquals(2, lista.size());
     }
 
     @Test
@@ -124,7 +126,7 @@ public class AdminServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarCuponText(){
+    public void actualizarCuponTest(){
         try {
             Cupon cupon = adminServicio.obtenerCupon(1);
             cupon.setCriterio("primera compra");

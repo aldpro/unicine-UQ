@@ -59,12 +59,14 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarHistorialComprasTest(){
         List<Compra> lista = clienteServicio.listarHistorialCompras(1008000022);
         lista.forEach(System.out::println);
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarHistorialComprasCorreoTest(){
@@ -89,32 +91,50 @@ public class ClienteServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void hacerCompraTest(){
-
-        Cliente cliente =  Cliente.builder().cedula(1009000011).nombre("Pepe").correo("pepe@hotmail.com").estado(true).urlFoto("https://pepe.jpg").password("CjT30mNQ1dV").build();
-        Confiteria confiteria = Confiteria.builder().nombre("combo hamburguesa + gaseosa + papas fritas").precio(25000.00f).urlImagen("url_imagen").build();
-        CompraConfiteria compraConfiteria = CompraConfiteria.builder().precio(27000f).confiteria(confiteria).unidades(5).build();
-        List<CompraConfiteria> confiterias = new ArrayList<>();
-        confiterias.add(compraConfiteria);
-        Funcion funcion = Funcion.builder().precio(25000.00f).build();
-        Cupon cupon = Cupon.builder().descripcion("descuento del 10% en la proxima Compra").criterio("Primera compra").descuento(10f).fechaVencimiento(LocalDateTime.of(2023,10,20,8,14)).build();
-        CuponCliente cuponCliente = CuponCliente.builder().estado(true).build();
-        cuponCliente.setCupon(cupon);
-        cuponCliente.setCliente(cliente);
-        //Compra compra = Compra.builder().cliente(cliente).funcion(funcion).medioPago(MedioPago.NEQUI).build();
-        Entrada entrada = Entrada.builder().columna(7).fila(4).precio(15000f).build();
-        List<Entrada> entradas = new ArrayList<>();
-        entradas.add(entrada);
-
+    public void cambiarPasswordTest(){
         try {
-            Compra compra =  clienteServicio.hacerCompra(entradas,cliente,confiterias,funcion,cuponCliente);
-            System.out.println(compra.getValorTotal());
+            Cliente cliente = clienteServicio.obtenerCliente(1009000011);
+            Cliente clienteCambiado = clienteServicio.cambiarPassword(cliente,"pepe123");
+            Assertions.assertEquals("pepe123", clienteCambiado.getPassword());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+/*
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void hacerCompra(){
 
+        Cliente cliente = Cliente.builder().nombre("Pepe").estado(true).cedula(1009000011).urlFoto("url").correo("pepe@hotmail.com").build();
+
+
+        Confiteria confiteria = Confiteria.builder().precio(14000f).build();
+
+        CompraConfiteria compraConfiteria =   CompraConfiteria.builder().precio(27000f).confiteria(confiteria).unidades(5).build();
+        List<CompraConfiteria> confiterias = new ArrayList<>();
+        confiterias.add(compraConfiteria);
+
+        Funcion funcion =  Funcion.builder().precio(25000.00f).build();
+
+        Cupon cupon = Cupon.builder().descripcion("descuento del 10% en la proxima Compra").criterio("Primera compra").descuento(10f).fechaVencimiento(LocalDateTime.of(2023,10,20,8,14)).build();
+        CuponCliente cuponCliente = CuponCliente.builder().estado(true).build();
+        cuponCliente.setCupon(cupon);
+        cuponCliente.setCliente(cliente);
+
+        Entrada entrada = Entrada.builder().columna(4).fila(4).precio(10000f).build();
+        List<Entrada> entradas = new ArrayList<>();
+        entradas.add(entrada);
+
+        try {
+            Compra compra = clienteServicio.hacerCompra(entradas,cliente,confiterias,funcion,cuponCliente);
+            System.out.println(compra);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+ */
 
     @Test
     @Sql("classpath:dataset.sql")

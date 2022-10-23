@@ -138,12 +138,11 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         if (verificarDisponibilidadCupon(cuponCliente.getCodigo())) {
             redimirCupon(cuponCliente.getCodigo(),total);
-            cuponCliente.setEstado(false);
         }
-
 
         Compra compra = new Compra();
 
+        compra.setCodigo(1);
         compra.setFechaCompra(LocalDateTime.now());
         compra.setValorTotal(total);
         compra.setCliente(cliente);
@@ -168,7 +167,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).isEmpty()){
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
-            Cupon cuponPrimeraCompra = new Cupon("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1f, "Primera compra",fechaVencimiento.plus(periodoVencimiento));
+            Cupon cuponPrimeraCompra = new Cupon("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 10f, "Primera compra",fechaVencimiento.plus(periodoVencimiento));
             cuponCliente = new CuponCliente(true,cuponPrimeraCompra,cliente);
             emailServicio.enviarEmail("Primera compra","Obtuvo cupon por realizar la primera compra", cliente.getCorreo());
             cliente.getCuponClientes().add(cuponCliente);
@@ -201,7 +200,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         if (!cuponCliente.getEstado()) {
             valorFinalCompra = valorInicialCompra *(cuponCliente.getCupon().getDescuento()/100);
-            cuponCliente.setEstado(true);
+            cuponCliente.setEstado(false);
         }else{
             throw new Exception("El cupon no esta disponible");
         }

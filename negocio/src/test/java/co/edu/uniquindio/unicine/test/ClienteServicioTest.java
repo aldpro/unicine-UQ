@@ -100,13 +100,12 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-    
+    /*
     @Test
     @Sql("classpath:dataset.sql")
-    public void hacerCompra(){
+    public void hacerCompraTest(){
 
         Cliente cliente = Cliente.builder().nombre("Pepe").estado(true).cedula(1009000011).urlFoto("url").correo("pepe@hotmail.com").build();
-
 
         Confiteria confiteria = Confiteria.builder().precio(14000f).build();
 
@@ -132,7 +131,9 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-    
+
+
+     */
 
     @Test
     @Sql("classpath:dataset.sql")

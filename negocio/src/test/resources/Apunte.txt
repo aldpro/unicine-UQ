@@ -1,1 +1,1 @@
-En el dataset se leer de arriba a abajo las inserciones
+En el dataset se debe leer de arriba hacia abajo las inserciones

@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ConfiteriaRepo extends JpaRepository<Confiteria, Integer> {
 
-
     Optional<Confiteria> findByUrlImagen(String url);
 }

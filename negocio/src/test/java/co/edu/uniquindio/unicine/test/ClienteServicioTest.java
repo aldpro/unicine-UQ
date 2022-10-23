@@ -59,12 +59,14 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarHistorialComprasTest(){
         List<Compra> lista = clienteServicio.listarHistorialCompras(1008000022);
         lista.forEach(System.out::println);
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarHistorialComprasCorreoTest(){
@@ -113,9 +115,7 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-
-
-
+    
     @Test
     @Sql("classpath:dataset.sql")
     public void listarClienteTest(){

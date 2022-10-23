@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface AdministradorTeatroRepo extends JpaRepository<AdministradorTeatro, Integer> {
+
     @Override
     Optional<AdministradorTeatro> findById(Integer cedula);
 

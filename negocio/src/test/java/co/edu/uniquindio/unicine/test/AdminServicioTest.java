@@ -21,7 +21,6 @@ public class AdminServicioTest {
     @Autowired
     private AdminServicio adminServicio;
 
-
     @Test
     @Sql("classpath:dataset.sql")
     public void iniciarSesionTest(){
@@ -65,7 +64,6 @@ public class AdminServicioTest {
         Pelicula peliculaRegistrada = adminServicio.crearPelicula(pelicula);
         Assertions.assertNotNull(peliculaRegistrada);
     }
-
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -149,6 +147,7 @@ public class AdminServicioTest {
             Assertions.assertTrue(true);
         }
     }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void crearConfiteriaTest(){

@@ -131,8 +131,6 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-
-
      */
 
     @Test

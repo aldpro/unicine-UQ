@@ -15,10 +15,10 @@ import java.util.List;
 public class Cliente extends Persona implements Serializable {
 
     @Column(nullable = false)
-    private Boolean estado;
+    private Boolean estado = false;
 
     @Column(nullable = false,length = 200)
-    private String urlFoto;
+    private String urlFoto = " ";
 
     @ElementCollection
     private List<String> telefonos;

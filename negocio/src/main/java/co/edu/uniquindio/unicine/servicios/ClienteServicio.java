@@ -37,7 +37,9 @@ public interface ClienteServicio {
 
     Funcion obtenerFuncion(Integer codigo)throws Exception;
 
-    CuponCliente obtenerCuponCliente(Integer codigo)throws Exception;
+    Cupon obtenerCupon(Integer codigoCupon)throws Exception;
 
     Entrada obtenerEntrada(Integer codigoEntrada)throws Exception;
+
+    List<Cupon> listarCuponesCliente(Integer cedula);
 }

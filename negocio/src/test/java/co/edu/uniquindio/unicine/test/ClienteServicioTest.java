@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @Transactional
@@ -100,38 +101,42 @@ public class ClienteServicioTest {
             throw new RuntimeException(e);
         }
     }
-    /*
+
+/*
     @Test
     @Sql("classpath:dataset.sql")
-    public void hacerCompraTest(){
-
-        Cliente cliente = Cliente.builder().nombre("Pepe").estado(true).cedula(1009000011).urlFoto("url").correo("pepe@hotmail.com").build();
-
-        Confiteria confiteria = Confiteria.builder().precio(14000f).build();
-
-        CompraConfiteria compraConfiteria =   CompraConfiteria.builder().precio(27000f).confiteria(confiteria).unidades(5).build();
-        List<CompraConfiteria> confiterias = new ArrayList<>();
-        confiterias.add(compraConfiteria);
-
-        Funcion funcion =  Funcion.builder().precio(25000.00f).build();
-
-        Cupon cupon = Cupon.builder().descripcion("descuento del 10% en la proxima Compra").criterio("Primera compra").descuento(10f).fechaVencimiento(LocalDateTime.of(2023,10,20,8,14)).build();
-        CuponCliente cuponCliente = CuponCliente.builder().estado(true).build();
-        cuponCliente.setCupon(cupon);
-        cuponCliente.setCliente(cliente);
-
-        Entrada entrada = Entrada.builder().columna(4).fila(4).precio(10000f).build();
-        List<Entrada> entradas = new ArrayList<>();
-        entradas.add(entrada);
-
+    public void hacerCompraTest()  {
         try {
-            Compra compra = clienteServicio.hacerCompra(entradas,cliente,confiterias,funcion,cuponCliente);
-            System.out.println(compra);
-        } catch (Exception e) {
+            Compra compra = new Compra();
+
+            Entrada entrada1 = clienteServicio.obtenerEntrada(1);
+            entrada1.setCompra(compra);
+            List<Entrada> entradas = new ArrayList<>();
+            entradas.add(entrada1);
+            Cliente cliente = clienteServicio.obtenerCliente(1008000022);
+            Confiteria confiteria = clienteServicio.obtenerConfiteria(1);
+            CompraConfiteria compraConfiteria = new CompraConfiteria(50000f,5,compra,confiteria);
+            compraConfiteria.setCodigo(10);
+            List<CompraConfiteria> compraConfiterias = new ArrayList<>();
+            compraConfiterias.add(compraConfiteria);
+            Funcion funcion = clienteServicio.obtenerFuncion(6);
+            Cupon cupon = clienteServicio.obtenerCupon(1);
+            CuponCliente cuponCliente = new CuponCliente(true,cupon,cliente);
+            cuponCliente.setCodigo(5);
+
+            Compra compraRegistrada = clienteServicio.hacerCompra(entradas,cliente,compraConfiterias,funcion,cuponCliente);
+
+            Assertions.assertNotNull(compraRegistrada);
+            System.out.println(compraRegistrada);
+
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
+
     }
-     */
+
+ */
+
 
     @Test
     @Sql("classpath:dataset.sql")

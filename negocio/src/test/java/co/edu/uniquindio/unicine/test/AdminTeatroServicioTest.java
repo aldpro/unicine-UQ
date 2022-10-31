@@ -28,6 +28,8 @@ public class AdminTeatroServicioTest {
     @Autowired
     private AdminServicio adminServicio;
 
+
+
     @Test
     @Sql("classpath:dataset.sql")
     public void validarLoginTest() throws Exception {
@@ -178,12 +180,13 @@ public class AdminTeatroServicioTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void crearSalaTest(){
 
         try {
 
             AdministradorTeatro administradorTeatro = new AdministradorTeatro(10,"julio","julio@meial.com", "julio123" );
-            Ciudad ciudad = new Ciudad("Pereira");
+            Ciudad ciudad = adminServicio.obtenerCiudad(1);
             Teatro teatro = new Teatro("Calle 5 #15-48", "32547896", ciudad,administradorTeatro );
             administradorTeatro.getTeatros().add(teatro);
             DistribucionSilla distribucionSilla = new DistribucionSilla("distribucion", 25, 5,5);

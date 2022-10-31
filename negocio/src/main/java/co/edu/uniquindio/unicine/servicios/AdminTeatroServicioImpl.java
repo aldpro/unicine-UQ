@@ -22,12 +22,16 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Autowired
     private final TeatroRepo teatroRepo;
 
-    public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo, FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo) {
+    private final PeliculaRepo peliculaRepo;
+
+    public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo,
+                                   FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo, PeliculaRepo peliculaRepo) {
         this.adminTeatroRepo = adminTeatroRepo;
         this.horarioRepo = horarioRepo;
         this.funcionRepo = funcionRepo;
         this.salaRepo = salaRepo;
         this.teatroRepo = teatroRepo;
+        this.peliculaRepo = peliculaRepo;
     }
 
     @Override
@@ -80,8 +84,19 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public Funcion crearFuncion(Funcion funcion) {
-        return funcionRepo.save(funcion);
+    public Funcion crearFuncion(Funcion funcion,Horario horario,Sala sala,Pelicula pelicula,Float precio) throws Exception {
+
+        Funcion f = funcionRepo.verificarDisponibilidad(sala.getCodigo(),horario.getCodigo());
+        if (f != null){
+            throw new Exception("No se puede crear la función en la misma sala y en el mismo horario");
+        }
+
+        Funcion registro = funcionRepo.save(funcion);
+        registro.setPelicula(pelicula);
+        registro.setSala(sala);
+        registro.setPrecio(precio);
+
+        return registro;
     }
 
     @Override
@@ -206,5 +221,15 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("Por favor envie un codigo");
         }
         return teatroRepo.findById(codigoTeatro).orElse(null);
+    }
+
+    @Override
+    public Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception {
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
     }
 }

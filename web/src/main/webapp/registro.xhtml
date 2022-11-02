@@ -13,42 +13,45 @@
 </h:head>
 <h:body>
 
-    <p:panel header="Registro cliente"/>
-    <h:form>
-        <h:panelGrid columns="3" cellpadding="5">
-            <p:outputLabel for="cedula_cliente" value="Cedula:"/>
-            <p:inputText id="cedula_cliente" value="#{clienteBean.cliente.cedula}" required="true"/>
-            <p:message for="cedula_cliente"/>
+    <p:panel header="Registro cliente">
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="cedula_cliente" value="Cedula:"/>
+                <p:inputText id="cedula_cliente" value="#{clienteBean.cliente.cedula}" required="true"/>
+                <p:message for="cedula_cliente"/>
 
-            <p:outputLabel for="nombre_cliente" value="Nombre:"/>
-            <p:inputText id="nombre_cliente" value="#{clienteBean.cliente.nombre}" required="true"/>
-            <p:message for="nombre_cliente"/>
-
-
-            <p:outputLabel for="correo_cliente" value="Correo:"/>
-            <p:inputText id="correo_cliente" value="#{clienteBean.cliente.correo}" required="true"/>
-            <p:message for="correo_cliente"/>
+                <p:outputLabel for="nombre_cliente" value="Nombre:"/>
+                <p:inputText id="nombre_cliente" value="#{clienteBean.cliente.nombre}" required="true"/>
+                <p:message for="nombre_cliente"/>
 
 
-            <p:outputLabel for="fecha_nacimiento_cliente" value="Fecha de Nacimiento:"/>
-            <p:datePicker id="fecha_nacimiento_cliente" value="#{clienteBean.fechaNacimiento}" required="true"/>
-            <p:message for="fecha_nacimiento_cliente"/>
+                <p:outputLabel for="correo_cliente" value="Correo:"/>
+                <p:inputText id="correo_cliente" value="#{clienteBean.cliente.correo}" required="true"/>
+                <p:message for="correo_cliente"/>
 
 
-            <p:outputLabel for="password_cliente" value="Contraseña:"/>
-            <p:password id="password_cliente" value="#{clienteBean.cliente.password}" required="true" feedback="true"/>
-            <p:message for="password_cliente"/>
+                <p:outputLabel for="fecha_nacimiento_cliente" value="Fecha de Nacimiento:"/>
+                <p:datePicker id="fecha_nacimiento_cliente" value="#{clienteBean.fechaNacimiento}" required="true"/>
+                <p:message for="fecha_nacimiento_cliente"/>
 
 
-            <p:outputLabel for="password_cliente_confirmacion" value="Conformar contraseña:"/>
-            <p:password id="password_cliente_confirmacion" value="#{clienteBean.confirmacionPassword}" required="true" feedback="true"/>
-            <p:message for="password_cliente_confirmacion"/>
+                <p:outputLabel for="password_cliente" value="Contraseña:"/>
+                <p:password id="password_cliente" value="#{clienteBean.cliente.password}" required="true" feedback="true"/>
+                <p:message for="password_cliente"/>
 
-        </h:panelGrid>
-        <p:commandButton value="Registrarse" action="#{clienteBean.registrarCliente}" update="@form"/>
 
-        <p:growl for="mensaje_bean" showDetail="true"/>
+                <p:outputLabel for="password_cliente_confirmacion" value="Conformar contraseña:"/>
+                <p:password id="password_cliente_confirmacion" value="#{clienteBean.confirmacionPassword}" required="true" feedback="true"/>
+                <p:message for="password_cliente_confirmacion"/>
 
-    </h:form>
+            </h:panelGrid>
+            <p:commandButton value="Registrarse" action="#{clienteBean.registrarCliente}" update="@form"/>
+
+            <p:growl for="mensaje_bean" showDetail="true"/>
+
+        </h:form>
+
+    </p:panel>
+
 </h:body>
 </html>

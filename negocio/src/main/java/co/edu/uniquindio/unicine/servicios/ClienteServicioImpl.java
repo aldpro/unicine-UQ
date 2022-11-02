@@ -71,10 +71,9 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("Este correo ya esta registrado");
         }
-
-        emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/", cliente.getCorreo());
-        cliente.setEstado(false);
-        return clienteRepo.save(cliente);
+        Cliente registro = clienteRepo.save(cliente);
+        //emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/", cliente.getCorreo());
+        return registro;
     }
 
     //obtener funciones por ciudad | teatro

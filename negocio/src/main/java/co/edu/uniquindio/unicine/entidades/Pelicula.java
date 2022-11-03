@@ -27,6 +27,7 @@ public class Pelicula implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPelicula estado;
 
+
     @Column(nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
     private GeneroPelicula generoPelicula;

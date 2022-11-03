@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.servicios;
 
+import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,15 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final CuponClienteRepo cuponClienteRepo;
     private final ConfiteriaRepo confiteriaRepo;
 
+    private final PeliculaRepo peliculaRepo;
+
     private final CuponRepo cuponRepo;
 
     public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio,
                                CompraConfiteriaRepo compraConfiteriaRepo, CompraRepo compraRepo,
                                EntradaRepo entradaRepo, CuponClienteRepo cuponClienteRepo,
-                               FuncionRepo funcionRepo, ConfiteriaRepo confiteriaRepo, CuponRepo cuponRepo) {
+                               FuncionRepo funcionRepo, ConfiteriaRepo confiteriaRepo, CuponRepo cuponRepo,
+                               PeliculaRepo peliculaRepo) {
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
         this.compraConfiteriaRepo = compraConfiteriaRepo;
@@ -38,6 +42,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         this.funcionRepo = funcionRepo;
         this.confiteriaRepo = confiteriaRepo;
         this.cuponRepo = cuponRepo;
+        this.peliculaRepo = peliculaRepo;
     }
 
     @Override
@@ -126,7 +131,12 @@ public class ClienteServicioImpl implements ClienteServicio {
     public List<Compra> listarComprasPorCorreo(String correo){
         return clienteRepo.obtenerCompras(correo);
     }
-    
+
+    @Override
+    public List<PeliculaFuncion> listarFuncionesPelicula(String nombre) {
+        return peliculaRepo.buscarPeliculas(nombre);
+    }
+
     @Override
     public Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente) throws Exception {
 

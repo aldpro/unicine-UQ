@@ -9,11 +9,32 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="bootstrap.min.css" library="css" />
+    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
     <title>Página de Inicio</title>
 </h:head>
 
 <h:body>
     <h1>#{inicioBean.mensaje}</h1>
+
+    <div id="barra_navegacion">
+        <ul>
+            <li> <a href="/registro.xhtml" >Registro</a> </li>
+            <li> <a href="admin/crear_pelicula.xhtml" >Crear pelicula</a> </li>
+        </ul>
+    </div>
+
+    <h:form>
+        <div class="input-search ui-inputgroup">
+            <p:inputText placeholder="¿Qué película está buscando?"
+                         required="true" value="#{busquedaBean.busqueda}" />
+
+            <p:commandButton update="@form" icon="pi pi-search"
+                             action="#{busquedaBean.buscar}" />
+
+        </div>
+    </h:form>
+
 </h:body>
 
 </html>

@@ -62,6 +62,11 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     @Override
+    public List<Ciudad> listarCiudades() {
+        return ciudadRepo.findAll();
+    }
+
+    @Override
     public Pelicula crearPelicula(Pelicula pelicula) {
         return peliculaRepo.save(pelicula);
     }

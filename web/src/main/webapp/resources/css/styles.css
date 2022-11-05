@@ -1,3 +1,7 @@
 .img-icono{
     max-width: 30px;
 }
+.cls {
+    display: block;
+    margin: 0 auto;
+}

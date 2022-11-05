@@ -298,5 +298,15 @@ public class ClienteServicioImpl implements ClienteServicio {
         return null;
     }
 
+    @Override
+    public List<Pelicula> listarPeliculasEstadoCiudad(Integer codigoCiudad, EstadoPelicula estadoPelicula) {
+        return clienteRepo.listarPeliculasEstadoCiudad(codigoCiudad, estadoPelicula);
+    }
+
+    @Override
+    public List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula) {
+        return clienteRepo.listarPeliculasEstado(estadoPelicula);
+    }
+
 
 }

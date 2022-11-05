@@ -5,6 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -47,13 +48,29 @@
                             <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                         </a>
                         <ul class="dropdown-menu text-small">
+
                             <h:form>
-                                <h:panelGrid columns="3" cellpadding="5">
-                                    <p:outputLabel for="ciudad" value="Elegir ciudad"/>
-                                    <p:selectOneMenu id="ciudad" value="#{busquedaBean.ciudades}">
-                                        <f:selectItems value="#{busquedaBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                                <h:panelGrid columns="3" cellpadding="5" >
+                                    <p:outputLabel for="ciudad_origen" value="Elegir ciudad: " />
+
+                                    <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                                        <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
                                     </p:selectOneMenu>
-                                    <p:message for="ciudad"/>
+                                    <p:message for="ciudad_origen"/>
+
+                                </h:panelGrid>
+                            </h:form>
+
+                            <h:form>
+                                <h:panelGrid columns="3" cellpadding="5" >
+                                    <p:outputLabel for="teatro_origen" value="Elegir teatro: " />
+
+                                    <p:selectOneMenu id="teatro_origen" value="#{inicioBean.teatro}" converter="#{teatroConverter}">
+                                        <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{null}"/>
+                                        <f:selectItems value="#{inicioBean.teatros}" var="teatro" itemLabel="#{teatro.direccion}" itemValue="#{teatro}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="teatro_origen"/>
 
                                 </h:panelGrid>
                             </h:form>
@@ -78,18 +95,64 @@
         </header>
     </div>
 
-    <div class="container">
+    <div>
 
-        <div>
-            <h1>Cartelera</h1>
+        <div jsf:id="listas_peliculas_Cartelera" class="container">
+
+            <div class="Cartelera">
+                <h2 class="mt-5 mb-5" >En cartelera</h2>
+
+                <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                    <p>#{pelicula.nombre}</p>
+                </p:repeat>
+                <div></div>
+            </div>
+        </div>
+
+        <hr class="mt-5"/>
+
+        <div jsf:id="listas_peliculas_Proximamente" class="container">
+            <h2 class="mt-5 mb-5" >Proximamente</h2>
+            <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
+                <p>#{pelicula.nombre}</p>
+            </p:repeat>
             <div></div>
         </div>
     </div>
 
-    <div>
-        <h1>Proximamente</h1>
-        <div></div>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <img src="resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
+                </a>
+                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-twitter" /> </a></li>
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-instagram" /> </a></li>
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-facebook" /> </a></li>
+            </ul>
+        </footer>
     </div>
+
+    <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccione una ciudad: ">
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="ciudad" value="Ciudad: "/>
+
+                <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                    <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                </p:selectOneMenu>
+
+                <p:message for="ciudad" />
+
+            </h:panelGrid>
+            <p:commandButton value="seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente" oncomplete="PF('dialogo_ciudad').hide()"/>
+        </h:form>
+    </p:dialog>
 
 </h:body>
 

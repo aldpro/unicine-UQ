@@ -43,7 +43,6 @@ public class busquedaBean implements Serializable {
         if (busquedaParam!=null && !busquedaParam.isEmpty()){
             peliculas = clienteServicio.listarFuncionesPelicula(busquedaParam);
         }
-        ciudades = adminServicio.listarCiudades();
     }
 
     public String buscar(){

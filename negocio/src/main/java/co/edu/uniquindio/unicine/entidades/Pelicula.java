@@ -35,8 +35,9 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, length = 80)
     private String nombre;
 
-    @ElementCollection
-    private List<String> repartos;
+    //@Column(nullable = false)
+    @Lob
+    private String reparto;
 
     @Column(nullable = false)
     @Lob
@@ -58,11 +59,11 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, String reparto ,String sinopsis, String urlImagen, String urlTrailer, Float puntuacion) {
         this.estado = estado;
         this.generoPelicula = generoPelicula;
         this.nombre = nombre;
-        this.repartos = reparto;
+        this.reparto = reparto;
         this.sinopsis = sinopsis;
         this.urlImagen = urlImagen;
         this.urlTrailer = urlTrailer;

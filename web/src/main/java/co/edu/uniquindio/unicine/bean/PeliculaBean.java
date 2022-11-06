@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
+import co.edu.uniquindio.unicine.entidades.GeneroPelicula;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class PeliculaBean implements Serializable {
 
     @PostConstruct
     public void init(){
+
         pelicula = new Pelicula();
     }
 
@@ -34,6 +36,8 @@ public class PeliculaBean implements Serializable {
 
         try {
             pelicula.setEstado(EstadoPelicula.CARTELERA);
+            pelicula.setGeneroPelicula(GeneroPelicula.ACCION);
+            pelicula.setPuntuacion(2.5f);
             adminServicio.crearPelicula(pelicula);
 
             return "/admin/pelicula_creada?faces-redirect=true";

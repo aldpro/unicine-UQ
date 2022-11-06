@@ -8,6 +8,7 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -35,15 +36,17 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, length = 80)
     private String nombre;
 
-    @ElementCollection
-    private List<String> repartos;
+    @Column(nullable = false)
+    @Lob
+    private String reparto;
 
     @Column(nullable = false)
     @Lob
     private String sinopsis;
 
-    @Column(nullable = false, length = 200)
-    private String urlImagen;
+    @ElementCollection
+    @Column(nullable = false)
+    private Map<String, String> imagenes;
 
     @Column(nullable = false, length = 200)
     private String urlTrailer;
@@ -58,15 +61,20 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
         this.generoPelicula = generoPelicula;
         this.nombre = nombre;
-        this.repartos = reparto;
+        this.reparto = reparto;
         this.sinopsis = sinopsis;
-        this.urlImagen = urlImagen;
         this.urlTrailer = urlTrailer;
         this.puntuacion = puntuacion;
-        this.funciones =  new ArrayList<>();
+    }
+    public String obtenerImagenPrincipal(){
+        if (!imagenes.isEmpty()){
+            String primera = imagenes.keySet().toArray()[0].toString();
+            return imagenes.get(primera);
+        }
+        return "";
     }
 }

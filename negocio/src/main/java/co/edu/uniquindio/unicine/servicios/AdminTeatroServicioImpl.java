@@ -21,7 +21,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     private final SalaRepo salaRepo;
     @Autowired
     private final TeatroRepo teatroRepo;
-
+    @Autowired
     private final PeliculaRepo peliculaRepo;
 
     public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo,

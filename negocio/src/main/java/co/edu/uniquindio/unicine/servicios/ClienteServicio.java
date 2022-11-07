@@ -45,4 +45,8 @@ public interface ClienteServicio {
     Entrada obtenerEntrada(Integer codigoEntrada)throws Exception;
 
     List<Cupon> listarCuponesCliente(Integer cedula);
+
+    List<Pelicula> listarPeliculasEstadoCiudad(Integer codigoCiudad, EstadoPelicula estadoPelicula);
+
+    List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula);
 }

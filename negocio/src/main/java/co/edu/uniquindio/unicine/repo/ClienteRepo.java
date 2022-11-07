@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.repo;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
+import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +31,9 @@ public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
     @Query("select p from Pelicula p where p.nombre = :nombrePelicula")
     List<Pelicula> buscarPeliculas(String nombrePelicula);
 
+    @Query("select distinct f.pelicula from Funcion f where f.sala.teatro.ciudad.codigo = :codigoCiudad and f.pelicula.estado = :estadoPelicula")
+    List<Pelicula> listarPeliculasEstadoCiudad(Integer codigoCiudad, EstadoPelicula estadoPelicula);
+
+    @Query("select distinct f.pelicula from Funcion f where f.pelicula.estado = :estadoPelicula")
+    List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula);
 }

@@ -16,6 +16,8 @@ public interface AdminServicio {
 
     Ciudad obtenerCiudad(Integer codigoCiudad) throws Exception;
 
+    List<Ciudad> listarCiudades();
+
     //Gestion de peliculas
 
     Pelicula crearPelicula(Pelicula pelicula);

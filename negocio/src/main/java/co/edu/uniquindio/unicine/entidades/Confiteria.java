@@ -7,6 +7,7 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -29,8 +30,9 @@ public class Confiteria implements Serializable {
     @Column(nullable = false)
     private Float precio;
 
+    @ElementCollection
     @Column(nullable = false,length = 200)
-    private String urlImagen;
+    private Map<String, String> imagenesConfi;
 
     @OneToMany(mappedBy = "confiteria", cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -40,7 +42,14 @@ public class Confiteria implements Serializable {
     public Confiteria(String nombre, Float precio, String urlImagen) {
         this.nombre = nombre;
         this.precio = precio;
-        this.urlImagen = urlImagen;
         this.compraConfiterias =  new ArrayList<>();
+    }
+
+    public String getImagenPrincipal(){
+        if (!imagenesConfi.isEmpty()){
+            String primera = imagenesConfi.keySet().toArray()[0].toString();
+            return imagenesConfi.get(primera);
+        }
+        return "";
     }
 }

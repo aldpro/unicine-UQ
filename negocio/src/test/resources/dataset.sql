@@ -1,10 +1,11 @@
-insert into administrador values (1007569040,"cristian@gmail.com","Cristian","52t30XzA2dU");
+insert into administrador values (1003496468,"henrya.barraganp@uqvirtual.edu.co","Henry","unicine123");
 
-insert into administrador_teatro values (1119000000,"jhon@yahoo.com","Jhon","02T3CXzA2dX");
-insert into administrador_teatro values (1228000000,"henry@outlook.com","Henry","ESEq2BwzB0rH");
-insert into administrador_teatro values (1337000000,"valentina@gmail.com","Valentina","IRe05CXzA7dX");
-insert into administrador_teatro values (1446000000,"farit@gmail.com","Farit","69YuNC01u6Eq");
-insert into administrador_teatro values (1557000000,"rodolfo@gmail.com","Rodolfo","1Av3yEzA2Ts");
+insert into administrador_teatro values (1119000000,"jhona.belloc@uqvirtual.edu.co","Jhon","xxunicinexx");
+insert into administrador_teatro values (1228000000,"mariaf.camachog@uqvirtual.edu.co","Maria","unicine12345");
+insert into administrador_teatro values (1337000000,"cristians.barreram@uqvirtual.edu.co ","Cristian","unicine");
+insert into administrador_teatro values (1446000000,"henrya.barraganp@uqvirtual.edu.co","Alejandro","unicine1320");
+insert into administrador_teatro values (1557000000,"rodolfo@email.com","Rodolfo","1Av3yEzA2Ts");
+insert into administrador_teatro values (1657000800,"jose@email.com","Jose","1EzA2Ts");
 
 insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
@@ -19,18 +20,20 @@ insert into distribucion_silla values (4, 9, 8, 72, "C://esquema[colonia].png");
 insert into distribucion_silla values (5, 11, 10, 120, "C://esquema[imperial].jpg");
 
 insert into teatro values (1, "Carrera 14 # 4-6 Norte", "3185469257", 1119000000, 5);
-insert into teatro values (2, "Calle 3 # 1 A 24 Sur", "3185749321", 1119000000, 4);
-insert into teatro values (3, "Calle 16 4-2 Centro", "3124720846", 1228000000, 4);
-insert into teatro values (4, "Carrera 7 # B 12-13 Sur", "3001247585", 1337000000, 3);
-insert into teatro values (5, "Carrera 9 # 4-7 Oeste", "3186347896", 1446000000, 2);
-insert into teatro values (6, "Calle 4 # 4-2 Sur", "3178532410", 1446000000, 1);
+insert into teatro values (2, "Calle 3 # 1 A 24 Sur", "3185749321", 1228000000, 4);
+insert into teatro values (3, "Calle 16 4-2 Centro", "3124720846", 1337000000, 4);
+insert into teatro values (4, "Carrera 7 # B 12-13 Sur", "3001247585", 1446000000, 3);
+insert into teatro values (5, "Carrera 9 # 4-7 Oeste", "3186347896", 1557000000, 2);
+insert into teatro values (6, "Calle 4 # 4-2 Sur", "3178532410", 1657000800, 1);
 
 insert into sala values (1, "Atlantis", "XD", 2, 5);
 insert into sala values (2, "FLoresta", "NORMAL", 1, 5);
 insert into sala values (3, "Gran Plaza Bosa", "IMAX", 1, 4);
-insert into sala values (4, "Multiplaza", "XD", 3, 3);
-insert into sala values (5, "Parque Colonia", "NORMAL", 4, 2);
-insert into sala values (6, "Plaza Imperial", "DX4", 5, 1);
+insert into sala values (4, "Altavista", "IMAX", 1, 6);
+insert into sala values (5, "Multiplaza", "XD", 3, 3);
+insert into sala values (6, "Parque Colonia", "NORMAL", 4, 2);
+insert into sala values (7, "Plaza Imperial", "DX4", 5, 1);
+insert into sala values (8, "Colon", "IMAX", 1, 6);
 
 insert into horario values (1, "2022-12-20 23:15:32", "2022-12-20 21:30:32");
 insert into horario values (2, "2022-12-15 20:31:05", "2022-12-15 18:50:45");
@@ -89,11 +92,17 @@ insert into cliente_telefonos values (1005000055, "3101036478");
 insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, "2022-12-25 20:00:00");
 insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, "2022-12-19 15:45:00");
 
-insert into confiteria values (1, "Perro Caliente + Gaseosa", 24000, "C://perroygaseosa.png");
-insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygaseosa.png");
-insert into confiteria values (3, "Crispeta + Gaseosa para Pareja", 54800, "C://crispetaygaseosa.png");
-insert into confiteria values (4, "Crispeta", 15000, "C://crispeta.png");
-insert into confiteria values (5, "Bebida", 6000, "C://gaseosa.png");
+insert into confiteria values (1, "Combo para niños", 15000);
+insert into confiteria values (2, "Combo para dos", 49900);
+insert into confiteria values (3, "Crispeta + Dos Gaseosas", 29800);
+insert into confiteria values (4, "Gaseosa + Perro caliente + Crispeta + KitKat", 19900);
+insert into confiteria values (5, "Nevado de arequipe", 6000);
+
+insert into confiteria_imagenes_confi values (1,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg", "unicine/confiteria/combo_ni%C3%B1os_ydpbay");
+insert into confiteria_imagenes_confi values (2,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes_confi values (3,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg", "unicine/confiteria/crispeta_2gaseosas_vnrpli");
+insert into confiteria_imagenes_confi values (4,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes_confi values (5,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg", "unicine/confiteria/nevado_arequipe_afpfeo");
 
 insert into cupon_cliente values (1, 1, 1005000055, 1);
 insert into cupon_cliente values (2, 0, 1006000044, 2);

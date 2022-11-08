@@ -44,7 +44,7 @@ public interface AdminServicio {
 
     //Gestion de confiteria
 
-    Confiteria crearConfiteria(Confiteria confiteria) throws  Exception;
+    Confiteria crearConfiteria(Confiteria confiteria);
 
     Confiteria actualizarConfiteria(Confiteria confiteria) throws  Exception;
 

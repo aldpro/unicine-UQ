@@ -156,13 +156,8 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     @Override
-    public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
+    public Confiteria crearConfiteria(Confiteria confiteria) {
 
-        Optional<Confiteria> confiteriaBuscada = confiteriaRepo.findByUrlImagen(confiteria.getUrlImagen());
-
-        if(confiteriaBuscada.isPresent()) {
-            throw new Exception("Dos imagenes no pueden ser iguales");
-        }
         return confiteriaRepo.save(confiteria);
     }
 

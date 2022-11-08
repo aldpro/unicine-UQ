@@ -28,10 +28,10 @@ public class Pelicula implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPelicula estado;
 
-
+    @ElementCollection
     @Column(nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
-    private GeneroPelicula generoPelicula;
+    private List<GeneroPelicula> generosPelicula;
 
     @Column(nullable = false, length = 80)
     private String nombre;
@@ -61,16 +61,16 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, List<GeneroPelicula> generosPelicula, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
-        this.generoPelicula = generoPelicula;
+        this.generosPelicula = generosPelicula;
         this.nombre = nombre;
         this.reparto = reparto;
         this.sinopsis = sinopsis;
         this.urlTrailer = urlTrailer;
         this.puntuacion = puntuacion;
     }
-    public String obtenerImagenPrincipal(){
+    public String getImagenPrincipal(){
         if (!imagenes.isEmpty()){
             String primera = imagenes.keySet().toArray()[0].toString();
             return imagenes.get(primera);

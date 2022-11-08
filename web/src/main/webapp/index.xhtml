@@ -19,7 +19,7 @@
 <h:body>
 
     <div id="barra_navegacion">
-        
+
         <header class="p-3 mb-3 border-bottom">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -47,47 +47,60 @@
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                         </a>
-                        <ul class="dropdown-menu text-small">
-
+                        <ul id="Ubicacion" class="dropdown-menu text-small" style="transform: translate(-270px,35px); min-width: 20rem">
                             <h:form>
-                                <h:panelGrid columns="3" cellpadding="5" >
-                                    <p:outputLabel for="ciudad_origen" value="Elegir ciudad: " />
+                                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
+
+                                <div class="mb-2" align="center">
+                                    <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
+
+                                    <hr style="margin: 0rem 0; color: white"/>
 
                                     <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
                                         <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
                                         <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
                                     </p:selectOneMenu>
                                     <p:message for="ciudad_origen"/>
+                                </div>
 
-                                </h:panelGrid>
-                            </h:form>
-
-                            <h:form>
-                                <h:panelGrid columns="3" cellpadding="5" >
+                                <div class="mb-2" align="center">
                                     <p:outputLabel for="teatro_origen" value="Elegir teatro: " />
+
+                                    <hr style="margin: 0rem 0; color: white"/>
 
                                     <p:selectOneMenu id="teatro_origen" value="#{inicioBean.teatro}" converter="#{teatroConverter}">
                                         <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{null}"/>
                                         <f:selectItems value="#{inicioBean.teatros}" var="teatro" itemLabel="#{teatro.direccion}" itemValue="#{teatro}"/>
                                     </p:selectOneMenu>
                                     <p:message for="teatro_origen"/>
-
-                                </h:panelGrid>
+                                </div>
                             </h:form>
                         </ul>
-                        
                     </div>
 
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                         </a>
-                        <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); min-width: 20rem">
+                            <h:form>
+                                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Iniciar sesión: </h1>
+
+                                <div class="form-floating">
+                                    <input type="email" required = "true" class="form-control" id="correo_login" placeholder="name@example.com"/>
+                                    <label for="correo_login">Correo electrónico:</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password_login" placeholder="Password" required = "true"/>
+                                    <label for="password_login">Contraseña:</label>
+                                </div>
+                                <div class="mb-2">
+                                    <a href="reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
+                                    <hr style="margin: 0rem 0; color: white"/>
+                                    <a href="registro.xhtml">¿No tienes cuenta? Registraté</a>
+                                </div>
+                                <button class="w-100 btn btn-lg btn-primary" type="submit" id="boton_login" >Ingresar</button>
+                            </h:form>
                         </ul>
                     </div>
                 </div>
@@ -100,11 +113,100 @@
         <div jsf:id="listas_peliculas_Cartelera" class="container">
 
             <div class="Cartelera">
-                <h2 class="mt-5 mb-5" >En cartelera</h2>
 
-                <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
-                    <p>#{pelicula.nombre}</p>
-                </p:repeat>
+                <div>
+                    <div class="bd-example-snippet bd-code-snippet">
+                        <div class="bd-example">
+                            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
+                                    </button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2">
+                                    </button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3">
+                                    </button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                                             preserveAspectRatio="xMidYMid slice" focusable="false">
+                                            <title>Placeholder
+                                            </title>
+                                            <rect width="100%" height="100%" fill="#777"/>
+                                            <text x="50%" y="50%" fill="#555" dy=".3em">First slide
+                                            </text>
+                                        </svg>
+
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>First slide label</h5>
+                                            <p>Some representative placeholder content for the first slide.</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                                             preserveAspectRatio="xMidYMid slice" focusable="false">
+                                            <title>Placeholder
+                                            </title>
+                                            <rect width="100%" height="100%" fill="#666"/>
+                                            <text x="50%" y="50%" fill="#444" dy=".3em">Second slide
+                                            </text>
+                                        </svg>
+
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Second slide label</h5>
+                                            <p>Some representative placeholder content for the second slide.</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                                             preserveAspectRatio="xMidYMid slice" focusable="false">
+                                            <title>Placeholder
+                                            </title>
+                                            <rect width="100%" height="100%" fill="#555"/>
+                                            <text x="50%" y="50%" fill="#333" dy=".3em">Third slide
+                                            </text>
+                                        </svg>
+
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Third slide label</h5>
+                                            <p>Some representative placeholder content for the third slide.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="mt-5 mb-5" >En cartelera</h2>
+                <div class="row">
+                    <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                        <div class="col-md-6">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generosPelicula}" var="genero">
+                                        <p:chip label="#{genero}" styleClass="mr-2"/></p:repeat></strong>
+                                    <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                    <p class="card-text mb-auto">#{pelicula.reparto}</p>
+                                    <a href="#" class="stretched-link">Ver más</a>
+                                </div>
+                                <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
+                                    <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
                 <div></div>
             </div>
         </div>
@@ -113,9 +215,23 @@
 
         <div jsf:id="listas_peliculas_Proximamente" class="container">
             <h2 class="mt-5 mb-5" >Proximamente</h2>
-            <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
-                <p>#{pelicula.nombre}</p>
-            </p:repeat>
+            <div class="row">
+                <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
+                    <div class="col-md-6">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generosPelicula}" var="genero"><p:chip label="#{genero}" styleClass="mr-2"/></p:repeat></strong>
+                                <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                <p class="card-text mb-auto">#{pelicula.reparto}</p>
+                                <a href="#" class="stretched-link">Ver más</a>
+                            </div>
+                            <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
+                                <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
+                            </div>
+                        </div>
+                    </div>
+                </p:repeat>
+            </div>
             <div></div>
         </div>
     </div>

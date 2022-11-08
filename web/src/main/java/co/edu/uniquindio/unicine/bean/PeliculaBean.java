@@ -15,7 +15,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.faces.view.facelets.FaceletContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

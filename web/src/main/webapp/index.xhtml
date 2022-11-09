@@ -47,32 +47,30 @@
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                         </a>
-                        <ul id="Ubicacion" class="dropdown-menu text-small" style="transform: translate(-270px,35px); min-width: 20rem">
+                        <ul id="Ubicacion" class="dropdown-menu text-small" style="--bs-dropdown-border-radius: 1rem; transform: translate(-270px,35px); min-width: 20rem">
                             <h:form>
                                 <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
 
                                 <div class="mb-2" align="center">
                                     <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
 
-                                    <hr style="margin: 0rem 0; color: white"/>
+                                    <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
 
                                     <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
                                         <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
                                         <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
                                     </p:selectOneMenu>
-                                    <p:message for="ciudad_origen"/>
                                 </div>
 
                                 <div class="mb-2" align="center">
                                     <p:outputLabel for="teatro_origen" value="Elegir teatro: " />
 
-                                    <hr style="margin: 0rem 0; color: white"/>
+                                    <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
 
                                     <p:selectOneMenu id="teatro_origen" value="#{inicioBean.teatro}" converter="#{teatroConverter}">
                                         <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{null}"/>
                                         <f:selectItems value="#{inicioBean.teatros}" var="teatro" itemLabel="#{teatro.direccion}" itemValue="#{teatro}"/>
                                     </p:selectOneMenu>
-                                    <p:message for="teatro_origen"/>
                                 </div>
                             </h:form>
                         </ul>
@@ -82,24 +80,26 @@
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                         </a>
-                        <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); min-width: 20rem">
+                        <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); padding-bottom: 0px; --bs-dropdown-border-radius: 1rem; min-width: 20rem">
                             <h:form>
                                 <h1 class="h3 mb-3 fw-normal" style="text-align: center">Iniciar sesión: </h1>
 
-                                <div class="form-floating">
+                                <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
                                     <input type="email" required = "true" class="form-control" id="correo_login" placeholder="name@example.com"/>
                                     <label for="correo_login">Correo electrónico:</label>
                                 </div>
-                                <div class="form-floating">
+                                <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
                                     <input type="password" class="form-control" id="password_login" placeholder="Password" required = "true"/>
                                     <label for="password_login">Contraseña:</label>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-2" style="margin-left: 10px">
                                     <a href="reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
                                     <hr style="margin: 0rem 0; color: white"/>
                                     <a href="registro.xhtml">¿No tienes cuenta? Registraté</a>
                                 </div>
-                                <button class="w-100 btn btn-lg btn-primary" type="submit" id="boton_login" >Ingresar</button>
+                                <button style="border-left-width: 2px; left: 120px; bottom: 2px" id="ingresar" name="j_idt367" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only rounded-button" onclick="">
+                                    <span class="ui-button-text ui-c">Ingresar</span>
+                                </button>
                             </h:form>
                         </ul>
                     </div>

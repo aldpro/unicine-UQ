@@ -195,7 +195,7 @@
                                         <p:chip label="#{genero}" styleClass="mr-2"/></p:repeat></strong>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.reparto}</p>
-                                    <a href="#" class="stretched-link">Ver más</a>
+                                    <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
                                 </div>
                                 <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
                                     <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
@@ -256,7 +256,7 @@
                 <p:outputLabel for="ciudad" value="Ciudad: "/>
 
                 <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
-                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                    <f:selectItem itemLabel="Seleccione una ciudad"  noSelectionOption="true" itemValue="#{null}"/>
                     <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
                 </p:selectOneMenu>
 

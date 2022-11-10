@@ -249,4 +249,14 @@ public class AdminServicioImpl implements AdminServicio{
         }
         return guardado.get();
     }
+
+    @Override
+    public Pelicula obtenerPeliculaNombre(String nombrePelicula) throws Exception{
+        Optional<Pelicula> guardado = peliculaRepo.obtenerPeliculaNombre(nombrePelicula);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
+    }
 }

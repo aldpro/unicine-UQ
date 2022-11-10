@@ -59,7 +59,8 @@ public class InicioBean implements Serializable {
 
         imagenesCarousel = new ArrayList<>();
         imagenesCarousel.add("https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6FB49579CE66FD924D7C91DFF86F354DFE10AD56446002E98C1E40B3FD2C7D3F/scale?width=1200&aspectRatio=1.78&format=jpeg");
-        imagenesCarousel.add("https://los40.com/los40/imagenes/2022/06/23/cinetv/1655978254_918544_1655980054_gigante_normal.jpg");
+        imagenesCarousel.add("https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/F6570A8A7FCC8633100E0E0E6B87E081BB433F4658F15D4C8F04D31E6353ECB5/scale?width=1200&aspectRatio=1.78&format=jpeg");
+        imagenesCarousel.add("https://imagenes.20minutos.es/files/og_thumbnail/uploads/imagenes/2022/09/29/smile.jpeg");
     }
 
     public void elegirCiudad(){

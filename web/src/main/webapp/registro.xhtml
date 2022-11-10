@@ -5,13 +5,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <h:outputStylesheet name="bootstrap.min.css" library="css" />
     <h:outputScript name="bootstrap.bundle.min.js" library="js" />
-    <h:outputScript name="styles.css" library="css" />
+    <h:outputStylesheet name="styles.css" library="css" />
     <title>Nuevo registro cliente</title>
 </h:head>
 <h:body>
@@ -34,7 +35,7 @@
                     <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                         <div class="input-search ui-inputgroup">
                             <p:inputText placeholder="Buscar..."
-                                         required="true" value="#{busquedaBean.busqueda}" />
+                                         required="true" value="#{busquedaBean.pelicula.nombre}" />
                             <p:commandButton update="@form" icon="pi pi-search"
                                              action="#{busquedaBean.buscar}" />
                         </div>
@@ -104,7 +105,8 @@
             </div>
         </header>
     </div>
-    <p:panel header="Registro cliente">
+
+    <p:panel header="Registro cliente" styleClass="ui-panel-title tit">
         <h:form>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="cedula_cliente" value="Cedula:"/>
@@ -131,9 +133,16 @@
                 <p:message for="password_cliente"/>
 
 
-                <p:outputLabel for="password_cliente_confirmacion" value="Conformar contraseña:"/>
+                <p:outputLabel for="password_cliente_confirmacion" value="Confirmar contraseña:"/>
                 <p:password id="password_cliente_confirmacion" value="#{clienteBean.confirmacionPassword}" required="true" feedback="true"/>
                 <p:message for="password_cliente_confirmacion"/>
+
+                <p:outputLabel for="imagen_cliente" value="Imagen de perfil:"/>
+
+                <p:fileUpload id="imagen_cliente" listener="#{clienteBean.subirImagen}" mode="advanced"
+                              multiple="false" sizeLimit="1000000" fileLimit="1"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="false" />
+                <p:message for="imagen_cliente"/>
 
             </h:panelGrid>
             <p:commandButton value="Registrarse" action="#{clienteBean.registrarCliente}" update="@form"/>

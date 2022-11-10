@@ -54,20 +54,20 @@ insert into pelicula_imagenes values(3, "https://res.cloudinary.com/dwu4xtiun/im
 insert into pelicula_imagenes values(4, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775203/unicine/peliculas/Minions_gqwkoe.jpg","unicine/peliculas/Minions_gqwkoe");
 insert into pelicula_imagenes values(5, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775197/unicine/peliculas/Encanto_fhr4vu.jpg","unicine/peliculas/Encanto_fhr4vu");
 
-insert into pelicula_generos_pelicula values (1, "AVENTURAS");
-insert into pelicula_generos_pelicula values (1, "FANTASIA");
-insert into pelicula_generos_pelicula values (1, "ANIMADA");
-insert into pelicula_generos_pelicula values (2, "ACCION");
-insert into pelicula_generos_pelicula values (2, "AVENTURAS");
-insert into pelicula_generos_pelicula values (2, "ANIMADA");
-insert into pelicula_generos_pelicula values (3, "TERROR");
-insert into pelicula_generos_pelicula values (3, "SUSPENSO");
-insert into pelicula_generos_pelicula values (4, "ANIMADA");
-insert into pelicula_generos_pelicula values (4, "COMEDIA");
-insert into pelicula_generos_pelicula values (4, "AVENTURAS");
-insert into pelicula_generos_pelicula values (5, "ANIMADA");
-insert into pelicula_generos_pelicula values (5, "MUSICAL");
-insert into pelicula_generos_pelicula values (5, "AVENTURAS");
+insert into pelicula_generos values (1, "AVENTURAS");
+insert into pelicula_generos values (1, "FANTASIA");
+insert into pelicula_generos values (1, "ANIMADA");
+insert into pelicula_generos values (2, "ACCION");
+insert into pelicula_generos values (2, "AVENTURAS");
+insert into pelicula_generos values (2, "ANIMADA");
+insert into pelicula_generos values (3, "TERROR");
+insert into pelicula_generos values (3, "SUSPENSO");
+insert into pelicula_generos values (4, "ANIMADA");
+insert into pelicula_generos values (4, "COMEDIA");
+insert into pelicula_generos values (4, "AVENTURAS");
+insert into pelicula_generos values (5, "ANIMADA");
+insert into pelicula_generos values (5, "MUSICAL");
+insert into pelicula_generos values (5, "AVENTURAS");
 
 insert into funcion values (1, 7000, 1, 1, 6);
 insert into funcion values (2, 6500, 2, 2, 5);
@@ -76,11 +76,17 @@ insert into funcion values (4, 6800, 4, 4, 3);
 insert into funcion values (5, 7100, 5, 5, 2);
 insert into funcion values (6, 6800, 6, 4, 1);
 
-insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1,"https://pepe.jpg");
-insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0,"http://juan.jpg");
-insert into cliente values (1007000033,"luis@yahoo.com","Luis","kUL17Okt1SM",0,"http://luis.png");
-insert into cliente values (1006000044,"maria@gmail.com","Maria","Dss57UgC3QK",1,"http://maria.jpg");
-insert into cliente values (1005000055,"luisa@google.com","Luisa","MqG82VtF2Ob",0,"https://luis.png");
+insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1);
+insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0);
+insert into cliente values (1007000033,"luis@yahoo.com","Luis","kUL17Okt1SM",0);
+insert into cliente values (1006000044,"maria@gmail.com","Maria","Dss57UgC3QK",1);
+insert into cliente values (1005000055,"luisa@google.com","Luisa","MqG82VtF2Ob",0);
+
+insert into cliente_imagenes values (1009000011,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente1_zfhe3z.jpg", "unicine/clientes/cliente1_zfhe3z");
+insert into cliente_imagenes values (1008000022,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente2_rpyvof.jpg", "unicine/clientes/cliente2_rpyvof");
+insert into cliente_imagenes values (1007000033,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente3_nad9sh.jpg", "unicine/clientes/cliente3_nad9sh");
+insert into cliente_imagenes values (1006000044,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668100350/unicine/clientes/cliente4_jspbf9.jpg", "unicine/clientes/cliente4_jspbf9");
+insert into cliente_imagenes values (1005000055,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente5_akhhrd.jpg", "unicine/clientes/cliente5_akhhrd");
 
 insert into cliente_telefonos values (1009000011, "3146832477");
 insert into cliente_telefonos values (1009000011, "3008245984");
@@ -98,11 +104,11 @@ insert into confiteria values (3, "Crispeta + Dos Gaseosas", 29800);
 insert into confiteria values (4, "Gaseosa + Perro caliente + Crispeta + KitKat", 19900);
 insert into confiteria values (5, "Nevado de arequipe", 6000);
 
-insert into confiteria_imagenes_confi values (1,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg", "unicine/confiteria/combo_ni%C3%B1os_ydpbay");
-insert into confiteria_imagenes_confi values (2,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
-insert into confiteria_imagenes_confi values (3,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg", "unicine/confiteria/crispeta_2gaseosas_vnrpli");
-insert into confiteria_imagenes_confi values (4,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
-insert into confiteria_imagenes_confi values (5,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg", "unicine/confiteria/nevado_arequipe_afpfeo");
+insert into confiteria_imagenes values (1,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg", "unicine/confiteria/combo_ni%C3%B1os_ydpbay");
+insert into confiteria_imagenes values (2,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes values (3,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg", "unicine/confiteria/crispeta_2gaseosas_vnrpli");
+insert into confiteria_imagenes values (4,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes values (5,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg", "unicine/confiteria/nevado_arequipe_afpfeo");
 
 insert into cupon_cliente values (1, 1, 1005000055, 1);
 insert into cupon_cliente values (2, 0, 1006000044, 2);

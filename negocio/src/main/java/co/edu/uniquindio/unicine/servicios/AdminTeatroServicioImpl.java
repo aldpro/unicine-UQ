@@ -234,7 +234,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public List<Teatro> listarTeatrosCiudad(String nombreCiudad) {
-        return teatroRepo.listarTeatroxCiudad(nombreCiudad);
+    public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) {
+        return teatroRepo.listarTeatroxCiudad(codigoCiudad);
     }
 }

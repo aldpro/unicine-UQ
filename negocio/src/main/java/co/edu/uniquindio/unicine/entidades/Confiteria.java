@@ -32,7 +32,7 @@ public class Confiteria implements Serializable {
 
     @ElementCollection
     @Column(nullable = false,length = 200)
-    private Map<String, String> imagenesConfi;
+    private Map<String, String> imagenes;
 
     @OneToMany(mappedBy = "confiteria", cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -46,9 +46,9 @@ public class Confiteria implements Serializable {
     }
 
     public String getImagenPrincipal(){
-        if (!imagenesConfi.isEmpty()){
-            String primera = imagenesConfi.keySet().toArray()[0].toString();
-            return imagenesConfi.get(primera);
+        if (!imagenes.isEmpty()){
+            String primera = imagenes.keySet().toArray()[0].toString();
+            return imagenes.get(primera);
         }
         return "";
     }

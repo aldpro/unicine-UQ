@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.Ciudad;
+import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import lombok.Getter;
@@ -22,18 +23,19 @@ public class busquedaBean implements Serializable {
 
     @Getter @Setter
     private String busqueda;
-
+    @Autowired
+    AdminServicio adminServicio;
     @Autowired
     private ClienteServicio clienteServicio;
-
-    @Autowired
-    private AdminServicio adminServicio;
 
     @Value("#{param['busqueda']}")
     private String busquedaParam;
 
     @Getter @Setter
     private List<PeliculaFuncion> peliculas;
+
+    @Getter @Setter
+    private Pelicula pelicula;
 
     @Setter @Getter
     private List<Ciudad> ciudades;
@@ -42,7 +44,19 @@ public class busquedaBean implements Serializable {
     public void init(){
         if (busquedaParam!=null && !busquedaParam.isEmpty()){
             peliculas = clienteServicio.listarFuncionesPelicula(busquedaParam);
+            try {
+                pelicula = adminServicio.obtenerPeliculaNombre(busquedaParam);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+    }
+
+    public String buscarPelicula(){
+        if (pelicula != null){
+            return "/detalle_pelicula?faces-redirect=true&amp;pelicula_id="+pelicula.getCodigo();
+        }
+        return "";
     }
 
     public String buscar(){

@@ -25,11 +25,15 @@
 }
 
 .carousel-item{
-    height: 400px;
+    height: 500px;
     position: relative;
 }
 
 .img-carousel{
     width: 100%;
     height: auto;
+}
+
+body .ui-panel .ui-panel-title {
+    margin: 599px;
 }

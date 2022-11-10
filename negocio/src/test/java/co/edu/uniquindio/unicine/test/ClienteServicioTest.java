@@ -39,7 +39,7 @@ public class ClienteServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarClienteTest(){
-        Cliente cliente = Cliente.builder().cedula(1003496468).nombre("aldo").password("2312").correo("cristianbarrera100@gmail.com").urlFoto("C/gfeds").build();
+        Cliente cliente = Cliente.builder().cedula(1003496468).nombre("aldo").password("2312").correo("cristianbarrera100@gmail.com").build();
         try {
             Cliente nuevo = clienteServicio.registrarCliente(cliente);
             Assertions.assertNotNull(nuevo);

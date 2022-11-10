@@ -68,7 +68,7 @@
                                     <p:outputLabel for="teatro_origen" value="Elegir teatro: " />
                                     <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
                                     <p:selectOneMenu id="teatro_origen" value="#{inicioBean.teatro}" converter="#{teatroConverter}">
-                                        <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{null}"/>
+                                        <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{inicioBean.ciudad}"/>
                                         <f:selectItems value="#{inicioBean.teatros}" var="teatro" itemLabel="#{teatro.direccion}" itemValue="#{teatro}"/>
                                     </p:selectOneMenu>
                                 </h:form>
@@ -154,8 +154,11 @@
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generosPelicula}" var="genero">
-                                        <p:chip label="#{genero}" styleClass="mr-2"/></p:repeat></strong>
+                                    <strong class="d-inline-block mb-2 text-primary">
+                                        <p:repeat value="#{pelicula.generos}" var="genero">
+                                        <p:chip label="#{genero}" styleClass="mr-2"/>
+                                        </p:repeat>
+                                    </strong>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.reparto}</p>
                                     <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
@@ -180,7 +183,7 @@
                     <div class="col-md-6">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generosPelicula}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
+                                <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generos}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
                                 <h3 class="mb-0">#{pelicula.nombre}</h3>
                                 <p class="card-text mb-auto">#{pelicula.reparto}</p>
                                 <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>

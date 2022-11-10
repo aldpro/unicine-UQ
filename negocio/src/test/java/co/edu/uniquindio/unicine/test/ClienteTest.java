@@ -25,7 +25,7 @@ public class ClienteTest {
     public void registrar(){
 
         String[] telefonos = new String[] {"3145876258", "3174085147"};
-        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, "C:\\", Arrays.asList(telefonos));
+        Cliente cliente = new Cliente(1007569040, "Cristian", "cristian@gmail.com", "Rxrl01", false, Arrays.asList(telefonos));
 
         Cliente registrado = clienteRepo.save(cliente);
 

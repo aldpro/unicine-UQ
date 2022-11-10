@@ -232,4 +232,9 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         }
         return guardado.get();
     }
+
+    @Override
+    public List<Teatro> listarTeatrosCiudad(String nombreCiudad) {
+        return teatroRepo.listarTeatroxCiudad(nombreCiudad);
+    }
 }

@@ -1,10 +1,11 @@
-insert into administrador values (1007569040,"cristian@gmail.com","Cristian","52t30XzA2dU");
+insert into administrador values (1003496468,"henrya.barraganp@uqvirtual.edu.co","Henry","unicine123");
 
-insert into administrador_teatro values (1119000000,"jhon@yahoo.com","Jhon","02T3CXzA2dX");
-insert into administrador_teatro values (1228000000,"henry@outlook.com","Henry","ESEq2BwzB0rH");
-insert into administrador_teatro values (1337000000,"valentina@gmail.com","Valentina","IRe05CXzA7dX");
-insert into administrador_teatro values (1446000000,"farit@gmail.com","Farit","69YuNC01u6Eq");
-insert into administrador_teatro values (1557000000,"rodolfo@gmail.com","Rodolfo","1Av3yEzA2Ts");
+insert into administrador_teatro values (1119000000,"jhona.belloc@uqvirtual.edu.co","Jhon","xxunicinexx");
+insert into administrador_teatro values (1228000000,"mariaf.camachog@uqvirtual.edu.co","Maria","unicine12345");
+insert into administrador_teatro values (1337000000,"cristians.barreram@uqvirtual.edu.co ","Cristian","unicine");
+insert into administrador_teatro values (1446000000,"henrya.barraganp@uqvirtual.edu.co","Alejandro","unicine1320");
+insert into administrador_teatro values (1557000000,"rodolfo@email.com","Rodolfo","1Av3yEzA2Ts");
+insert into administrador_teatro values (1657000800,"jose@email.com","Jose","1EzA2Ts");
 
 insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
@@ -19,18 +20,20 @@ insert into distribucion_silla values (4, 9, 8, 72, "C://esquema[colonia].png");
 insert into distribucion_silla values (5, 11, 10, 120, "C://esquema[imperial].jpg");
 
 insert into teatro values (1, "Carrera 14 # 4-6 Norte", "3185469257", 1119000000, 5);
-insert into teatro values (2, "Calle 3 # 1 A 24 Sur", "3185749321", 1119000000, 4);
-insert into teatro values (3, "Calle 16 4-2 Centro", "3124720846", 1228000000, 4);
-insert into teatro values (4, "Carrera 7 # B 12-13 Sur", "3001247585", 1337000000, 3);
-insert into teatro values (5, "Carrera 9 # 4-7 Oeste", "3186347896", 1446000000, 2);
-insert into teatro values (6, "Calle 4 # 4-2 Sur", "3178532410", 1446000000, 1);
+insert into teatro values (2, "Calle 3 # 1 A 24 Sur", "3185749321", 1228000000, 4);
+insert into teatro values (3, "Calle 16 4-2 Centro", "3124720846", 1337000000, 4);
+insert into teatro values (4, "Carrera 7 # B 12-13 Sur", "3001247585", 1446000000, 3);
+insert into teatro values (5, "Carrera 9 # 4-7 Oeste", "3186347896", 1557000000, 2);
+insert into teatro values (6, "Calle 4 # 4-2 Sur", "3178532410", 1657000800, 1);
 
 insert into sala values (1, "Atlantis", "XD", 2, 5);
 insert into sala values (2, "FLoresta", "NORMAL", 1, 5);
 insert into sala values (3, "Gran Plaza Bosa", "IMAX", 1, 4);
-insert into sala values (4, "Multiplaza", "XD", 3, 3);
-insert into sala values (5, "Parque Colonia", "NORMAL", 4, 2);
-insert into sala values (6, "Plaza Imperial", "DX4", 5, 1);
+insert into sala values (4, "Altavista", "IMAX", 1, 6);
+insert into sala values (5, "Multiplaza", "XD", 3, 3);
+insert into sala values (6, "Parque Colonia", "NORMAL", 4, 2);
+insert into sala values (7, "Plaza Imperial", "DX4", 5, 1);
+insert into sala values (8, "Colon", "IMAX", 1, 6);
 
 insert into horario values (1, "2022-12-20 23:15:32", "2022-12-20 21:30:32");
 insert into horario values (2, "2022-12-15 20:31:05", "2022-12-15 18:50:45");
@@ -39,17 +42,32 @@ insert into horario values (4, "2022-12-17 19:00:23", "2022-12-17 17:30:06");
 insert into horario values (5, "2022-12-22 20:30:18", "2022-12-22 18:40:28");
 insert into horario values (6, "2022-12-17 23:11:02", "2022-12-17 21:40:12");
 
-insert into pelicula values (1, "PREVENTA", "AVENTURAS", "Pinocho", 4.2,"Pinocho, Tom Cruise, Cameron Diaz", "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://youtube//wQls8fn.com");
-insert into pelicula values (2, "CARTELERA", "ACCION", "Dragon Ball: Super Hero", 3.5, "Olivia Rodrigo, Brad Pitt, Jennifer Lawrence", "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://youtube//SxtZ8fU.com");
-insert into pelicula values (3, "CARTELERA", "SUSPENSO", "Smile", 4.0, "Sosie Bacon, Jessie T Usher", "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://youtube//Ab4e8fI.com");
-insert into pelicula values (4, "CARTELERA", "AVENTURAS", "Minions", 4.5, "Ryan Reinolds, Henry Cavill", "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://youtube//QsrT0jE.com");
-insert into pelicula values (5, "PREVENTA", "FANTASIA", "Encanto", 4.1, "Lucy Vives, Selena Gomez", "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://youtube//wQls8fn.com");
+insert into pelicula values (1, "PREVENTA", "Pinocho", 4.2,"Tom Hanks, Cynthia Erivo, Luke Evans", "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un vuelco al abandonar a su padre para unirse a un circo.", "https://www.youtube.com/embed/TITv1TNi5mI");
+insert into pelicula values (2, "CARTELERA", "Dragon Ball: Super Hero", 3.5, "	Masako Nozawa, Toshio Furukawa, Ryō Horikawa, Yūko Minaguchi", "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://www.youtube.com/embed/lXLPVQ-WrU4");
+insert into pelicula values (3, "CARTELERA", "Smile", 4.0, "Sosie Bacon, Jessie T Usher", "Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.", "https://www.youtube.com/embed/yhKiQGJop_8");
+insert into pelicula values (4, "CARTELERA", "Minions", 4.5, "Sandra Bullock, Jon Hamm, Michael Keaton", "En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.", "https://www.youtube.com/embed/W27moupirnI");
+insert into pelicula values (5, "PREVENTA", "Encanto", 4.1, "Stephanie Beatriz, María Cecilia Botero, John Leguizamo", "En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.", "https://www.youtube.com/embed/SAH_W9q_brE");
 
-insert into pelicula_imagenes values(1, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775216/unicine/peliculas/pinocho_gxbbvh.jpg","unicine/peliculas/pinocho_gxbbvh");
+insert into pelicula_imagenes values(1, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667875113/unicine/peliculas/pinocho_wehtj2.jpg","unicine/peliculas/pinocho_wehtj2");
 insert into pelicula_imagenes values(2, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775208/unicine/peliculas/Dragon_Ball_Super_Super_Hero_kgaa1r.jpg","unicine/peliculas/Dragon_Ball_Super_Super_Hero_kgaa1r");
 insert into pelicula_imagenes values(3, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775212/unicine/peliculas/Smile_dl13uz.jpg","unicine/peliculas/Smile_dl13uz");
-insert into pelicula_imagenes values(5, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775203/unicine/peliculas/Minions_gqwkoe.jpg","unicine/peliculas/Minions_gqwkoe");
+insert into pelicula_imagenes values(4, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775203/unicine/peliculas/Minions_gqwkoe.jpg","unicine/peliculas/Minions_gqwkoe");
 insert into pelicula_imagenes values(5, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775197/unicine/peliculas/Encanto_fhr4vu.jpg","unicine/peliculas/Encanto_fhr4vu");
+
+insert into pelicula_generos_pelicula values (1, "AVENTURAS");
+insert into pelicula_generos_pelicula values (1, "FANTASIA");
+insert into pelicula_generos_pelicula values (1, "ANIMADA");
+insert into pelicula_generos_pelicula values (2, "ACCION");
+insert into pelicula_generos_pelicula values (2, "AVENTURAS");
+insert into pelicula_generos_pelicula values (2, "ANIMADA");
+insert into pelicula_generos_pelicula values (3, "TERROR");
+insert into pelicula_generos_pelicula values (3, "SUSPENSO");
+insert into pelicula_generos_pelicula values (4, "ANIMADA");
+insert into pelicula_generos_pelicula values (4, "COMEDIA");
+insert into pelicula_generos_pelicula values (4, "AVENTURAS");
+insert into pelicula_generos_pelicula values (5, "ANIMADA");
+insert into pelicula_generos_pelicula values (5, "MUSICAL");
+insert into pelicula_generos_pelicula values (5, "AVENTURAS");
 
 insert into funcion values (1, 7000, 1, 1, 6);
 insert into funcion values (2, 6500, 2, 2, 5);
@@ -74,11 +92,17 @@ insert into cliente_telefonos values (1005000055, "3101036478");
 insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, "2022-12-25 20:00:00");
 insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, "2022-12-19 15:45:00");
 
-insert into confiteria values (1, "Perro Caliente + Gaseosa", 24000, "C://perroygaseosa.png");
-insert into confiteria values (2, "Crispeta + Gaseosa", 29900, "C://crispetaygaseosa.png");
-insert into confiteria values (3, "Crispeta + Gaseosa para Pareja", 54800, "C://crispetaygaseosa.png");
-insert into confiteria values (4, "Crispeta", 15000, "C://crispeta.png");
-insert into confiteria values (5, "Bebida", 6000, "C://gaseosa.png");
+insert into confiteria values (1, "Combo para niños", 15000);
+insert into confiteria values (2, "Combo para dos", 49900);
+insert into confiteria values (3, "Crispeta + Dos Gaseosas", 29800);
+insert into confiteria values (4, "Gaseosa + Perro caliente + Crispeta + KitKat", 19900);
+insert into confiteria values (5, "Nevado de arequipe", 6000);
+
+insert into confiteria_imagenes_confi values (1,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg", "unicine/confiteria/combo_ni%C3%B1os_ydpbay");
+insert into confiteria_imagenes_confi values (2,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes_confi values (3,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg", "unicine/confiteria/crispeta_2gaseosas_vnrpli");
+insert into confiteria_imagenes_confi values (4,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg", "unicine/confiteria/combo_para_dos_r5rvxp");
+insert into confiteria_imagenes_confi values (5,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg", "unicine/confiteria/nevado_arequipe_afpfeo");
 
 insert into cupon_cliente values (1, 1, 1005000055, 1);
 insert into cupon_cliente values (2, 0, 1006000044, 2);

@@ -47,4 +47,6 @@ public interface AdminTeatroServicio {
     Teatro obtenerTeatro(Integer codigoTeatro) throws Exception;
 
     Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception;
+
+    List<Teatro> listarTeatrosCiudad(String nombreCiudad);
 }

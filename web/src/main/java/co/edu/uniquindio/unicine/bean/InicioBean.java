@@ -38,13 +38,7 @@ public class InicioBean implements Serializable {
     private List<Ciudad> ciudades;
 
     @Setter @Getter
-    private List<Teatro> teatros;
-
-    @Setter @Getter
     private Ciudad ciudad;
-
-    @Setter @Getter
-    private Teatro teatro;
 
     @Setter @Getter
     private ArrayList<String> imagenesCarousel;
@@ -55,7 +49,6 @@ public class InicioBean implements Serializable {
         peliculasCartelera = clienteServicio.listarPeliculasEstado(EstadoPelicula.CARTELERA);
         peliculasEstrenar = clienteServicio.listarPeliculasEstado(EstadoPelicula.PREVENTA);
         ciudades = adminServicio.listarCiudades();
-        teatros = adminTeatroServicio.listarTeatros();
 
         imagenesCarousel = new ArrayList<>();
         imagenesCarousel.add("https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6FB49579CE66FD924D7C91DFF86F354DFE10AD56446002E98C1E40B3FD2C7D3F/scale?width=1200&aspectRatio=1.78&format=jpeg");
@@ -70,9 +63,5 @@ public class InicioBean implements Serializable {
             peliculasCartelera = clienteServicio.listarPeliculasEstadoCiudad(ciudad.getCodigo(),EstadoPelicula.CARTELERA);
             peliculasEstrenar = clienteServicio.listarPeliculasEstadoCiudad(ciudad.getCodigo(),EstadoPelicula.PREVENTA);
         }
-    }
-
-    public void elegirTeatro(){
-
     }
 }

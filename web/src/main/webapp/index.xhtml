@@ -7,158 +7,166 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet name="bootstrap.min.css" library="css" />
-    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
-    <h:outputStylesheet name="styles.css" library="css" />
-    <title>Página de Inicio</title>
-</h:head>
 
-<h:body>
+<ui:composition template="/WEB-INF/template.xhtml">
+    <ui:define name="header">
+        <div id="barra_navegacion">
 
-    <div id="barra_navegacion">
-
-        <header class="p-3 mb-3 border-bottom">
-            <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                        <img src="resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
-                    </a>
-
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 link-secondary">Unicine</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Cartelera</a></li>
-                        <li><a href="confiteria.xhtml" class="nav-link px-2 link-dark">Confitería</a></li>
-
-                    </ul>
-
-                    <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <div class="input-search ui-inputgroup">
-                            <p:inputText placeholder="Buscar..."
-                                         required="true" value="#{busquedaBean.busqueda}" />
-                            <p:commandButton update="@form" icon="pi pi-search"
-                                             action="#{busquedaBean.buscar}" />
-                        </div>
-                    </h:form>
-
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+            <header class="p-3 mb-3 border-bottom">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                            <img src="resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
                         </a>
-                        <ul id="Ubicacion" class="dropdown-menu text-small" onclick="event.stopPropagation()" style="--bs-dropdown-border-radius: 1rem; transform: translate(-270px,35px); min-width: 20rem">
 
-                            <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
+                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <li><a href="#" class="nav-link px-2 link-secondary">Unicine</a></li>
+                            <li><a href="#" class="nav-link px-2 link-dark">Cartelera</a></li>
+                            <li><a href="confiteria.xhtml" class="nav-link px-2 link-dark">Confitería</a></li>
 
-                            <div class="mb-2" align="center">
-                                <h:form>
-                                    <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
-                                    <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
-                                    <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
-                                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
-                                        <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
-                                        <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="listas_peliculas_Cartelera,listas_peliculas_Proximamente" />
-                                    </p:selectOneMenu>
-                                </h:form>
-                            </div>
-
-                            <div class="mb-2" align="center">
-                                <h:form>
-                                    <p:outputLabel for="teatro_origen" value="Elegir teatro: " />
-                                    <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
-                                    <p:selectOneMenu id="teatro_origen" value="#{inicioBean.teatro}" converter="#{teatroConverter}">
-                                        <f:selectItem itemLabel="Seleccione un teatro" noSelectionOption="true" itemValue="#{inicioBean.ciudad}"/>
-                                        <f:selectItems value="#{inicioBean.teatros}" var="teatro" itemLabel="#{teatro.direccion}" itemValue="#{teatro}"/>
-                                    </p:selectOneMenu>
-                                </h:form>
-                            </div>
                         </ul>
-                    </div>
 
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
-                        </a>
-                        <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); padding-bottom: 0px; --bs-dropdown-border-radius: 1rem; min-width: 20rem">
-                            <h:form>
-                                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Iniciar sesión: </h1>
-
-                                <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
-                                    <input type="email" required = "true" class="form-control" id="correo_login" placeholder="name@example.com"/>
-                                    <label for="correo_login">Correo electrónico:</label>
-                                </div>
-                                <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
-                                    <input type="password" class="form-control" id="password_login" placeholder="Password" required = "true"/>
-                                    <label for="password_login">Contraseña:</label>
-                                </div>
-                                <div class="mb-2" style="margin-left: 10px">
-                                    <a href="reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
-                                    <hr style="margin: 0rem 0; color: white"/>
-                                    <a href="registro.xhtml">¿No tienes cuenta? Registraté</a>
-                                </div>
-                                <button style="border-left-width: 2px; left: 120px; bottom: 2px" id="ingresar" name="j_idt367" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only rounded-button" onclick="">
-                                    <span class="ui-button-text ui-c">Ingresar</span>
-                                </button>
-                            </h:form>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-    </div>
-
-    <div>
-        <div class="carousel-home">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i"  >
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="#{i.index}" class="#{i.index == 0 ? 'active' : '' }" aria-current="true" aria-label="Slide #{i.index}">
-                        </button>
-                    </p:repeat>
-                </div>
-                <div class="carousel-inner">
-                    <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i" >
-
-                        <div class="carousel-item #{i.index == 0 ? 'active' : '' }">
-                            <img src="#{imagen}" alt="Texto" class="img-carousel" />
-
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
+                        <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                            <div class="input-search ui-inputgroup">
+                                <p:inputText placeholder="Buscar..."
+                                             required="true" value="#{busquedaBean.busqueda}" />
+                                <p:commandButton update="@form" icon="pi pi-search"
+                                                 action="#{busquedaBean.buscar}" />
                             </div>
+                        </h:form>
+
+                        <div class="dropdown text-end">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+                            </a>
+                            <ul id="Ubicacion" class="dropdown-menu text-small" onclick="event.stopPropagation()" style="--bs-dropdown-border-radius: 1rem; transform: translate(-270px,35px); min-width: 20rem">
+
+                                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
+
+                                <div class="mb-2" align="center">
+                                    <h:form>
+                                        <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
+                                        <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
+                                        <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                                            <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                                            <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="listas_peliculas_Cartelera,listas_peliculas_Proximamente" />
+                                        </p:selectOneMenu>
+                                    </h:form>
+                                </div>
+                            </ul>
                         </div>
 
-                    </p:repeat>
+                        <div class="dropdown text-end">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+                            </a>
+                            <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); padding-bottom: 0px; --bs-dropdown-border-radius: 1rem; min-width: 20rem">
+                                <h:form>
+                                    <h1 class="h3 mb-3 fw-normal" style="text-align: center">Iniciar sesión: </h1>
+
+                                    <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
+                                        <input type="email" required = "true" class="form-control" id="correo_login" placeholder="name@example.com"/>
+                                        <label for="correo_login">Correo electrónico:</label>
+                                    </div>
+                                    <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
+                                        <input type="password" class="form-control" id="password_login" placeholder="Password" required = "true"/>
+                                        <label for="password_login">Contraseña:</label>
+                                    </div>
+                                    <div class="mb-2" style="margin-left: 10px">
+                                        <a href="reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
+                                        <hr style="margin: 0rem 0; color: white"/>
+                                        <a href="registro.xhtml">¿No tienes cuenta? Registraté</a>
+                                    </div>
+                                    <button style="border-left-width: 2px; left: 120px; bottom: 2px" id="ingresar" name="j_idt367" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only rounded-button" onclick="">
+                                        <span class="ui-button-text ui-c">Ingresar</span>
+                                    </button>
+                                </h:form>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
+            </header>
         </div>
+    </ui:define>
+    <ui:define name="content">
 
-        <div jsf:id="listas_peliculas_Cartelera" class="container">
+        <div>
+            <div class="carousel-home">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i"  >
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="#{i.index}" class="#{i.index == 0 ? 'active' : '' }" aria-current="true" aria-label="Slide #{i.index}">
+                            </button>
+                        </p:repeat>
+                    </div>
+                    <div class="carousel-inner">
+                        <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i" >
 
-            <div class="Cartelera">
-                <h2 class="mt-5 mb-5" >En cartelera</h2>
+                            <div class="carousel-item #{i.index == 0 ? 'active' : '' }">
+                                <img src="#{imagen}" alt="Texto" class="img-carousel" />
+
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Unicine</h5>
+                                    <p>Anímate a ver nuestras mejores peliculas :).</p>
+                                </div>
+                            </div>
+
+                        </p:repeat>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div jsf:id="listas_peliculas_Cartelera" class="container">
+
+                <div class="Cartelera">
+                    <h2 class="mt-5 mb-5" >En cartelera</h2>
+                    <div class="row">
+                        <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                            <div class="col-md-6">
+                                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                        <strong class="d-inline-block mb-2 text-primary">
+                                            <p:repeat value="#{pelicula.generos}" var="genero">
+                                                <p:chip label="#{genero}" styleClass="mr-2"/>
+                                            </p:repeat>
+                                        </strong>
+                                        <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                        <p class="card-text mb-auto">#{pelicula.reparto}</p>
+                                        <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
+                                    </div>
+                                    <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
+                                        <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:repeat>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <hr class="mt-5"/>
+
+            <div jsf:id="listas_peliculas_Proximamente" class="container">
+                <h2 class="mt-5 mb-5" >Proximamente</h2>
                 <div class="row">
-                    <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                    <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
                         <div class="col-md-6">
                             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
-                                    <strong class="d-inline-block mb-2 text-primary">
-                                        <p:repeat value="#{pelicula.generos}" var="genero">
-                                        <p:chip label="#{genero}" styleClass="mr-2"/>
-                                        </p:repeat>
-                                    </strong>
+                                    <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generos}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.reparto}</p>
                                     <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
@@ -170,69 +178,31 @@
                         </div>
                     </p:repeat>
                 </div>
-                <div></div>
+                <div>
+                </div>
             </div>
         </div>
 
-        <hr class="mt-5"/>
 
-        <div jsf:id="listas_peliculas_Proximamente" class="container">
-            <h2 class="mt-5 mb-5" >Proximamente</h2>
-            <div class="row">
-                <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
-                    <div class="col-md-6">
-                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generos}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
-                                <h3 class="mb-0">#{pelicula.nombre}</h3>
-                                <p class="card-text mb-auto">#{pelicula.reparto}</p>
-                                <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
-                            </div>
-                            <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
-                                <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
-                            </div>
-                        </div>
-                    </div>
-                </p:repeat>
-            </div>
-            <div></div>
-        </div>
-    </div>
+        <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccione una ciudad: ">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="ciudad" value="Ciudad: "/>
 
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <img src="resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
-                </a>
-                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
-            </div>
+                    <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad"  noSelectionOption="true" itemValue="#{null}"/>
+                        <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                    </p:selectOneMenu>
 
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-twitter" /> </a></li>
-                <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/henry_barraganp/"> <i class="pi pi-instagram" /> </a></li>
-                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-facebook" /> </a></li>
-            </ul>
-        </footer>
-    </div>
+                    <p:message for="ciudad" />
 
-    <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="true" header="Seleccione una ciudad: ">
-        <h:form>
-            <h:panelGrid columns="3" cellpadding="5">
-                <p:outputLabel for="ciudad" value="Ciudad: "/>
+                </h:panelGrid>
+                <p:commandButton value="seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente" oncomplete="PF('dialogo_ciudad').hide()"/>
+            </h:form>
+        </p:dialog>
 
-                <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
-                    <f:selectItem itemLabel="Seleccione una ciudad"  noSelectionOption="true" itemValue="#{null}"/>
-                    <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
-                </p:selectOneMenu>
+    </ui:define>
+</ui:composition>
 
-                <p:message for="ciudad" />
-
-            </h:panelGrid>
-            <p:commandButton value="seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente" oncomplete="PF('dialogo_ciudad').hide()"/>
-        </h:form>
-    </p:dialog>
-
-</h:body>
 
 </html>

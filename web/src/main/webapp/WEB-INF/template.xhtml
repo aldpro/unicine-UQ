@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="bootstrap.min.css" library="css" />
+    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
+    <h:outputStylesheet name="styles.css" library="css" />
+    <title>Página de Inicio</title>
+</h:head>
+
+<h:body>
+    <div id="header">
+        <ui:insert name="header">
+            <div id="barra_navegacion">
+                <header class="p-3 mb-3 border-bottom">
+                    <div class="container">
+                        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                                <img src="resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
+                            </a>
+
+                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                <li><a href="#" class="nav-link px-2 link-secondary">Unicine</a></li>
+                                <li><a href="#" class="nav-link px-2 link-dark">Cartelera</a></li>
+                                <li><a href="confiteria.xhtml" class="nav-link px-2 link-dark">Confitería</a></li>
+
+                            </ul>
+
+                            <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                                <div class="input-search ui-inputgroup">
+                                    <p:inputText placeholder="Buscar..."
+                                                 required="true" value="#{busquedaBean.busqueda}" />
+                                    <p:commandButton update="@form" icon="pi pi-search"
+                                                     action="#{busquedaBean.buscar}" />
+                                </div>
+                            </h:form>
+
+                            <div class="dropdown text-end">
+                                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+                                </a>
+                                <ul class="dropdown-menu text-small" style="transform: translate(-270px,35px); padding-bottom: 0px; --bs-dropdown-border-radius: 1rem; min-width: 20rem">
+                                    <h:form>
+                                        <h1 class="h3 mb-3 fw-normal" style="text-align: center">Iniciar sesión: </h1>
+
+                                        <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
+                                            <input type="email" required = "true" class="form-control" id="correo_login" placeholder="name@example.com"/>
+                                            <label for="correo_login">Correo electrónico:</label>
+                                        </div>
+                                        <div style="align-content: center; height: 55px; width: 300px; border-left-width: 5px; margin-left: 10px; margin-bottom: 10px" class="form-floating">
+                                            <input type="password" class="form-control" id="password_login" placeholder="Password" required = "true"/>
+                                            <label for="password_login">Contraseña:</label>
+                                        </div>
+                                        <div class="mb-2" style="margin-left: 10px">
+                                            <a href="reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
+                                            <hr style="margin: 0rem 0; color: white"/>
+                                            <a href="registro.xhtml">¿No tienes cuenta? Registraté</a>
+                                        </div>
+                                        <button style="border-left-width: 2px; left: 120px; bottom: 2px" id="ingresar" name="j_idt367" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only rounded-button" onclick="">
+                                            <span class="ui-button-text ui-c">Ingresar</span>
+                                        </button>
+                                    </h:form>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </ui:insert>
+    </div>
+
+    <div id="contenido">
+        <ui:insert name="content"></ui:insert>
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <img src="/resources/img/iconoUnicine.jpg" alt="mdo" width="35" height="35" />
+                </a>
+                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-twitter" /> </a></li>
+                <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/henry_barraganp/"> <i class="pi pi-instagram" /> </a></li>
+                <li class="ms-3"><a class="text-muted" href="#"> <i class="pi pi-facebook" /> </a></li>
+            </ul>
+        </footer>
+    </div>
+
+</h:body>
+
+</html>

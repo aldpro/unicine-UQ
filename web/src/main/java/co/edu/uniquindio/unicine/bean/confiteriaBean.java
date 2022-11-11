@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +41,18 @@ public class confiteriaBean implements Serializable {
     @Autowired
     CloudinaryServicio cloudinaryServicio;
 
+    @Setter @Getter
+    private ArrayList<String> imagenesCarousel;
+
     @PostConstruct
     public void init(){
         confiterias = adminServicio.listarConfiteria();
         imagenesConfiteria = new HashMap<>();
+
+        imagenesCarousel = new ArrayList<>();
+        imagenesCarousel.add("https://cloudfront-us-east-1.images.arcpublishing.com/semana/ISWSR7L7T5BM7MKFANV6ESYAU4.jpg");
+        imagenesCarousel.add("https://www.procinal.com/uploads/HOME/Noticias_Destacados/PROMOCIONES/Promo-CumpleCF.png");
+        imagenesCarousel.add("https://www.ccviva.com/sites/default/files/PROCINAL_BANNER_INT2_1.png");
     }
 
     public void subirImagen(FileUploadEvent event){

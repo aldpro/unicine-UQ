@@ -37,3 +37,13 @@
 body .ui-panel .ui-panel-title {
     margin: 599px;
 }
+
+.lista-busqueda{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.margen-texto {
+    margin-left: 0px;
+    padding-left: 40px;
+    padding-right: 20px;
+}

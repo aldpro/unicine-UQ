@@ -40,13 +40,13 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("Por favor rellenar todo los campos de texto");
         }
 
-        AdministradorTeatro administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
+        Optional<AdministradorTeatro> administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
 
-        if (administradorTeatro == null) {
+        if (administradorTeatro == null || administradorTeatro.isEmpty()) {
             throw new Exception("Los datos de autentificacion son incorrectos");
         }
 
-        return administradorTeatro;
+        return administradorTeatro.get();
     }
 
     @Override

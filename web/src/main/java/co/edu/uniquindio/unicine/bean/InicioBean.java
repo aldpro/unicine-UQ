@@ -64,4 +64,5 @@ public class InicioBean implements Serializable {
             peliculasEstrenar = clienteServicio.listarPeliculasEstadoCiudad(ciudad.getCodigo(),EstadoPelicula.PREVENTA);
         }
     }
+
 }

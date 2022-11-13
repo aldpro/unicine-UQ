@@ -12,7 +12,14 @@ public interface ClienteServicio {
 
     Cliente login(String correo, String password) throws Exception;
 
+    CuponCliente crearCuponCliente(Integer codigoCupon, Cliente cliente) throws Exception;
+
     Cliente registrarCliente(Cliente cliente) throws Exception;
+
+    List<Funcion> listarFuncionesCiudad(Integer codigoCiudad);
+    List<Funcion> listarFuncionesTeatro(Integer codigoTeatro);
+
+    void activarCliente(String correo, String fecha) throws Exception;
 
     Cliente actualizarCliente(Cliente cliente) throws Exception;
 

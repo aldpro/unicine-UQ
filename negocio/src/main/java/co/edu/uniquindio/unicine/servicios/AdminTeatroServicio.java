@@ -16,7 +16,7 @@ public interface AdminTeatroServicio {
 
     void eliminarHorario(Integer codigoHorario) throws Exception;
 
-    Funcion crearFuncion(Funcion funcion,Horario horario, Sala sala, Pelicula pelicula, Float precio) throws Exception;
+    Funcion crearFuncion(Funcion funcion) throws Exception;
 
     Funcion actualizarFuncion(Funcion funcion)throws Exception;
 
@@ -49,4 +49,8 @@ public interface AdminTeatroServicio {
     Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception;
 
     List<Teatro> listarTeatrosCiudad(Integer codigoCiudad);
+
+    List<DistribucionSilla> listarDistribucionSillas();
+
+    DistribucionSilla obtenerDistribucionSillas(Integer codigoDistribucionSillas) throws Exception;
 }

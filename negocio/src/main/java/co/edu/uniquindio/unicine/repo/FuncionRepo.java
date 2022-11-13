@@ -14,9 +14,14 @@ import java.util.Optional;
 @Repository
 public interface FuncionRepo extends JpaRepository<Funcion, Integer> {
 
-    @Query("select f from Funcion f where f.sala.codigo = :codigoSala and f.horario.codigo = :codigoHorario") //verificar los rangos de las horas, no los ids
-    Funcion verificarDisponibilidad(Integer codigoSala, Integer codigoHorario);
+
 
     @Query("select f.pelicula from Funcion f where  f.codigo = : codigoPelicula")
     Optional<Pelicula> obtenerPelicula(Integer codigoPelicula);
+
+    @Query("select f from Funcion f where f.sala.distribucionSilla.filas = :fila and f.sala.distribucionSilla.columnas = :columna")
+    Optional<Funcion> verificarDisponibilidadSillas(Integer fila, Integer columna);
+
+    @Query("select f from Funcion f where f.horario.fechaInicio = :horario")
+    Funcion verificarDisponibilidad(Horario horario);
 }

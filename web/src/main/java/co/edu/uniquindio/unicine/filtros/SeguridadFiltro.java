@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/* quitar comentario despues de terminar todos los CRUD
 @Component
 public class SeguridadFiltro implements Filter {
 
@@ -77,4 +78,7 @@ public class SeguridadFiltro implements Filter {
             e.printStackTrace();
         }
     }
+
+
 }
+*/

@@ -99,7 +99,7 @@ public class AdminTeatroServicioTest {
             Assertions.assertTrue(true);
         }
     }
-
+/*
     @Test
     @Sql("classpath:dataset.sql")
     public void crearFuncionTest() {
@@ -121,6 +121,8 @@ public class AdminTeatroServicioTest {
             throw new RuntimeException(e);
         }
     }
+
+ */
 
     @Test
     @Sql("classpath:dataset.sql")

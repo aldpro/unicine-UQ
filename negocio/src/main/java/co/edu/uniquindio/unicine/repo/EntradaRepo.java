@@ -11,8 +11,4 @@ import java.util.Optional;
 @Repository
 public interface EntradaRepo extends JpaRepository<Entrada, Integer> {
 
-    Optional<Entrada> findByFilaAndColumna(Integer fila, Integer columna);
-
-
-
 }

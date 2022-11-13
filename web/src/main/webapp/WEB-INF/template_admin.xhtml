@@ -43,27 +43,6 @@
                         </h:form>
 
                         <div class="dropdown text-end">
-                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
-                            </a>
-                            <ul id="Ubicacion" class="dropdown-menu text-small" onclick="event.stopPropagation()" style="--bs-dropdown-border-radius: 1rem; transform: translate(-270px,35px); min-width: 20rem">
-
-                                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
-
-                                <div class="mb-2" align="center">
-                                    <h:form>
-                                        <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
-                                        <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
-                                        <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
-                                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
-                                            <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
-                                        </p:selectOneMenu>
-                                    </h:form>
-                                </div>
-                            </ul>
-                        </div>
-
-                        <div class="dropdown text-end">
                             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="/resources/img/perfil-vacio.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
                             </a>

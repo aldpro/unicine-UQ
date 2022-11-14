@@ -24,14 +24,19 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Autowired
     private final PeliculaRepo peliculaRepo;
 
+    @Autowired
+    private final DistribucionSillaRepo distribucionSillaRepo;
+
     public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo,
-                                   FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo, PeliculaRepo peliculaRepo) {
+                                   FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo,
+                                   PeliculaRepo peliculaRepo, DistribucionSillaRepo distribucionSillaRepo) {
         this.adminTeatroRepo = adminTeatroRepo;
         this.horarioRepo = horarioRepo;
         this.funcionRepo = funcionRepo;
         this.salaRepo = salaRepo;
         this.teatroRepo = teatroRepo;
         this.peliculaRepo = peliculaRepo;
+        this.distribucionSillaRepo = distribucionSillaRepo;
     }
 
     @Override
@@ -40,13 +45,13 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("Por favor rellenar todo los campos de texto");
         }
 
-        AdministradorTeatro administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
+        Optional<AdministradorTeatro> administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
 
-        if (administradorTeatro == null) {
+        if (administradorTeatro == null || administradorTeatro.isEmpty()) {
             throw new Exception("Los datos de autentificacion son incorrectos");
         }
 
-        return administradorTeatro;
+        return administradorTeatro.get();
     }
 
     @Override
@@ -84,19 +89,14 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public Funcion crearFuncion(Funcion funcion,Horario horario,Sala sala,Pelicula pelicula,Float precio) throws Exception {
+    public Funcion crearFuncion(Funcion funcion) throws Exception {
 
-        Funcion f = funcionRepo.verificarDisponibilidad(sala.getCodigo(),horario.getCodigo());
+        Funcion f = funcionRepo.verificarDisponibilidad(funcion.getHorario());
         if (f != null){
-            throw new Exception("No se puede crear la función en la misma sala y en el mismo horario");
+            throw new Exception("No se puede crear la función en el mismo horario");
         }
 
-        Funcion registro = funcionRepo.save(funcion);
-        registro.setPelicula(pelicula);
-        registro.setSala(sala);
-        registro.setPrecio(precio);
-
-        return registro;
+        return funcionRepo.save(funcion);
     }
 
     @Override
@@ -236,5 +236,20 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) {
         return teatroRepo.listarTeatroxCiudad(codigoCiudad);
+    }
+
+    @Override
+    public List<DistribucionSilla> listarDistribucionSillas() {
+        return distribucionSillaRepo.findAll();
+    }
+
+    @Override
+    public DistribucionSilla obtenerDistribucionSillas(Integer codigoDistribucionSillas) throws Exception {
+        Optional<DistribucionSilla> guardado = distribucionSillaRepo.findById(codigoDistribucionSillas);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La distribucion de sillas no existe");
+        }
+        return guardado.get();
     }
 }

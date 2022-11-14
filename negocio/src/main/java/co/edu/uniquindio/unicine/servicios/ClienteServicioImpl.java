@@ -3,11 +3,14 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +72,17 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
+    public CuponCliente crearCuponCliente(Integer codigoCupon, Cliente cliente) throws Exception {
+
+        CuponCliente cuponCliente = cuponClienteRepo.obtenerPorCuponYCliente(codigoCupon, cliente.getCedula());
+
+        if (cuponCliente == null){
+            throw new Exception("El codigo o el cliente invalidos");
+        }
+        return cuponClienteRepo.save(cuponCliente);
+    }
+
+    @Override
     public Cliente registrarCliente(Cliente cliente) throws Exception {
 
         boolean correoExiste = esRepetido(cliente.getCorreo());
@@ -82,11 +96,38 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     //obtener funciones por ciudad | teatro
+    public List<Funcion> listarFuncionesCiudad(Integer codigoCiudad){
+        return clienteRepo.listarFuncionesCiudad(codigoCiudad);
+    }
 
-    public void activarCuenta(String correo){
-        //Cliente cliente = buscar;
+    public List<Funcion> listarFuncionesTeatro(Integer codigoTeatro){
+        return clienteRepo.listarFuncionesTeatro(codigoTeatro);
+    }
 
-        //cliente.setEstado(true);
+    public void activarCliente(String correo, String fecha) throws Exception{
+
+        correo = correo.replaceAll(" ", "+");
+        fecha = fecha.replaceAll(" ", "+");
+
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ldt.atZone(ZoneId.of("America/Bogota"));
+
+        String correoDes = textEncryptor.decrypt(correo);
+        String fechaDes = textEncryptor.decrypt(fecha);
+
+        Cliente guardado = clienteRepo.findByCorreo(correoDes).orElse(null);
+
+        if (guardado == null){
+            throw new Exception("El cliente no existe");
+        }
+
+        guardado.setEstado(true);
+        clienteRepo.save(guardado);
+
+        crearCuponCliente(1, guardado);
     }
 
     private boolean esRepetido(String correo) {
@@ -143,7 +184,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         float total = 0;
 
         for (Entrada e : entradas) {
-            boolean disponible = verificarDisponibilidad(e); //buscar fila y columna en las entradas de la función
+            boolean disponible = verificarDisponibilidad(e);
             if (!disponible) {
                 throw new Exception("La silla no está disponible");
             }
@@ -153,8 +194,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         for (CompraConfiteria c : confiterias) {
             total += c.getPrecio() * c.getUnidades();
         }
-
-        //total += funcion.getPrecio();
 
         if (verificarDisponibilidadCupon(cuponCliente.getCodigo())) {
             redimirCupon(cuponCliente.getCodigo(),total);
@@ -203,8 +242,8 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     private boolean verificarDisponibilidad(Entrada entrada) {
-        Optional<Entrada> disponibilidadBuscada = entradaRepo.findByFilaAndColumna(entrada.getFila(),entrada.getColumna());
-        if (disponibilidadBuscada == null){
+        Optional<Funcion> disponibilidadSillas = funcionRepo.verificarDisponibilidadSillas(entrada.getFila(), entrada.getColumna());
+        if (disponibilidadSillas == null){
             return true;
         }
         return false;
@@ -295,7 +334,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public List<Cupon> listarCuponesCliente(Integer cedula) {
-        return null;
+        return clienteRepo.listarCuponesCliente(cedula);
     }
 
     @Override

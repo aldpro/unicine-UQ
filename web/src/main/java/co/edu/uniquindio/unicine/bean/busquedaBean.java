@@ -23,6 +23,7 @@ public class busquedaBean implements Serializable {
 
     @Getter @Setter
     private String busqueda;
+
     @Autowired
     AdminServicio adminServicio;
     @Autowired
@@ -50,13 +51,6 @@ public class busquedaBean implements Serializable {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    public String buscarPelicula(){
-        if (pelicula != null){
-            return "/detalle_pelicula?faces-redirect=true&amp;pelicula_id="+pelicula.getCodigo();
-        }
-        return "";
     }
 
     public String buscar(){

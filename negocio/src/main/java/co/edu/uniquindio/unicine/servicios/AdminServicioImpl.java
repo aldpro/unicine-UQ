@@ -32,17 +32,7 @@ public class AdminServicioImpl implements AdminServicio{
     @Override
     public Administrador iniciarSesion(String correo, String password) throws Exception {
 
-        if(correo.isEmpty() || password.isEmpty()){
-            throw new Exception("Por favor rellenar todo los campos de texto");
-        }
-
-        Administrador administrador = administradorRepo.comprobarAutenticacionAdmin(correo, password);
-
-        if (administrador == null) {
-            throw new Exception("Los datos de autentificacion son incorrectos");
-        }
-
-        return administrador;
+        return administradorRepo.findByCorreoAndPassword(correo, password).orElse(null);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unicine.repo;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.entidades.Compra;
-import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -36,4 +33,19 @@ public interface ClienteRepo extends JpaRepository<Cliente, Integer> {
 
     @Query("select distinct f.pelicula from Funcion f where f.pelicula.estado = :estadoPelicula")
     List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula);
+
+    @Query("select f from Funcion f where f.sala.codigo = :codigoSala")
+    List<Funcion> listarFuncionesSala(Integer codigoSala);
+
+    @Query("select f from Sala s join s.funciones f where s.codigo = :codigoSala and f.horario = :horario")
+    List<Funcion> obtenerFuncionesSala(Horario horario, Integer codigoSala);
+
+    @Query("select distinct c.cupon from CuponCliente c where c.cliente.cedula = :cedula")
+    List<Cupon> listarCuponesCliente(Integer cedula);
+
+    @Query("select f from Funcion f where f.sala.teatro.codigo = :codigoTeatro")
+    List<Funcion> listarFuncionesTeatro(Integer codigoTeatro);
+
+    @Query("select f from Funcion f where f.sala.teatro.ciudad.codigo = :codigoCiudad")
+    List<Funcion> listarFuncionesCiudad(Integer codigoCiudad);
 }

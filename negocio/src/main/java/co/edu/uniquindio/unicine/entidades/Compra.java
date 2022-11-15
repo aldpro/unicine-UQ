@@ -50,6 +50,9 @@ public class Compra implements Serializable {
     @ToString.Exclude
     private List<Entrada> entradas;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaPelicula;
+
     @Builder
     public Compra(MedioPago medioPago, CuponCliente cuponCliente, Cliente cliente, Funcion funcion) {
         this.medioPago = medioPago;

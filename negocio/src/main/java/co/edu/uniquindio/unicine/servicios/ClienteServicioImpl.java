@@ -179,7 +179,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente) throws Exception {
+    public Compra hacerCompra(Cliente cliente, Funcion funcion, MedioPago medioPago, List<CompraConfiteria> confiterias, Integer codigoCupon, List<Entrada> entradas, LocalDateTime fechaCompra) throws Exception {
 
         float total = 0;
 
@@ -195,8 +195,8 @@ public class ClienteServicioImpl implements ClienteServicio {
             total += c.getPrecio() * c.getUnidades();
         }
 
-        if (verificarDisponibilidadCupon(cuponCliente.getCodigo())) {
-            redimirCupon(cuponCliente.getCodigo(),total);
+        if (verificarDisponibilidadCupon(codigoCupon)) {
+            redimirCupon(codigoCupon,total);
         }
 
         Compra compra = new Compra();
@@ -206,7 +206,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         compra.setCliente(cliente);
         compra.setFuncion(funcion);
         compra.setCompraConfiterias(confiterias);
-        compra.setCuponCliente(cuponCliente);
 
         Compra registro = compraRepo.save(compra);
 
@@ -220,7 +219,7 @@ public class ClienteServicioImpl implements ClienteServicio {
             entradaRepo.save(e);
         }
 
-
+        /*
         if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).size() ==1 ){
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
@@ -229,7 +228,14 @@ public class ClienteServicioImpl implements ClienteServicio {
             emailServicio.enviarEmail("Primera compra","Obtuvo cupon por realizar la primera compra", cliente.getCorreo());
             cliente.getCuponClientes().add(cuponCliente);
         }
+
+         */
         return  compra;
+    }
+
+    @Override
+    public CuponCliente validarCupon(Integer codigoCupon) {
+        return null;
     }
 
     private boolean verificarDisponibilidadCupon(Integer codigo) { //validar el estadoy la fecha de vencimiento
@@ -284,12 +290,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Compra obtenercompra(Integer codigo) throws Exception {
-        Optional<Compra> guardado = compraRepo.findById(codigo);
-
-        if (guardado.isEmpty()) {
-            throw new Exception("La compra no existe");
-        }
-        return guardado.get();
+        return compraRepo.findById(codigo).orElseThrow(()-> new Exception("No se encontro la compra"));
     }
 
     @Override
@@ -346,6 +347,5 @@ public class ClienteServicioImpl implements ClienteServicio {
     public List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula) {
         return clienteRepo.listarPeliculasEstado(estadoPelicula);
     }
-
 
 }

@@ -35,12 +35,15 @@ insert into sala values (6, "Parque Colonia", "NORMAL", 4, 2);
 insert into sala values (7, "Plaza Imperial", "DX4", 5, 1);
 insert into sala values (8, "Colon", "IMAX", 1, 6);
 
-insert into horario values (1, "2022-12-20 23:15:32", "2022-12-20 21:30:32");
-insert into horario values (2, "2022-12-15 20:31:05", "2022-12-15 18:50:45");
-insert into horario values (3, "2022-12-16 00:07:20", "2022-12-16 22:12:02");
-insert into horario values (4, "2022-12-17 19:00:23", "2022-12-17 17:30:06");
-insert into horario values (5, "2022-12-22 20:30:18", "2022-12-22 18:40:28");
-insert into horario values (6, "2022-12-17 23:11:02", "2022-12-17 21:40:12");
+insert into horario values (1, "2022-12-20", "2022-12-20", "20:00");
+insert into horario values (2, "2022-12-15", "2022-12-15", "21:00");
+insert into horario values (3, "2022-12-16", "2022-12-16", "22:00");
+insert into horario values (4, "2022-12-17", "2022-12-17", "20:00");
+insert into horario values (5, "2022-12-22", "2022-12-22", "20:00");
+insert into horario values (6, "2022-12-17", "2022-12-17", "20:00");
+
+insert into horario_dias values (1, 0);
+insert into horario_dias values (1, 1);
 
 insert into pelicula values (1, "PREVENTA", "Pinocho", 4.2,"Tom Hanks, Cynthia Erivo, Luke Evans", "En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un giro al abandonar a su padre para unirse a un circo.", "https://www.youtube.com/embed/TITv1TNi5mI");
 insert into pelicula values (2, "CARTELERA", "Dragon Ball: Super Hero", 3.5, "	Masako Nozawa, Toshio Furukawa, Ryō Horikawa, Yūko Minaguchi", "La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.", "https://www.youtube.com/embed/lXLPVQ-WrU4");
@@ -95,8 +98,8 @@ insert into cliente_telefonos values (1007000033, "3126845287");
 insert into cliente_telefonos values (1006000044, "3139847645");
 insert into cliente_telefonos values (1005000055, "3101036478");
 
-insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, "2022-12-25 20:00:00");
-insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, "2022-12-19 15:45:00");
+insert into cupon values (1, "Primer registro", "Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma", 0.15, "2022-12-25T20:00:00");
+insert into cupon values (2, "Primera compra", "Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 0.1, "2022-12-19T15:45:00");
 
 insert into confiteria values (1, "Combo para niños", 15000);
 insert into confiteria values (2, "Combo para dos", 49900);
@@ -116,11 +119,11 @@ insert into cupon_cliente values (3, 1, 1006000044, 1);
 insert into cupon_cliente values (4, 1, 1007000033, 2);
 insert into cupon_cliente values (5, 0, 1008000022, 1);
 
-insert into compra values (1, "2022-12-20 18:32:25", "NEQUI", 17000, 1008000022, 1, 6);
-insert into compra values (2, "2022-12-15 14:47:41", "VISA", 59800, 1007000033, 2, 5);
-insert into compra values (3, "2022-12-16 19:12:04", "NEQUI", 24000, 1006000044, 3, 4);
-insert into compra values (4, "2022-12-17 15:32:07", "MASTERCARD", 54800, 1005000055, 4, 3);
-insert into compra values (5, "2022-12-16 20:30:12", "DAVIPLATA", 72000, 1008000022, 5, 2);
+insert into compra values (1, "2022-12-20T18:32:25", "2022-12-21T20:00:00", "NEQUI", 17000, 1008000022, 1, 6);
+insert into compra values (2, "2022-12-15T14:47:41", "2022-12-15T20:00:00", "VISA", 59800, 1007000033, 2, 5);
+insert into compra values (3, "2022-12-16T19:12:04", "2022-12-20T20:00:00", "NEQUI", 24000, 1006000044, 3, 4);
+insert into compra values (4, "2022-12-17T15:32:07", "2022-12-25T20:00:00", "MASTERCARD", 54800, 1005000055, 4, 3);
+insert into compra values (5, "2022-12-16T20:30:12", "2022-12-29T20:00:00", "DAVIPLATA", 72000, 1008000022, 5, 2);
 
 insert into compra_confiteria values (1, 6000, 2, 1, 5);
 insert into compra_confiteria values (2, 15000, 1, 1, 4);

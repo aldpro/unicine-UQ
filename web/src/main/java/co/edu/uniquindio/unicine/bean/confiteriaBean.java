@@ -74,4 +74,18 @@ public class confiteriaBean implements Serializable {
         fos.close();
         return file;
     }
+
+    public void crearConfiteria(){
+
+        try{
+            if (!imagenesConfiteria.isEmpty()){
+                confiteria.setImagenes(imagenesConfiteria);
+
+            }
+
+        }catch (Exception e){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+        }
+    }
 }

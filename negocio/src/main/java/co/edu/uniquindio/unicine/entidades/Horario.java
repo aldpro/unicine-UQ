@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +24,30 @@ public class Horario implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private LocalDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(nullable = false)
-    private LocalDateTime fechaFin;
+    private String hora;
+
+    @ElementCollection
+    @Column(nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
+    private List<Dias> dias;
+
+    @Column(nullable = false)
+    private LocalDate fechaFin;
 
     @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Funcion> funciones;
 
     @Builder
-    public Horario(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+    public Horario(LocalDate fechaInicio, LocalDate fechaFin, String hora, List<Dias> dias) {
         this.fechaInicio = fechaInicio;
+        this.hora = hora;
         this.fechaFin = fechaFin;
         this.funciones =  new ArrayList<>();
+        this.dias = dias;
     }
 
 }

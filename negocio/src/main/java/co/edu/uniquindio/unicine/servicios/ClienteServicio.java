@@ -3,6 +3,8 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -33,7 +35,9 @@ public interface ClienteServicio {
 
     List<PeliculaFuncion> listarFuncionesPelicula(String nombre);
 
-    Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente)throws Exception;
+    Compra hacerCompra(Cliente cliente, Funcion funcion, MedioPago medioPago, List<CompraConfiteria> confiterias, Integer codigoCupon, List<Entrada> entradas, LocalDateTime fechaCompra)throws Exception;
+
+    CuponCliente validarCupon(Integer codigoCupon);
 
     Float redimirCupon(Integer codigoCupon, Float valorInicialCompra) throws Exception;
 

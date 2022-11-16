@@ -47,3 +47,31 @@ body .ui-panel .ui-panel-title {
     padding-left: 40px;
     padding-right: 20px;
 }
+.item-silla{
+    padding: 7px 20px;
+    border: 1px solid black;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 3px;
+}
+.silla-elegida{
+    background: blue;
+    color: white;
+}
+
+#sillas .ui-widget-content.ui-datatable-even, #sillas .ui-widget-content.ui-datatable-odd, #sillas td{
+    border: 0 solid;
+}
+#sillas td table{
+    border: 1px solid;
+}
+.item-confite img {
+    max-width: 100%;
+}
+.btn-dia-func{
+    width: 14%;
+    margin-right: 2px !important;
+}
+.item-func{
+    background: #f8f9fa;
+}

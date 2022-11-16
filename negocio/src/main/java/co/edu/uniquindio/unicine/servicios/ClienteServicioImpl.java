@@ -66,7 +66,7 @@ public class ClienteServicioImpl implements ClienteServicio {
             throw new Exception("Los datos de autentificacion son incorrectos");
         }
         if (cliente.getEstado()==false){
-            throw new Exception("El cliente no esta activo");
+            throw new Exception("El cliente no esta activo, debe activarla con el enlace que fue enviado a su correo");
         }
         return cliente;
     }

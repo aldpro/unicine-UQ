@@ -44,31 +44,30 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Ciudad ciudadSeleccionada;
 
-
     @PostConstruct
     public void init(){
         autenticado = false;
-
     }
 
     public String iniciarSesionCliente(){
 
         if (!correo.isEmpty() && !password.isEmpty()){
             try {
-                persona = clienteServicio.login(correo,password);
+                persona = clienteServicio.login(correo, password);
                 tipoSesion = "cliente";
                 autenticado = true;
                 return "/index?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
-                FacesContext.getCurrentInstance().addMessage("Login-bean", fm);
+                FacesContext.getCurrentInstance().addMessage("login-bean", fm);
             }
         }else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta","El correo y la contraseña son necesarios");
-            FacesContext.getCurrentInstance().addMessage("Login-bean", fm);
+            FacesContext.getCurrentInstance().addMessage("login-bean", fm);
         }
         return null;
     }
+
     public String iniciarSesionAdmins(){
 
         if (!correo.isEmpty() && !password.isEmpty()){
@@ -102,7 +101,4 @@ public class SeguridadBean implements Serializable {
         return "/index?faces-redirect=true";
     }
 
-    public boolean isAutenticado() {
-        return autenticado=true;
-    }
 }

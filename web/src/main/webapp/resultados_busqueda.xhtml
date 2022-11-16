@@ -25,7 +25,7 @@
                                 <p class="card-text">#{peli.funcion.horario.fechaInicio} hasta #{peli.funcion.horario.fechaFin}</p>
                                 <p class="card-text">#{peli.funcion.sala.teatro.ciudad.nombre} - #{peli.funcion.sala.teatro.direccion} - #{peli.funcion.sala.tipoSala}</p>
                                 <hr/>
-                                <p:linkButton value="ver detalle" styleClass="" href="/detalle_pelicula.xhtml"></p:linkButton>
+                                <p:linkButton value="ver detalle" styleClass="" href="detalle_pelicula.xhtml?pelicula_id=#{peli.pelicula.codigo}"></p:linkButton>
                             </div>
                         </div>
                     </p:dataViewGridItem>
@@ -43,14 +43,14 @@
                                         <h:outputText value="Sinopsis:"/>
                                         <h:outputText value="#{peli.pelicula.sinopsis}"/>
                                         <h:outputText value="Horario:"/>
-                                        <h:outputText value="del #{peli.funcion.horario.fechaInicio} hasta el #{peli.funcion.horario.fechaFin}:"/>
+                                        <h:outputText value="Del #{peli.funcion.horario.fechaInicio} a las #{peli.funcion.horario.hora} hasta el #{peli.funcion.horario.fechaFin}:"/>
                                         <h:outputText value="Sala:"/>
                                         <h:outputText value="#{peli.funcion.sala.teatro.ciudad.nombre} - #{peli.funcion.sala.teatro.direccion} - #{peli.funcion.sala.tipoSala}:"/>
                                     </h:panelGrid>
                                 </p:outputPanel>
                             </div>
                             <div class="col-lg-2 col-md-1 align-self-center">
-                                <p:linkButton value="Ver detalle" styleClass="" href="/detalle_pelicula.xhtml"></p:linkButton>
+                                <p:linkButton value="Ver detalle" styleClass="" href="detalle_pelicula.xhtml?pelicula_id=#{peli.pelicula.codigo}"></p:linkButton>
                             </div>
                         </div>
                     </p:dataViewListItem>

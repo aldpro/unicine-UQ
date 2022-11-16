@@ -29,13 +29,15 @@ import java.util.Map;
 @ViewScoped
 public class PeliculaBean implements Serializable {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private Pelicula pelicula;
 
     @Autowired
     private AdminServicio adminServicio;
 
-    @Setter @Getter
+    @Setter
+    @Getter
     private List<GeneroPelicula> generoPeliculas;
 
     @Autowired
@@ -43,38 +45,43 @@ public class PeliculaBean implements Serializable {
 
     private Map<String, String> imagenes;
 
+    private String urlImagenes;
+
     @PostConstruct
-    public void init(){
+    public void init() {
         pelicula = new Pelicula();
         imagenes = new HashMap<>();
         generoPeliculas = Arrays.asList(GeneroPelicula.values());
+
+
     }
 
-    public void crearPelicula(){
+    public void crearPelicula() {
 
         try {
-            if (!imagenes.isEmpty()){
+            if (!imagenes.isEmpty()) {
                 pelicula.setImagenes(imagenes);
                 pelicula.setEstado(EstadoPelicula.CARTELERA);
                 adminServicio.crearPelicula(pelicula);
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Pelicula creada correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
-            }else{
+            } else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir una imagen");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
     }
-    public void subirImagen(FileUploadEvent event){
-        try{
+
+    public void subirImagen(FileUploadEvent event) {
+        try {
             UploadedFile imagen = event.getFile();
             File imagenFile = convertirUploadedFile(imagen);
-            Map resultado = cloudinaryServicio.subirImagen(imagenFile,"clientes");
+            Map resultado = cloudinaryServicio.subirImagen(imagenFile, "clientes");
             imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }

@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Component
 @ViewScoped
-public class confiteriaBean implements Serializable {
+public class ConfiteriaBean implements Serializable {
 
     @Getter @Setter
     private Confiteria confiteria;

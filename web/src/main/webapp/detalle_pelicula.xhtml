@@ -17,7 +17,7 @@
         <div>
             <iframe width= "100%" height="500" src="#{detallePeliculaBean.pelicula.urlTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
         </div>
-        <div class="col-4 p-3">
+        <div class="col-4 p-3 info-peli">
             <div class="shadow">
                 <img class="poster-imagen" src="#{detallePeliculaBean.pelicula.imagenPrincipal}" alt="Poster película"/>
 
@@ -35,6 +35,40 @@
                     <p:repeat value="#{detallePeliculaBean.pelicula.generos}" var="genero">
                         <p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/>
                     </p:repeat>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div class="shadow">
+                <div class="p-3">
+                    <h:form styleClass="mt-3">
+                        <p:repeat value="#{detallePeliculaBean.fechas}" var="fecha" varStatus="f">
+                            <p:commandButton value="#{detallePeliculaBean.diaSemanas.get(fecha.dayOfWeek.value-1)} - #{fecha}"/>
+                        </p:repeat>
+                    </h:form>
+
+                    <div class="mt-3">
+
+                        <p:accordionPanel id="lista-teatros" value="#{detallePeliculaBean.teatros}" var="teatro">
+                            <p:tab title="#{teatro.direccion}">
+                                <p:repeat value="${teatro.salas}" var="sala">
+                                    <div class="item-func mb-4">
+                                        <h:form>
+                                            <div class="shadow-sm p-4">
+                                                <p>#{sala.nombre}:</p>
+                                                <p:repeat value="${sala.funciones}" var="funcion">
+                                                    <p:commandButton rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}"/>
+                                                </p:repeat>
+                                            </div>
+                                        </h:form>
+
+                                    </div>
+                                </p:repeat>
+                            </p:tab>
+                        </p:accordionPanel>
+
+                    </div>
                 </div>
             </div>
         </div>

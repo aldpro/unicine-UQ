@@ -95,6 +95,7 @@ public class CompraBean implements Serializable {
         entradas = new ArrayList<>();
         precioCompra = 0f;
 
+
         confiterias.forEach(c ->{
             confiteriaFormulario.add(CompraConfiteria.builder().confiteria(c).precio(c.getPrecio()).unidades(0).build());
         });
@@ -111,6 +112,7 @@ public class CompraBean implements Serializable {
                 String[] hora = funcion.getHorario().getHora().split(":");
                 fechaSeleccionada = LocalDateTime.of(Integer.parseInt(anioSeleccionado), Integer.parseInt(mesSeleccionado), Integer.parseInt(diaSeleccionado),Integer.parseInt(hora[0]),Integer.parseInt(hora[1]));
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }

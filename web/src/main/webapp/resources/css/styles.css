@@ -76,6 +76,14 @@ body .ui-panel .ui-panel-title {
     background: #f8f9fa;
 }
 .poster-imagen{
-    width: 400px;
-    height: 500px;
+    width: 100%;
+}
+
+.info-peli{
+    margin-top: -145px;
+    position: relative;
+}
+
+.info-peli .shadow{
+    background: white;
 }

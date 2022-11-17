@@ -1,6 +1,5 @@
 package co.edu.uniquindio.unicine.bean;
 
-import co.edu.uniquindio.unicine.entidades.Administrador;
 import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
 import co.edu.uniquindio.unicine.entidades.Ciudad;
 import co.edu.uniquindio.unicine.entidades.Teatro;
@@ -22,7 +21,7 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class teatroBean  implements Serializable {
+public class TeatroBean implements Serializable {
 
     @Getter @Setter
     private Teatro teatro;

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class busquedaBean implements Serializable {
+public class BusquedaBean implements Serializable {
 
     @Getter @Setter
     private String busqueda;

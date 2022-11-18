@@ -20,10 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @ViewScoped
@@ -33,6 +30,8 @@ public class PeliculaBean implements Serializable {
     @Setter
     private Pelicula pelicula;
 
+    @Setter @Getter
+    private List<Pelicula> peliculas;
     @Autowired
     private AdminServicio adminServicio;
 
@@ -47,13 +46,30 @@ public class PeliculaBean implements Serializable {
 
     private String urlImagenes;
 
+    @Getter @Setter
+    private List<EstadoPelicula> estadoPeliculas;
+
+    private boolean editar;
+
+    @Getter @Setter
+    private List<Pelicula> peliculasSeleccionadas;
+
     @PostConstruct
     public void init() {
         pelicula = new Pelicula();
         imagenes = new HashMap<>();
         generoPeliculas = Arrays.asList(GeneroPelicula.values());
-
-
+        peliculasSeleccionadas = new ArrayList<>();
+        peliculas = adminServicio.listarPeliculas();
+        estadoPeliculas = Arrays.asList(EstadoPelicula.values());
+        /*try{
+            UploadedFile imagen = event.getFile();
+            File imagenFile = convertirUploadedFile(imagen);
+            Map resultado = cloudinaryServicio.subirImagen(imagenFile,"Peliculas");
+            imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
+        }catch (Exception e){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta", e.getMessage());
+        }*/
     }
 
     public void crearPelicula() {
@@ -79,7 +95,7 @@ public class PeliculaBean implements Serializable {
         try {
             UploadedFile imagen = event.getFile();
             File imagenFile = convertirUploadedFile(imagen);
-            Map resultado = cloudinaryServicio.subirImagen(imagenFile, "clientes");
+            Map resultado = cloudinaryServicio.subirImagen(imagenFile, "peliculas");
             imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
         } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
@@ -95,4 +111,41 @@ public class PeliculaBean implements Serializable {
         fos.close();
         return file;
     }
+
+    public void eliminarPelicula(){
+        try{
+            for (Pelicula p : peliculasSeleccionadas ){
+                adminServicio.eliminarPelicula(p.getCodigo());
+                peliculas.remove(p);
+            }
+            peliculasSeleccionadas.clear();
+        }catch (Exception e){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+        }
+    }
+
+    public String getMensajeBorrar(){
+        if(peliculasSeleccionadas.isEmpty()){
+            return "Borrar";
+        }else {
+            return peliculasSeleccionadas.size() == 1 ? "Borrar 1 elemento" :
+                    "Borrar " + peliculasSeleccionadas.size() + " elementos";
+        }
+    }
+
+    public String getMensajeCrear(){
+        return editar ? "Editar pelicula" : "Crear pelicula";
+    }
+
+    public void crearPeliculaDialogo(){
+        this.pelicula = new Pelicula();
+        editar = false;
+    }
+
+    public void seleccionarPelicula(Pelicula peliculaSeleccionada){
+        this.pelicula =  peliculaSeleccionada;
+        editar = true;
+    }
+
 }

@@ -19,7 +19,7 @@
 
                 <p:toolbarGroup>
 
-                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3"
+                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3" update="dialogo_crear"
                                      action="#{cuponBean.crearCuponDialogo()}" oncomplete="PF('crear_cupon').show()" />
 
                     <p:commandButton id="btn_borrar" value="#{cuponBean.mensajeBorrar}" icon="pi pi-trash"
@@ -90,7 +90,7 @@
                     <p:message for="descripcion_cupon"/>
 
                     <p:outputLabel for="descuento_cupon" value="Descuento: "/>
-                    <p:inputTextarea id="descuento_cupon" value="#{cuponBean.cupon.descuento}" required="true"/>
+                    <p:inputText id="descuento_cupon" value="#{cuponBean.cupon.descuento}" type="number" required="true"/>
                     <p:message for="descuento_cupon"/>
 
                     <p:outputLabel for="fecha_vencimiento_cupon" value="Fecha de vencimiento:"/>

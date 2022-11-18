@@ -48,7 +48,8 @@ public class CuponBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         cupon = new Cupon();
-        cuponesSeleccionados = getCupones();
+        cuponesSeleccionados = new ArrayList<>();
+        cupones = new ArrayList<>();
         editar = false;
     }
 
@@ -78,8 +79,7 @@ public class CuponBean implements Serializable {
             System.out.println("3");
            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
-            //FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Cupon creada correctamente");
-            //FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+
         }
 
     }

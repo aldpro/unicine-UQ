@@ -51,7 +51,7 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, length = 200)
     private String urlTrailer;
 
-    @Column(nullable = false, precision = 1, scale = 2)
+    //@Column(nullable = false, precision = 1, scale = 2)
     @Max(5)
     @Positive
     private Float puntuacion;

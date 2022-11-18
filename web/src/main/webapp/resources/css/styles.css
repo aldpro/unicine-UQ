@@ -75,3 +75,9 @@ body .ui-panel .ui-panel-title {
 .item-func{
     background: #f8f9fa;
 }
+
+#panel_pelicula{
+    width:max-content;
+    margin:1em auto;
+    padding:0.25em 1em;
+}

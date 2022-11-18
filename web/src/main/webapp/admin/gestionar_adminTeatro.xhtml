@@ -19,12 +19,12 @@
 
                 <p:toolbarGroup>
 
-                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3"
+                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3" update="dialogo_crear"
                                      action="#{adminTeatroBean.crearAdminTeatroDialogo()}" oncomplete="PF('crear_adminTeatro').show()" />
 
                     <p:commandButton id="btn_borrar" value="#{adminTeatroBean.mensajeBorrar}" icon="pi pi-trash"
                                      disabled="#{adminTeatroBean.administradorTeatrosSeleccionados.size()==0}" styleClass="ui-button-danger"
-                                     action="#{adminTeatroBean.eliminarAdminTeatro()}" update="crud_AdminTeatro:lista,@this"/>
+                                     action="#{adminTeatroBean.eliminarAdminTeatro}" update="crud_AdminTeatro:lista,@this"/>
 
 
                 </p:toolbarGroup>
@@ -32,7 +32,7 @@
             </p:toolbar>
 
 
-            <p:dataTable id="lista" value="#{adminTeatroBean.administradorTeatrosSeleccionados}" var="adminTeatro" paginator="true" rows="10"
+            <p:dataTable id="lista" value="#{adminTeatroBean.administradorTeatros}" var="adminTeatro" paginator="true" rows="10"
                          rowKey="#{adminTeatro.cedula}"
                          paginatorPosition="bottom"
                          selection="#{adminTeatroBean.administradorTeatrosSeleccionados}" rowSelector="true">
@@ -95,7 +95,7 @@
                     <p:message for="password_adminTeatro"/>
 
                 </h:panelGrid>
-                <p:commandButton value="#{adminTeatroBean.mensajeCrear}" action="#{adminTeatroBean.crearAdminTeatro()}" icon="pi pi-plus-circle"
+                <p:commandButton value="#{adminTeatroBean.mensajeCrear}" action="#{adminTeatroBean.crearAdminTeatro}" icon="pi pi-plus-circle"
                                  update="@form,crud_AdminTeatro:lista"/>
 
                 <p:growl for="mensaje_bean" showDetail="true"/>

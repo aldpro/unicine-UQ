@@ -67,4 +67,5 @@ public interface AdminServicio {
     AdministradorTeatro obtenerAdminTeatro(Integer cedulaAdminTeatro) throws  Exception;
 
     Pelicula obtenerPeliculaNombre(String nombrePelicula) throws Exception;
+
 }

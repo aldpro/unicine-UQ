@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class adminTeatroBean implements Serializable {
+public class AdminTeatroBean implements Serializable {
 
     @Getter @Setter
     private AdministradorTeatro administradorTeatro;
@@ -53,6 +53,7 @@ public class adminTeatroBean implements Serializable {
 
     private boolean editar;
 
+
     @PostConstruct
     public void  init(){
         administradorTeatro = new AdministradorTeatro();
@@ -60,7 +61,10 @@ public class adminTeatroBean implements Serializable {
         horarios = adminTeatroServicio.listarHorarios();
         salas = adminTeatroServicio.listarSalas();
         teatros = adminTeatroServicio.listarTeatros();
-        administradorTeatrosSeleccionados = getAdminTeatros();
+        administradorTeatros = adminServicio.listarAdminsTeatros();
+        administradorTeatrosSeleccionados = new ArrayList<>();
+
+
         editar = false;
     }
 
@@ -106,7 +110,7 @@ public class adminTeatroBean implements Serializable {
             return "Borrar";
         }else{
             return administradorTeatrosSeleccionados.size()==1 ? "Borrar 1 elemento" :
-                    "Borrar" + administradorTeatrosSeleccionados.size() + "elementos";
+                    "Borrar" + administradorTeatrosSeleccionados.size() + " elementos";
         }
     }
 
@@ -122,12 +126,6 @@ public class adminTeatroBean implements Serializable {
     public void seleccionarAdminTeatro(AdministradorTeatro adminTeatroSeleccionado){
         this.administradorTeatro = adminTeatroSeleccionado;
         editar=true;
-    }
-
-    public List<AdministradorTeatro> getAdminTeatros(){
-       List<AdministradorTeatro> administradorTeatros;
-       administradorTeatros = adminServicio.listarAdminsTeatros();
-       return administradorTeatros;
     }
 
 }

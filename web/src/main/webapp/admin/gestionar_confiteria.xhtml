@@ -19,12 +19,16 @@
 
                 <p:toolbarGroup>
 
-                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3" update="dialogo_crear"
-                                     action="#{confiteriaBean.crearConfiteriaDialogo()}" oncomplete="PF('crear_confiteria').show()" />
+                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3"
+                                     update="dialogo_crear"
+                                     action="#{confiteriaBean.crearConfiteriaDialogo()}"
+                                     oncomplete="PF('crear_confiteria').show()"/>
 
                     <p:commandButton id="btn_borrar" value="#{confiteriaBean.mensajeBorrar}" icon="pi pi-trash"
-                                     disabled="#{confiteriaBean.confiteriaSeleccionadas.size()==0}" styleClass="ui-button-danger"
-                                     action="#{confiteriaBean.eliminarConfiteria}" update="crud_confiteria:lista,@this"/>
+                                     disabled="#{confiteriaBean.confiteriaSeleccionadas.size()==0}"
+                                     styleClass="ui-button-danger"
+                                     action="#{confiteriaBean.eliminarConfiteria}"
+                                     update="crud_confiteria:lista,@this"/>
 
 
                 </p:toolbarGroup>
@@ -60,7 +64,8 @@
 
                 <p:column headerText="">
                     <p:commandButton styleClass="edit-button rounded-button vi-button-success" icon="pi pi-pencil"
-                                     action="#{confiteriaBean.seleccionarConfiteria(confiteria)}" oncomplete="PF('crear_confiteria').show()"
+                                     action="#{confiteriaBean.seleccionarConfiteria(confiteria)}"
+                                     oncomplete="PF('crear_confiteria').show()"
                                      update="dialogo_crear"/>
                 </p:column>
 
@@ -69,7 +74,8 @@
         </h:form>
 
 
-        <p:dialog id="dialogo_crear" widgetVar="crear_confiteria" modal="true" header="#{confiteriaBean.mensajeCrear}" showEffect="fade">
+        <p:dialog id="dialogo_crear" widgetVar="crear_confiteria" modal="true" header="#{confiteriaBean.mensajeCrear}"
+                  showEffect="fade">
             <h:form>
                 <h:panelGrid columns="3" cellpadding="5">
 
@@ -78,7 +84,8 @@
                     <p:message for="nombre_confiteria"/>
 
                     <p:outputLabel for="precio_confiteria" value="Precio: "/>
-                    <p:inputText id="precio_confiteria" value="#{confiteriaBean.confiteria.precio}" type="number" required="true"/>
+                    <p:inputText id="precio_confiteria" value="#{confiteriaBean.confiteria.precio}" type="number"
+                                 required="true"/>
                     <p:message for="precio_confiteria"/>
 
 
@@ -90,7 +97,8 @@
 
 
                 </h:panelGrid>
-                <p:commandButton value="#{confiteriaBean.mensajeCrear}" action="#{confiteriaBean.crearConfiteria}" icon="pi pi-plus-circle"
+                <p:commandButton value="#{confiteriaBean.mensajeCrear}" action="#{confiteriaBean.crearConfiteria}"
+                                 icon="pi pi-plus-circle"
                                  update="@form,crud_confiteria:lista"/>
 
                 <p:growl for="mensaje_bean" showDetail="true"/>

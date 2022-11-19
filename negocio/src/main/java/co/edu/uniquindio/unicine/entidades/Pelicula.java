@@ -30,7 +30,7 @@ public class Pelicula implements Serializable {
 
     @ElementCollection
     @Column(nullable = false, length = 10)
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private List<GeneroPelicula> generos;
 
     @Column(nullable = false, length = 80)
@@ -61,9 +61,9 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, List<GeneroPelicula> generos, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
-        this.generos = generos;
+        this.generos = new ArrayList<>();
         this.nombre = nombre;
         this.reparto = reparto;
         this.sinopsis = sinopsis;

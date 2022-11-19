@@ -97,20 +97,20 @@ insert into pelicula_imagenes values(3, "https://res.cloudinary.com/dwu4xtiun/im
 insert into pelicula_imagenes values(4, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775203/unicine/peliculas/Minions_gqwkoe.jpg","unicine/peliculas/Minions_gqwkoe");
 insert into pelicula_imagenes values(5, "https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775197/unicine/peliculas/Encanto_fhr4vu.jpg","unicine/peliculas/Encanto_fhr4vu");
 
-insert into pelicula_generos values (1, "AVENTURAS");
-insert into pelicula_generos values (1, "FANTASIA");
-insert into pelicula_generos values (1, "ANIMADA");
-insert into pelicula_generos values (2, "ACCION");
-insert into pelicula_generos values (2, "AVENTURAS");
-insert into pelicula_generos values (2, "ANIMADA");
-insert into pelicula_generos values (3, "TERROR");
-insert into pelicula_generos values (3, "SUSPENSO");
-insert into pelicula_generos values (4, "ANIMADA");
-insert into pelicula_generos values (4, "COMEDIA");
-insert into pelicula_generos values (4, "AVENTURAS");
-insert into pelicula_generos values (5, "ANIMADA");
-insert into pelicula_generos values (5, "MUSICAL");
-insert into pelicula_generos values (5, "AVENTURAS");
+insert into pelicula_generos values (1, 1);
+insert into pelicula_generos values (1, 5);
+insert into pelicula_generos values (1, 9);
+insert into pelicula_generos values (2, 0);
+insert into pelicula_generos values (2, 1);
+insert into pelicula_generos values (2, 9);
+insert into pelicula_generos values (3, 8);
+insert into pelicula_generos values (3, 6);
+insert into pelicula_generos values (4, 9);
+insert into pelicula_generos values (4, 3);
+insert into pelicula_generos values (4, 1);
+insert into pelicula_generos values (5, 9);
+insert into pelicula_generos values (5, 7);
+insert into pelicula_generos values (5, 1);
 
 insert into funcion values (1, 7000, 1, 1, 6);
 insert into funcion values (2, 6500, 2, 2, 5);

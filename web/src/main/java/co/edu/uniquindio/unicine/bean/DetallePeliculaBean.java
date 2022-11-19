@@ -5,6 +5,7 @@ import co.edu.uniquindio.unicine.entidades.Funcion;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.entidades.Teatro;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
+import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.el.MethodExpression;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +27,10 @@ public class DetallePeliculaBean  implements Serializable {
 
     @Autowired
     private AdminServicio adminServicio;
+
+    @Autowired
+    private AdminTeatroServicio adminTeatroServicio;
+
     @Value("#{param['pelicula_id']}")
     private String peliculaCodigo;
 
@@ -52,6 +58,9 @@ public class DetallePeliculaBean  implements Serializable {
             if (peliculaCodigo != null && !peliculaCodigo.isEmpty()){
                 pelicula = adminServicio.obtenerPelicula(Integer.parseInt(peliculaCodigo));
             }
+            if (ciudadCodigo !=null && !ciudadCodigo.isEmpty()){
+                teatros = adminTeatroServicio.listarTeatrosCiudad(Integer.parseInt(ciudadCodigo));
+            }
 
             fechas = new ArrayList<>();
 
@@ -65,5 +74,4 @@ public class DetallePeliculaBean  implements Serializable {
             e.printStackTrace();
         }
     }
-
 }

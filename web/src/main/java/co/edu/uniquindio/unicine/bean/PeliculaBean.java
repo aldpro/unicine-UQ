@@ -35,9 +35,11 @@ public class PeliculaBean implements Serializable {
     @Autowired
     private AdminServicio adminServicio;
 
-    @Setter
-    @Getter
+    @Getter     @Setter
     private List<GeneroPelicula> generoPeliculas;
+
+    @Getter @Setter
+    private List<GeneroPelicula> generosSeleccionados;
 
     @Autowired
     CloudinaryServicio cloudinaryServicio;
@@ -78,10 +80,19 @@ public class PeliculaBean implements Serializable {
             if (!imagenes.isEmpty()) {
                 pelicula.setImagenes(imagenes);
                 pelicula.setEstado(EstadoPelicula.CARTELERA);
-                adminServicio.crearPelicula(pelicula);
+
+                Pelicula registro = adminServicio.crearPelicula(pelicula);
+                peliculas.add(pelicula);
+
+                pelicula = new Pelicula();
+
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Pelicula creada correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             } else {
+
+                pelicula.setGeneros(generosSeleccionados);
+                adminServicio.actualizarPelicula(pelicula);
+
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir una imagen");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }

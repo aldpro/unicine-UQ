@@ -53,4 +53,6 @@ public interface AdminTeatroServicio {
     List<DistribucionSilla> listarDistribucionSillas();
 
     DistribucionSilla obtenerDistribucionSillas(Integer codigoDistribucionSillas) throws Exception;
+
+    Horario actualizarHorario(Horario horario) throws Exception;
 }

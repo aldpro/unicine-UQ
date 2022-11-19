@@ -90,17 +90,17 @@
                     </p:selectOneMenu>
                     <p:message for="teatro_sala"/>
 
-                    <p:outputLabel for="distribucion_sillas_sala" value="Teatro:"/>
+                    <p:outputLabel for="distribucion_sillas_sala" value="Distribución de sillas:"/>
                     <p:selectOneMenu id="distribucion_sillas_sala" value="#{salaBean.sala.distribucionSilla}"
                                      converter="#{distribucionSillaConverter}">
                         <f:selectItem itemLabel="Seleccione una distribucion de sillas" noSelectionOption="true" itemValue="#{null}"/>
-                        <f:selectItems value="#{salaBean.distribucionSillas}" var="distribucionSilla" itemLabel="Codigo: #{distribucionSilla.}"
+                        <f:selectItems value="#{salaBean.distribucionSillas}" var="distribucionSilla" itemLabel="Codigo: #{distribucionSilla.codigo}"
                                        itemValue="#{distribucionSilla}"/>
                     </p:selectOneMenu>
                     <p:message for="distribucion_sillas_sala"/>
 
                 </h:panelGrid>
-                <p:commandButton value="#{salaBean.mensajeCrear}" action="#{salaBean.crearTeatro}" icon="pi pi-plus-circle"
+                <p:commandButton value="#{salaBean.mensajeCrear}" action="#{salaBean.crearSala}" icon="pi pi-plus-circle"
                                  update="@form,crud_sala:lista"/>
 
                 <p:growl for="mensaje_bean" showDetail="true"/>

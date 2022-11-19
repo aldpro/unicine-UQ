@@ -14,7 +14,7 @@
 
     <ui:define name="content">
 
-        <div class="container mt-4 mb-4">
+        <div class="container mt-3 mb-3">
             <p:panel header="Seleccionar sillas">
                 <h:form id="sillas">
 
@@ -23,8 +23,8 @@
                     <p:dataTable id="mat_sillas" value="#{compraBean.filas}" var="fila" rows="#{compraBean.distribucion.filas}" editable="true" editMode="cell">
 
                         <p:columns id="columnas" var="col" value="#{compraBean.columnas}">
-                            <h:panelGrid id="item-silla" columns="1" styleClass="ui-noborder text-center #{compraBean.buscar(fila,col)} eq 'true' ? silla-elegida">
-                                <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila, col)}" update="sillas:mat-sillas:#{fila}:columnas:#{col}:item"/>
+                            <h:panelGrid id="item-silla" columns="1" styleClass="ui-noborder text-center #{compraBean.buscar(fila,col) ? 'silla-elegida' : '' }">
+                                <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila, col)}" update="sillas:mat-sillas:#{fila}:columnas:#{col}:item-silla, detalle_compra"/>
                                 <p class="mb-8">#{fila}#{col}</p>
                                 <i class="pi pi-box"/>
                             </h:panelGrid>
@@ -33,13 +33,13 @@
                 </h:form>
             </p:panel>
 
-            <p:panel header="Elija la confiteria" styleClass="mt-3">
+            <p:panel header="Elija la confiteria" styleClass="mt-2">
                 <div class="row">
                     <p:repeat value="#{compraBean.confiteriaFormulario}" var="confite" varStatus="c">
                         <div class="item-confite col-3 mb-3">
                             <div class="shadow-sm p-3">
                                 <h:form id="form_confites">
-                                    <img src="#{compraBean.confiteria.imagenPrincipal}" alt="Imagen"/>
+                                    <img src="#{confite.confiteria.imagenPrincipal}" alt="Imagen"/>
                                     <p>#{confite.confiteria.nombre}</p>
                                     <p>$ #{confite.confiteria.precio}</p>
                                     <div class="text-center">

@@ -62,11 +62,13 @@ body .ui-panel .ui-panel-title {
 #sillas .ui-widget-content.ui-datatable-even, #sillas .ui-widget-content.ui-datatable-odd, #sillas td{
     border: 0 solid;
 }
+
 #sillas td table{
     border: 1px solid;
 }
+
 .item-confite img {
-    max-width: 100%;
+    max-width: 80%;
 }
 .btn-dia-func{
     width: 14%;
@@ -75,9 +77,28 @@ body .ui-panel .ui-panel-title {
 .item-func{
     background: #f8f9fa;
 }
+.poster-imagen{
+    width: 100%;
+}
 
-#panel_pelicula{
-    width:max-content;
-    margin:1em auto;
-    padding:0.25em 1em;
+.info-peli{
+    margin-top: -200px;
+    position: relative;
+}
+
+.info-peli .shadow{
+    background: white;
+}
+
+.info-funciones{
+    margin-left: 440px;
+    position: relative;
+    margin-top: -800px;
+    height: 800px;
+}
+
+
+.boton-fechas{
+    width: 142px;
+    height: 62px;
 }

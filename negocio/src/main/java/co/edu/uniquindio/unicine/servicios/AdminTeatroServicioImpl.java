@@ -252,4 +252,14 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         }
         return guardado.get();
     }
+
+    @Override
+    public Horario actualizarHorario(Horario horario) throws Exception {
+        Optional<Horario> guardado = horarioRepo.findById(horario.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El horario no existe");
+        }
+        return horarioRepo.save(horario);
+    }
 }

@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
 @ViewScoped
 public class CompraBean implements Serializable {
 
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona personaSesion;
     @Autowired
     private AdminServicio adminServicio;
 
@@ -100,7 +102,7 @@ public class CompraBean implements Serializable {
         });
 
         try {
-            cliente = clienteServicio.obtenerCliente(1);
+            cliente = clienteServicio.obtenerCliente(1009000011);
 
             if (funcionCodigo != null && !funcionCodigo.isEmpty()){
                 funcion = adminTeatroServicio.obtenerFuncion(Integer.parseInt(funcionCodigo));
@@ -111,6 +113,7 @@ public class CompraBean implements Serializable {
                 String[] hora = funcion.getHorario().getHora().split(":");
                 fechaSeleccionada = LocalDateTime.of(Integer.parseInt(anioSeleccionado), Integer.parseInt(mesSeleccionado), Integer.parseInt(diaSeleccionado),Integer.parseInt(hora[0]),Integer.parseInt(hora[1]));
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -159,5 +162,49 @@ public class CompraBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("msj_bean", fm);
         }
         return "";
+    }
+
+    public void restarUnidades(Integer pos){
+        CompraConfiteria compraConfiteria = confiteriaFormulario.get(pos);
+
+        if (compraConfiteria.getUnidades() >= 0) {
+            confiteriaFormulario.get(pos).setUnidades(confiteriaFormulario.get(pos).getUnidades() - 1);
+        }
+    }
+
+    public void sumarUnidades(Integer pos){
+        confiteriaFormulario.get(pos).setUnidades(confiteriaFormulario.get(pos).getUnidades() + 1);
+    }
+
+
+    public Integer obtenerUnidadesConfites(Integer pos){
+        return confiteriaFormulario.get(pos).getUnidades();
+    }
+
+    public boolean buscar(Integer fila, Integer columna) {
+        for(Entrada e : entradas){
+            if(e.getColumna() == columna && e.getFila() == fila){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void seleccionarSilla(Integer fila, Integer columna){
+        if(!buscar(fila, columna)) {
+            Entrada entrada = new Entrada();
+            entrada.setFila(fila);
+            entrada.setColumna(columna);
+            entradas.add(entrada);
+        }
+        else{
+            for (int i = 0; i < entradas.size(); i++) {
+                Entrada e = entradas.get(i);
+
+                if(e.getColumna() == columna && e.getFila() == fila){
+                    entradas.remove(i);
+                }
+            }
+        }
     }
 }

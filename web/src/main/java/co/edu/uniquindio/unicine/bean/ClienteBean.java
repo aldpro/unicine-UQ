@@ -27,16 +27,13 @@ import java.util.Map;
 @ViewScoped
 public class ClienteBean implements Serializable {
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Cliente cliente;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private String confirmacionPassword;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private LocalDate fechaNacimiento;
 
     @Setter @Getter

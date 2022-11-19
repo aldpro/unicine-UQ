@@ -45,7 +45,7 @@
                     <div class="">
                         <h:form styleClass="mt-3">
                             <p:repeat value="#{detallePeliculaBean.fechas}" var="fecha" varStatus="f">
-                                <p:commandButton styleClass="m-lg-2" value="#{detallePeliculaBean.diaSemanas.get(fecha.dayOfWeek.value-1)} - #{fecha}" />
+                                <p:commandButton styleClass="ui-button-raised ui-button-flat boton-fechas" value="#{detallePeliculaBean.diaSemanas.get(fecha.dayOfWeek.ordinal())} #{fecha.dayOfMonth}/#{fecha.month.ordinal()}/#{fecha.year}" />
                             </p:repeat>
                         </h:form>
 
@@ -60,7 +60,7 @@
                                                 <div class="shadow-sm p-4">
                                                     <p>#{sala.nombre}:</p>
                                                     <p:repeat value="#{sala.funciones}" var="funcion">
-                                                        <p:commandButton rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}" styleClass="rounded-button" value="#{funcion.horario.hora}" action=""/>
+                                                        <p:commandButton rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}" styleClass="rounded-button" value="#{funcion.horario.hora}" />
                                                     </p:repeat>
                                                 </div>
                                             </h:form>

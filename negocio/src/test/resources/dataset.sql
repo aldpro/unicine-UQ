@@ -118,7 +118,7 @@ insert into funcion values (3, 6800, 3, 3, 4);
 insert into funcion values (4, 6800, 4, 4, 3);
 insert into funcion values (5, 7100, 5, 5, 2);
 insert into funcion values (6, 6800, 6, 4, 1);
-insert into funcion values (7, 10000, 1, 3, 6);
+insert into funcion values (7, 10000, 1, 3, 8);
 
 insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1);
 insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0);

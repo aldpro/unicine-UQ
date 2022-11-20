@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unicine.bean;
 
-import co.edu.uniquindio.unicine.entidades.Dias;
-import co.edu.uniquindio.unicine.entidades.Funcion;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
-import co.edu.uniquindio.unicine.entidades.Teatro;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import lombok.Getter;
@@ -52,6 +49,15 @@ public class DetallePeliculaBean  implements Serializable {
     @Getter @Setter
     private List<Teatro> teatros;
 
+    @Getter @Setter
+    private Integer diaSeleccionado;
+
+    @Getter @Setter
+    private Integer mesSeleccionado;
+
+    @Getter @Setter
+    private Integer anioSeleccionado;
+
     @PostConstruct
     public void init(){
         try {
@@ -74,4 +80,16 @@ public class DetallePeliculaBean  implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void obtenerFechaSeleccionada(Integer dia, Integer mes, Integer year) {
+        this.diaSeleccionado = dia;
+        this.mesSeleccionado = mes;
+        this.anioSeleccionado = year;
+    }
+
+    public String direccionarCompra(Integer codigoFuncion){
+        return "/cliente/proceso_compra.xhtml?faces-redirect=true&amp;funcion_codigo="+codigoFuncion;
+    }
+
+
 }

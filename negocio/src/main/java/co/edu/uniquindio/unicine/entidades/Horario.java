@@ -30,8 +30,8 @@ public class Horario implements Serializable {
     private String hora;
 
     @ElementCollection
-    @Column(nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
     private List<Dias> dias;
 
     @Column(nullable = false)

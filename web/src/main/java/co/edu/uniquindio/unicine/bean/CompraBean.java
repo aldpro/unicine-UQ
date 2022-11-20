@@ -37,6 +37,7 @@ public class CompraBean implements Serializable {
     private AdminTeatroServicio adminTeatroServicio;
 
     @Getter @Setter
+    @Value("#{param['funcion_codigo']}")
     private String funcionCodigo;
 
     @Value("#{param['d']}")

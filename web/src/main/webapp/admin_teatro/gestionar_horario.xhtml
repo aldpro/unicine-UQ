@@ -84,9 +84,9 @@
                     <p:message for="hora_horario"/>
 
                     <p:outputLabel for="dias_horario" value="Días:"/>
-                    <p:selectOneMenu id="dias_horario" value="#{horarioBean.horario.dias}">
-                        <f:selectItems value="#{horarioBean.dias}" />
-                    </p:selectOneMenu>
+                    <p:selectManyCheckbox id="dias_horario" value="#{horarioBean.horario.dias}" required="true">
+                        <f:selectItems value="#{horarioBean.dias}" var="genero" itemLabel="#{genero}" itemValue="#{genero}" />
+                    </p:selectManyCheckbox>
                     <p:message for="dias_horario"/>
 
                     <p:outputLabel for="fecha_inicio_horario" value="Fecha inicio: "/>

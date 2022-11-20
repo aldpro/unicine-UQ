@@ -58,9 +58,9 @@
                                         <div class="item-func mb-4">
                                             <h:form>
                                                 <div class="shadow-sm p-4">
-                                                    <p>#{sala.nombre}:</p>
+                                                    <p>#{sala.nombre} / #{sala.tipoSala}:</p>
                                                     <p:repeat value="#{sala.funciones}" var="funcion">
-                                                        <p:commandButton rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}" styleClass="rounded-button" value="#{funcion.horario.hora}" />
+                                                        <p:commandButton rendered="#{funcion.pelicula.codigo == detallePeliculaBean.pelicula.codigo}" styleClass="rounded-button" value="#{funcion.horario.hora}" action="#{detallePeliculaBean.direccionarCompra(funcion.codigo)}" />
                                                     </p:repeat>
                                                 </div>
                                             </h:form>

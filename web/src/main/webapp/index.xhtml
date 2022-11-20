@@ -115,7 +115,7 @@
                                     <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generos}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
                                     <h3 class="mb-0">#{pelicula.nombre}</h3>
                                     <p class="card-text mb-auto">#{pelicula.reparto}</p>
-                                    <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}" class="stretched-link">Ver más</a>
+                                    <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}&amp;ciudad_id=#{inicioBean.ciudad.codigo}" class="stretched-link">Ver más</a>
                                 </div>
                                 <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
                                     <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>

@@ -20,4 +20,6 @@ public interface PeliculaRepo extends JpaRepository<Pelicula, Integer> {
 
     @Query("select p from Pelicula p where p.nombre = :nombrePelicula")
     Optional<Pelicula> obtenerPeliculaNombre(String nombrePelicula);
+
+
 }

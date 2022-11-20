@@ -19,7 +19,7 @@
 
                 <p:toolbarGroup>
 
-                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3"
+                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3" update="dialogo_crear"
                                      action="#{teatroBean.crearTeatroDialogo()}" oncomplete="PF('crear_teatro').show()" />
 
                     <p:commandButton id="btn_borrar" value="#{teatroBean.mensajeBorrar}" icon="pi pi-trash"

@@ -44,6 +44,11 @@ public class ConfiteriaBean implements Serializable {
     @Setter @Getter
     private ArrayList<String> imagenesCarousel;
 
+    @Setter @Getter
+    private List<Confiteria> confiteriaSeleccionadas;
+
+    private boolean editar;
+
     @PostConstruct
     public void init(){
         confiterias = adminServicio.listarConfiteria();
@@ -53,6 +58,10 @@ public class ConfiteriaBean implements Serializable {
         imagenesCarousel.add("https://cloudfront-us-east-1.images.arcpublishing.com/semana/ISWSR7L7T5BM7MKFANV6ESYAU4.jpg");
         imagenesCarousel.add("https://www.procinal.com/uploads/HOME/Noticias_Destacados/PROMOCIONES/Promo-CumpleCF.png");
         imagenesCarousel.add("https://www.ccviva.com/sites/default/files/PROCINAL_BANNER_INT2_1.png");
+
+        confiterias = adminServicio.listarConfiteria();
+        confiteriaSeleccionadas =new ArrayList<>();
+        editar = false;
     }
 
     public void subirImagen(FileUploadEvent event){
@@ -74,4 +83,59 @@ public class ConfiteriaBean implements Serializable {
         fos.close();
         return file;
     }
+
+    public void crearConfiteria(){
+
+        try{
+            if (!imagenesConfiteria.isEmpty()){
+                confiteria.setImagenes(imagenesConfiteria);
+                adminServicio.crearConfiteria(confiteria);
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Pelicula creada correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+            }else {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir una imagen");
+                FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+            }
+        }catch (Exception e){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+        }
+    }
+
+    public void eliminarConfiteria(){
+        try{
+            for (Confiteria c:confiteriaSeleccionadas){
+                adminServicio.eliminarConfiteria(c.getCodigo());
+                confiterias.remove(c);
+            }
+            confiteriaSeleccionadas.clear();
+        }catch (Exception e){
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
+        }
+    }
+
+    public String getMensajeBorrar(){
+        if(confiteriaSeleccionadas.isEmpty()){
+            return "Borrar";
+        } else {
+            return confiteriaSeleccionadas.size()==1 ? "Borrar 1 elemento" :
+                    "Borrar " + confiteriaSeleccionadas.size() + " elementos";
+        }
+    }
+
+    public String getMensajeCrear(){
+        return editar ? "Editar confiteria" : "Crear confiteria";
+    }
+
+    public void crearConfiteriaDialogo(){
+        this.confiteria = new Confiteria();
+        editar = false;
+    }
+
+    public void  seleccionarConfiteria(Confiteria confiteriaSeleccionada){
+        this.confiteria = confiteriaSeleccionada;
+        editar = true;
+    }
+
 }

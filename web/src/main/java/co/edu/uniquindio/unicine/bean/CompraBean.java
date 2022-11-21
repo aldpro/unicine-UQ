@@ -103,8 +103,9 @@ public class CompraBean implements Serializable {
         });
 
         try {
-            cliente = clienteServicio.obtenerCliente(1009000011);
-
+            if (personaSesion != null) {
+                cliente = (Cliente) personaSesion;
+            }
             if (funcionCodigo != null && !funcionCodigo.isEmpty()){
                 funcion = adminTeatroServicio.obtenerFuncion(Integer.parseInt(funcionCodigo));
                 crearDistribucionSala();
@@ -134,29 +135,31 @@ public class CompraBean implements Serializable {
     }
 
     public String hacerCompra(){
-        if ( !entradas.isEmpty()){
+        if ( !entradas.isEmpty() && fechaSeleccionada != null){
+            if (personaSesion != null){
 
-            try {
-                List<CompraConfiteria> lista = confiteriaFormulario.stream().filter(c -> c.getUnidades() > 0).collect(Collectors.toList());
+                try {
+                    List<CompraConfiteria> lista = confiteriaFormulario.stream().filter(c -> c.getUnidades() > 0).collect(Collectors.toList());
 
-                Compra compra = clienteServicio.hacerCompra(cliente, funcion, medioPagoSeleccionado, lista, codigoCupon, entradas, fechaSeleccionada);
+                    Compra compra = clienteServicio.hacerCompra(cliente, funcion, medioPagoSeleccionado, lista, codigoCupon, entradas, fechaSeleccionada);
 
-                if (compra != null){
-                    FacesMessage fm;
+                    if (compra != null){
+                        FacesMessage fm;
 
-                    if (compra.getCuponCliente() != null) {
-                        fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente, se le ha enviado un email con la confirmación y se ha redimido el cupon");
-                    }else {
-                        fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente, se le ha enviado un email con la confirmación");
+                        if (compra.getCuponCliente() != null) {
+                            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente, se le ha enviado un email con la confirmación y se ha redimido el cupon");
+                        }else {
+                            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra realizada correctamente, se le ha enviado un email con la confirmación");
+                        }
+
+                        FacesContext.getCurrentInstance().addMessage("msj_bean", fm);
+                        Thread.sleep(2000);
+                        return "/cliente/detalle_compra.xhtml?faces-redirect=true&amp;compra_id="+compra.getCodigo();
                     }
-
+                }catch (Exception e){
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                     FacesContext.getCurrentInstance().addMessage("msj_bean", fm);
-                    Thread.sleep(2000);
-                    return "/cliente/detalle_compra.xhtml?faces-redirect=true&amp;compra_id="+compra.getCodigo();
                 }
-            }catch (Exception e){
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-                FacesContext.getCurrentInstance().addMessage("msj_bean", fm);
             }
         }else {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario elegir las sillas");

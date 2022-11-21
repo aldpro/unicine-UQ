@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +20,33 @@ public class AdminServicioImpl implements AdminServicio{
     private final CiudadRepo ciudadRepo;
     private final ConfiteriaRepo confiteriaRepo;
     private  final  AdministradorRepo administradorRepo;
+    private final  ClienteRepo clienteRepo;
 
-    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo, AdministradorRepo administradorRepo) {
+    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo,
+                             CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo,
+                             AdministradorRepo administradorRepo, ClienteRepo clienteRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
         this.ciudadRepo = ciudadRepo;
         this.confiteriaRepo = confiteriaRepo;
         this.administradorRepo = administradorRepo;
+        this.clienteRepo = clienteRepo;
     }
 
     @Override
     public Administrador iniciarSesion(String correo, String password) throws Exception {
 
-        return administradorRepo.findByCorreoAndPassword(correo, password).orElse(null);
+        Administrador admin = administradorRepo.findByCorreo(correo).orElse(null);
+
+        if (admin != null) {
+
+            StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+            if (!spe.checkPassword(password, admin.getPassword())) {
+                throw new Exception("La constraseña es incorrecta");
+            }
+        }
+        return admin;
     }
 
     @Override
@@ -246,6 +260,15 @@ public class AdminServicioImpl implements AdminServicio{
 
         if (guardado.isEmpty()){
             throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Cliente obtenerCliente(String correo) throws Exception {
+        Optional<Cliente> guardado = clienteRepo.findByCorreo(correo);
+        if (guardado.isEmpty()){
+            throw new Exception("El cliente no existe");
         }
         return guardado.get();
     }

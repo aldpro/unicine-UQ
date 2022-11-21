@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
+import co.edu.uniquindio.unicine.entidades.Persona;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import co.edu.uniquindio.unicine.servicios.CloudinaryServicio;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +31,9 @@ public class ClienteBean implements Serializable {
 
     @Getter @Setter
     private Cliente cliente;
+
+    @Value(value = "#{seguridadBean.persona}")
+    private Persona personaSesion;
 
     @Getter @Setter
     private String confirmacionPassword;
@@ -94,4 +99,5 @@ public class ClienteBean implements Serializable {
         fos.close();
         return file;
     }
+
 }

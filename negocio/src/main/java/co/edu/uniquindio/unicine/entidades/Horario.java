@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,8 +32,7 @@ public class Horario implements Serializable {
     private String hora;
 
     @ElementCollection
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Dias> dias;
 
     @Column(nullable = false)

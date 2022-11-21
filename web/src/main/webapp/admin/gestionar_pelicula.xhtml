@@ -13,7 +13,8 @@
 
     <ui:define name="content">
 
-        <h:form id="crud_pelicula">
+        <h:form id="crud_pelicula" >
+            <h4 class="m-lg-4">Gestión de peliculas</h4>
 
             <p:toolbar>
 
@@ -65,15 +66,23 @@
                     <h:outputText value="#{pelicula.reparto}"/>
                 </p:column>
 
+                <p:column headerText="Generos">
+                    <h:outputText value="#{pelicula.generos}"/>
+                </p:column>
+
                 <p:column headerText="Sinopsis">
                     <h:outputText value="#{pelicula.sinopsis}"/>
+                </p:column>
+
+                <p:column headerText="URL imagen">
+                    <h:outputText value="#{pelicula.imagenes}"/>
                 </p:column>
 
                 <p:column headerText="Url Trailer">
                     <h:outputText value="#{pelicula.urlTrailer}"/>
                 </p:column>
 
-                <p:column headerText="">
+                <p:column headerText="Editar">
                     <p:commandButton styleClass="edit-button rounded-button vi-button-success" icon="pi pi-pencil"
                                      action="#{peliculaBean.seleccionarPelicula(pelicula)}"
                                      oncomplete="PF('crear_pelicula').show()"
@@ -84,8 +93,7 @@
         </h:form>
 
 
-        <p:dialog id="dialogo_crear" widgetVar="crear_pelicula" modal="true" header="#{peliculaBean.mensajeCrear}"
-                  showEffect="fade">
+        <p:dialog id="dialogo_crear" widgetVar="crear_pelicula" modal="true" blockScroll="true" draggable="false" maximizable="true" header="#{peliculaBean.mensajeCrear}" showEffect="fade" >
             <h:form>
                 <h:panelGrid columns="3" cellpadding="5">
 
@@ -125,7 +133,7 @@
                     <p:message for="estado_pelicula"/>
 
                     <p:outputLabel for="generos_peli" value="Géneros: "/>
-                    <p:selectManyCheckbox id="generos_peli" value="#{peliculaBean.generosSeleccionados}">
+                    <p:selectManyCheckbox id="generos_peli" value="#{peliculaBean.generosSeleccionados}" required="true" layout="grid" columns="3">
                         <f:selectItems value="#{peliculaBean.generoPeliculas}"/>
                     </p:selectManyCheckbox>
                     <p:message for="generos_peli"/>

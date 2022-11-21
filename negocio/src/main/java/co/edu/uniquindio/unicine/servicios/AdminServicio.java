@@ -68,5 +68,6 @@ public interface AdminServicio {
 
     Pelicula obtenerPeliculaNombre(String nombrePelicula) throws Exception;
 
+    Cliente obtenerCliente(String correo) throws Exception;
 
 }

@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,14 +61,19 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente login(String correo, String password) throws Exception {
-        Cliente cliente = clienteRepo.comprobarAutenticacionCliente(correo, password);
+        Cliente cliente = clienteRepo.findByCorreo(correo).orElse(null);
 
         if (cliente == null) {
-            throw new Exception("Los datos de autentificacion son incorrectos");
+            throw new Exception("El correo no existe");
         }
         if (cliente.getEstado()==false){
             throw new Exception("El cliente no esta activo, debe activarla con el enlace que fue enviado a su correo");
         }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        if (!spe.checkPassword(password, cliente.getPassword())){
+            throw new Exception("La constraseña es incorrecta");
+        }
+
         return cliente;
     }
 
@@ -90,8 +96,20 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("Este correo ya esta registrado");
         }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        cliente.setPassword(spe.encryptPassword(cliente.getPassword()));
         Cliente registro = clienteRepo.save(cliente);
-        //emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/", cliente.getCorreo());
+
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ldt.atZone(ZoneId.of("America/Bogota"));
+
+        String param1 = textEncryptor.encrypt(registro.getCorreo());
+        String param2 = textEncryptor.encrypt(""+zdt.toInstant().toEpochMilli());
+
+        emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: http://localhost:8080/activar_cuenta.xhtml?p1="+param1+"&p2="+param2, cliente.getCorreo());
         return registro;
     }
 

@@ -35,7 +35,7 @@ public class PeliculaBean implements Serializable {
     @Autowired
     private AdminServicio adminServicio;
 
-    @Getter     @Setter
+    @Getter @Setter
     private List<GeneroPelicula> generoPeliculas;
 
     @Getter @Setter
@@ -64,14 +64,6 @@ public class PeliculaBean implements Serializable {
         peliculasSeleccionadas = new ArrayList<>();
         peliculas = adminServicio.listarPeliculas();
         estadoPeliculas = Arrays.asList(EstadoPelicula.values());
-        /*try{
-            UploadedFile imagen = event.getFile();
-            File imagenFile = convertirUploadedFile(imagen);
-            Map resultado = cloudinaryServicio.subirImagen(imagenFile,"Peliculas");
-            imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
-        }catch (Exception e){
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta", e.getMessage());
-        }*/
     }
 
     public void crearPelicula() {
@@ -80,6 +72,7 @@ public class PeliculaBean implements Serializable {
             if (!imagenes.isEmpty()) {
                 pelicula.setImagenes(imagenes);
                 pelicula.setEstado(EstadoPelicula.CARTELERA);
+                pelicula.setGeneros(generosSeleccionados);
 
                 Pelicula registro = adminServicio.crearPelicula(pelicula);
                 peliculas.add(pelicula);
@@ -124,15 +117,16 @@ public class PeliculaBean implements Serializable {
     }
 
     public void eliminarPelicula(){
-        try{
-            for (Pelicula p : peliculasSeleccionadas ){
+
+        for (Pelicula p : peliculasSeleccionadas ){
+            try{
                 adminServicio.eliminarPelicula(p.getCodigo());
                 peliculas.remove(p);
+            }catch (Exception e){
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }
             peliculasSeleccionadas.clear();
-        }catch (Exception e){
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
     }
 
@@ -146,16 +140,21 @@ public class PeliculaBean implements Serializable {
     }
 
     public String getMensajeCrear(){
-        return editar ? "Editar pelicula" : "Crear pelicula";
+        if (editar){
+            return "Actualizar Pelicula";
+        }
+        return "Crear Pelicula";
     }
 
     public void crearPeliculaDialogo(){
         this.pelicula = new Pelicula();
-        editar = false;
+        editar=false;
     }
 
     public void seleccionarPelicula(Pelicula peliculaSeleccionada){
-        this.pelicula =  peliculaSeleccionada;
+        this.pelicula = peliculaSeleccionada;
+        generosSeleccionados.clear();
+        generosSeleccionados.addAll( peliculaSeleccionada.getGeneros() );
         editar = true;
     }
 

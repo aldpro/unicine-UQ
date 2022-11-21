@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -29,8 +31,7 @@ public class Pelicula implements Serializable {
     private EstadoPelicula estado;
 
     @ElementCollection
-    @Column(nullable = false, length = 10)
-    //@Enumerated(EnumType.STRING)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<GeneroPelicula> generos;
 
     @Column(nullable = false, length = 80)

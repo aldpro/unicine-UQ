@@ -1,11 +1,11 @@
-insert into administrador values (1003496468,"henrya.barraganp@uqvirtual.edu.co","Henry","unicine123");
+insert into administrador values (1003496468,"henrya.barraganp@uqvirtual.edu.co","Henry","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
 
-insert into administrador_teatro values (1119000000,"jhona.belloc@uqvirtual.edu.co","Jhon","xxunicinexx");
-insert into administrador_teatro values (1228000000,"mariaf.camachog@uqvirtual.edu.co","Maria","unicine12345");
-insert into administrador_teatro values (1337000000,"cristians.barreram@uqvirtual.edu.co ","Cristian","unicine");
-insert into administrador_teatro values (1446000000,"henrya.barraganp@uqvirtual.edu.co","Alejandro","unicine1320");
-insert into administrador_teatro values (1557000000,"rodolfo@email.com","Rodolfo","1Av3yEzA2Ts");
-insert into administrador_teatro values (1657000800,"jose@email.com","Jose","1EzA2Ts");
+insert into administrador_teatro values (1119000000,"jhona.belloc@uqvirtual.edu.co","Jhon","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
+insert into administrador_teatro values (1228000000,"mariaf.camachog@uqvirtual.edu.co","Maria","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
+insert into administrador_teatro values (1337000000,"cristians.barreram@uqvirtual.edu.co ","Cristian","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
+insert into administrador_teatro values (1446000000,"henrya.barraganp@uqvirtual.edu.co","Alejandro","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
+insert into administrador_teatro values (1557000000,"rodolfo@email.com","Rodolfo","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
+insert into administrador_teatro values (1657000800,"jose@email.com","Jose","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N");
 
 insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
@@ -120,11 +120,11 @@ insert into funcion values (5, 7100, 5, 5, 2);
 insert into funcion values (6, 6800, 6, 4, 1);
 insert into funcion values (7, 10000, 1, 3, 8);
 
-insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","CjT30mNQ1dV",1);
-insert into cliente values (1008000022,"juan@outlook.com","Juan","HrF52cVT7So",0);
-insert into cliente values (1007000033,"luis@yahoo.com","Luis","kUL17Okt1SM",0);
-insert into cliente values (1006000044,"maria@gmail.com","Maria","Dss57UgC3QK",1);
-insert into cliente values (1005000055,"luisa@google.com","Luisa","MqG82VtF2Ob",0);
+insert into cliente values (1009000011,"pepe@hotmail.com","Pepe","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N",1);
+insert into cliente values (1008000022,"juan@outlook.com","Juan","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N",0);
+insert into cliente values (1007000033,"luis@yahoo.com","Luis","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N",0);
+insert into cliente values (1006000044,"maria@gmail.com","Maria","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N",1);
+insert into cliente values (1005000055,"luisa@google.com","Luisa","fe5i/PFsjWU0/+4VjImKacbXbnsiQ07+L49lGB5bq4fQ5u5lMiNXljo0s+oSV73N",0);
 
 insert into cliente_imagenes values (1009000011,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente1_zfhe3z.jpg", "unicine/clientes/cliente1_zfhe3z");
 insert into cliente_imagenes values (1008000022,"https://res.cloudinary.com/dwu4xtiun/image/upload/v1668099880/unicine/clientes/cliente2_rpyvof.jpg", "unicine/clientes/cliente2_rpyvof");

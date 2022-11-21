@@ -33,6 +33,7 @@ public class GestionCuentaBean implements Serializable {
         if (param1 != null && !param1.isEmpty() && param2 != null && !param2.isEmpty()){
             try {
                 clienteServicio.activarCliente(param1, param2);
+                mensaje = "Cuenta verificada";
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

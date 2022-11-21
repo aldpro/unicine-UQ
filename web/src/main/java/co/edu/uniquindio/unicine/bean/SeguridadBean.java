@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.Ciudad;
+import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Persona;
 import co.edu.uniquindio.unicine.servicios.AdminServicio;
 import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
@@ -98,8 +99,19 @@ public class SeguridadBean implements Serializable {
     }
 
     public String cerrarSesion(){
+        String tipo = tipoSesion;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index?faces-redirect=true";
+
+        if (tipo.equals("cliente")){
+            return "/index?faces-redirect=true";
+        }
+        return "/index_admin?faces-redirect=true";
     }
 
+    public boolean isAutenticado() {
+        if (autenticado == true){
+            return true;
+        }
+        return false;
+    }
 }

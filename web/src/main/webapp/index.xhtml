@@ -130,7 +130,7 @@
         </div>
 
 
-        <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="#{inicioBean.ciudad==null ? 'true' : 'false'}" header="Seleccione una ciudad: ">
+        <p:dialog widgetVar="dialogo_ciudad" modal="true" visible="#{seguridadBean.ciudadSeleccionada == null ? 'true' : 'false'}" header="Seleccione una ciudad: ">
             <h:form>
                 <h:panelGrid columns="3" cellpadding="5">
                     <p:outputLabel for="ciudad" value="Ciudad: "/>
@@ -138,12 +138,13 @@
                     <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
                         <f:selectItem itemLabel="Seleccione una ciudad"  noSelectionOption="true" itemValue="#{null}"/>
                         <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                        <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente"/>
                     </p:selectOneMenu>
 
                     <p:message for="ciudad" />
 
                 </h:panelGrid>
-                <p:commandButton value="seleccionar ciudad" action="#{inicioBean.elegirCiudad}" styleClass="mt-4" icon="pi pi-check" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente" oncomplete="PF('dialogo_ciudad').hide()"/>
+                <p:commandButton value="seleccionar ciudad" action="#{seguridadBean.seleccionarCiudad(inicioBean.ciudad)}" styleClass="mt-4" icon="pi pi-check"  oncomplete="PF('dialogo_ciudad').hide()"/>
             </h:form>
         </p:dialog>
 

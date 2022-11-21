@@ -98,6 +98,17 @@ body .ui-panel .ui-panel-title {
 }
 
 
+
+
+element.style {
+}
+.ui-linkbutton.ui-button.ui-state-default>a {
+    color: inherit;
+}
+.a {
+    text-decoration: dashed;
+}
+
 .boton-fechas{
     width: 142px;
     height: 62px;

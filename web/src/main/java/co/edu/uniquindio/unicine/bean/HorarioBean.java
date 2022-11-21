@@ -29,6 +29,9 @@ public class HorarioBean implements Serializable {
     @Setter @Getter
     private List<Dias> dias;
 
+    @Getter @Setter
+    private List<Dias> diasSeleccionados;
+
     @Setter @Getter
     private List<Horario> horariosSeleccionados;
 
@@ -43,6 +46,7 @@ public class HorarioBean implements Serializable {
         dias = Arrays.asList(Dias.values());
         horarios = adminTeatroServicio.listarHorarios();
         horariosSeleccionados = new ArrayList<>();
+        diasSeleccionados = new ArrayList<>();
         editar = false;
     }
 
@@ -50,7 +54,7 @@ public class HorarioBean implements Serializable {
 
         try {
             if(!editar) {
-
+                horario.setDias(diasSeleccionados);
                 Horario registro = adminTeatroServicio.crearHorario(horario);
                 horarios.add(registro);
 
@@ -60,6 +64,7 @@ public class HorarioBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }else {
                 adminTeatroServicio.actualizarHorario(horario);
+
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Horario actualizado correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }

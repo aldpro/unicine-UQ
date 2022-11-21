@@ -17,7 +17,6 @@
 </h:head>
 
 <h:body>
-    <p> sesion actual: #{seguridadBean.persona.nombre}, #{seguridadBean.tipoSesion}</p>
 
     <div id="barra_navegacion">
         <header class="p-3 mb-3 border-bottom">
@@ -28,10 +27,21 @@
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 link-secondary">Unicine</a></li>
-                        <li><a href="#" class="nav-link px-2 link-dark">Cartelera</a></li>
-                        <li><a href="confiteria.xhtml" class="nav-link px-2 link-dark">Confitería</a></li>
-
+                        <li>
+                            <a href="#" class="nav-link px-2 link-secondary">Unicine</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-2 link-dark">Cartelera</a>
+                        </li>
+                        <li>
+                            <a href="confiteria.xhtml" class="nav-link px-2 link-dark">Confitería</a>
+                        </li>
+                        <p:linkButton rendered="#{seguridadBean.autenticado}" styleClass="text-center align-text-top" style="margin-top: -16px; background: none; border-color: white">
+                            <li><a href="/cliente/historial_compra.xhtml" class="align-text-top nav-link px-2 link-dark">Mis compras</a></li>
+                        </p:linkButton>
+                        <p:linkButton rendered="#{seguridadBean.autenticado}" style="background: none; border-color: white; margin-top: -16px">
+                            <li><a href="/cliente/cupones_cliente.xhtml" class="nav-link px-2 link-dark">Mis cupones</a></li>
+                        </p:linkButton>
                     </ul>
 
                     <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -69,7 +79,10 @@
 
                     <div class="dropdown text-end m-lg-2" >
                     </div>
-                    <p:commandButton rendered="#{!seguridadBean.autenticado}" styleClass="rounded-button" icon="pi pi-user" oncomplete="PF('login').show()"/>
+                    <h:form>
+                        <p:commandButton rendered="#{!seguridadBean.autenticado}" styleClass="rounded-button" icon="pi pi-user" oncomplete="PF('login').show()"/>
+                        <p:commandButton rendered="#{seguridadBean.autenticado}" value="Cerrar sesión" styleClass="rounded-button" action="#{seguridadBean.cerrarSesion}"/>
+                    </h:form>
                 </div>
             </div>
         </header>
@@ -112,11 +125,15 @@
                 <hr style="margin: 0rem 0; color: white"/>
                 <a href="/registro.xhtml">¿No tienes cuenta? Registraté</a>
             </div>
-            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionCliente}"
+            <p:commandButton value="Iniciar sesión" action="#{seguridadBean.iniciarSesionCliente}"
                              styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+
+            <p:commandButton value="Iniciar sesión como admin" action="#{seguridadBean.iniciarSesionAdmins}"
+                             styleClass="mt-4 m-lg-2" update="@form" icon="pi pi-sign-in" iconPos="left" />
             <p:growl for="login-bean" showDetail="true" />
         </h:form>
     </p:dialog>
+
 </h:body>
 
 </html>

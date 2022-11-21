@@ -11,7 +11,8 @@
 <ui:composition template="/WEB-INF/template_admin.xhtml">
     <ui:define name="content">
 
-        <h:form rendered="#{!seguridadBean.autenticado}">
+        <p:panel header="Iniciar sesión" styleClass="mt-3 mb-3">
+        <h:form >
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="email_login" value="Email:" />
                 <p:inputText id="email_login" value="#{seguridadBean.correo}" required="true" />
@@ -20,14 +21,19 @@
                 <p:password id="password_login" value="#{seguridadBean.password}" required="true"/>
                 <p:message for="password_login" />
             </h:panelGrid>
-            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionAdmins}"
+            <div class="mb-2" style="margin-left: 10px">
+                <a href="/reestablecer_password.xhtml">¿Olvidaste tu contraseña?</a>
+                <hr style="margin: 0rem 0; color: white"/>
+                <a href="/registro.xhtml">¿No tienes cuenta? Registraté</a>
+            </div>
+            <p:commandButton value="Iniciar sesión" action="#{seguridadBean.iniciarSesionCliente}"
                              styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+
+            <p:commandButton value="Iniciar sesión como admin" action="#{seguridadBean.iniciarSesionAdmins}"
+                             styleClass="mt-4 m-lg-2" update="@form" icon="pi pi-sign-in" iconPos="left" />
             <p:growl for="login-bean" showDetail="true" />
         </h:form>
-        <h:form rendered="#{seguridadBean.autenticado}">
-            <p:outputLabel value="Hola #{seguridadBean.persona.nombre}" styleClass="me-3"/>
-            <p:commandButton value="Cerrar sesión" action="#{seguridadBean.cerrarSesion}" styleClass="ui-button-outlined ui-button-primary me-3"/>
-        </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>
 

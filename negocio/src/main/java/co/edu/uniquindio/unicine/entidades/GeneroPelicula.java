@@ -4,11 +4,12 @@ public enum GeneroPelicula {
 
     ACCION,
     AVENTURAS,
-    CFICCION,
+    FICCION,
     COMEDIA,
     DRAMA,
     FANTASIA,
     SUSPENSO,
     MUSICAL,
-    TERROR
+    TERROR,
+    ANIMADA
 }

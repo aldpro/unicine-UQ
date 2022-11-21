@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +20,33 @@ public class AdminServicioImpl implements AdminServicio{
     private final CiudadRepo ciudadRepo;
     private final ConfiteriaRepo confiteriaRepo;
     private  final  AdministradorRepo administradorRepo;
+    private final  ClienteRepo clienteRepo;
 
-    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo, AdministradorRepo administradorRepo) {
+    public AdminServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo,
+                             CuponRepo cuponRepo, CiudadRepo ciudadRepo, ConfiteriaRepo confiteriaRepo,
+                             AdministradorRepo administradorRepo, ClienteRepo clienteRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
         this.ciudadRepo = ciudadRepo;
         this.confiteriaRepo = confiteriaRepo;
         this.administradorRepo = administradorRepo;
+        this.clienteRepo = clienteRepo;
     }
 
     @Override
     public Administrador iniciarSesion(String correo, String password) throws Exception {
 
-        if(correo.isEmpty() || password.isEmpty()){
-            throw new Exception("Por favor rellenar todo los campos de texto");
+        Administrador admin = administradorRepo.findByCorreo(correo).orElse(null);
+
+        if (admin != null) {
+
+            StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+            if (!spe.checkPassword(password, admin.getPassword())) {
+                throw new Exception("La constraseña es incorrecta");
+            }
         }
-
-        Administrador administrador = administradorRepo.comprobarAutenticacionAdmin(correo, password);
-
-        if (administrador == null) {
-            throw new Exception("Los datos de autentificacion son incorrectos");
-        }
-
-        return administrador;
+        return admin;
     }
 
     @Override
@@ -59,6 +63,11 @@ public class AdminServicioImpl implements AdminServicio{
             throw new Exception("La ciudad no existe");
         }
         return ciudad.get();
+    }
+
+    @Override
+    public List<Ciudad> listarCiudades() {
+        return ciudadRepo.findAll();
     }
 
     @Override
@@ -151,13 +160,8 @@ public class AdminServicioImpl implements AdminServicio{
     }
 
     @Override
-    public Confiteria crearConfiteria(Confiteria confiteria) throws Exception {
+    public Confiteria crearConfiteria(Confiteria confiteria) {
 
-        Optional<Confiteria> confiteriaBuscada = confiteriaRepo.findByUrlImagen(confiteria.getUrlImagen());
-
-        if(confiteriaBuscada.isPresent()) {
-            throw new Exception("Dos imagenes no pueden ser iguales");
-        }
         return confiteriaRepo.save(confiteria);
     }
 
@@ -249,4 +253,24 @@ public class AdminServicioImpl implements AdminServicio{
         }
         return guardado.get();
     }
+
+    @Override
+    public Pelicula obtenerPeliculaNombre(String nombrePelicula) throws Exception{
+        Optional<Pelicula> guardado = peliculaRepo.obtenerPeliculaNombre(nombrePelicula);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Cliente obtenerCliente(String correo) throws Exception {
+        Optional<Cliente> guardado = clienteRepo.findByCorreo(correo);
+        if (guardado.isEmpty()){
+            throw new Exception("El cliente no existe");
+        }
+        return guardado.get();
+    }
+
 }

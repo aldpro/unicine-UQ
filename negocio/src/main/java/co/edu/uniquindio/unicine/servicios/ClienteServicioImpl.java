@@ -1,12 +1,17 @@
 package co.edu.uniquindio.unicine.servicios;
 
+import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +28,15 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final CuponClienteRepo cuponClienteRepo;
     private final ConfiteriaRepo confiteriaRepo;
 
+    private final PeliculaRepo peliculaRepo;
+
+    private final CuponRepo cuponRepo;
+
     public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio,
                                CompraConfiteriaRepo compraConfiteriaRepo, CompraRepo compraRepo,
                                EntradaRepo entradaRepo, CuponClienteRepo cuponClienteRepo,
-                               FuncionRepo funcionRepo, ConfiteriaRepo confiteriaRepo) {
+                               FuncionRepo funcionRepo, ConfiteriaRepo confiteriaRepo, CuponRepo cuponRepo,
+                               PeliculaRepo peliculaRepo) {
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
         this.compraConfiteriaRepo = compraConfiteriaRepo;
@@ -35,6 +45,8 @@ public class ClienteServicioImpl implements ClienteServicio {
         this.cuponClienteRepo =cuponClienteRepo;
         this.funcionRepo = funcionRepo;
         this.confiteriaRepo = confiteriaRepo;
+        this.cuponRepo = cuponRepo;
+        this.peliculaRepo = peliculaRepo;
     }
 
     @Override
@@ -49,15 +61,31 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente login(String correo, String password) throws Exception {
-        Cliente cliente = clienteRepo.comprobarAutenticacionCliente(correo, password);
+        Cliente cliente = clienteRepo.findByCorreo(correo).orElse(null);
 
         if (cliente == null) {
-            throw new Exception("Los datos de autentificacion son incorrectos");
+            throw new Exception("El correo no existe");
         }
         if (cliente.getEstado()==false){
-            throw new Exception("El cliente no esta activo");
+            throw new Exception("El cliente no esta activo, debe activarla con el enlace que fue enviado a su correo");
         }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        if (!spe.checkPassword(password, cliente.getPassword())){
+            throw new Exception("La constraseña es incorrecta");
+        }
+
         return cliente;
+    }
+
+    @Override
+    public CuponCliente crearCuponCliente(Integer codigoCupon, Cliente cliente) throws Exception {
+
+        CuponCliente cuponCliente = cuponClienteRepo.obtenerPorCuponYCliente(codigoCupon, cliente.getCedula());
+
+        if (cuponCliente == null){
+            throw new Exception("El codigo o el cliente invalidos");
+        }
+        return cuponClienteRepo.save(cuponCliente);
     }
 
     @Override
@@ -68,10 +96,56 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (correoExiste) {
             throw new Exception("Este correo ya esta registrado");
         }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        cliente.setPassword(spe.encryptPassword(cliente.getPassword()));
+        Cliente registro = clienteRepo.save(cliente);
 
-        emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: https://www.instagram.com/henry_barraganp/", cliente.getCorreo());
-        cliente.setEstado(true);
-        return clienteRepo.save(cliente);
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ldt.atZone(ZoneId.of("America/Bogota"));
+
+        String param1 = textEncryptor.encrypt(registro.getCorreo());
+        String param2 = textEncryptor.encrypt(""+zdt.toInstant().toEpochMilli());
+
+        emailServicio.enviarEmail("Registro en unicine", "Por favor acceda al siguiente enlace para activar la cuenta: http://localhost:8080/activar_cuenta.xhtml?p1="+param1+"&p2="+param2, cliente.getCorreo());
+        return registro;
+    }
+
+    //obtener funciones por ciudad | teatro
+    public List<Funcion> listarFuncionesCiudad(Integer codigoCiudad){
+        return clienteRepo.listarFuncionesCiudad(codigoCiudad);
+    }
+
+    public List<Funcion> listarFuncionesTeatro(Integer codigoTeatro){
+        return clienteRepo.listarFuncionesTeatro(codigoTeatro);
+    }
+
+    public void activarCliente(String correo, String fecha) throws Exception{
+
+        correo = correo.replaceAll(" ", "+");
+        fecha = fecha.replaceAll(" ", "+");
+
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ldt.atZone(ZoneId.of("America/Bogota"));
+
+        String correoDes = textEncryptor.decrypt(correo);
+        String fechaDes = textEncryptor.decrypt(fecha);
+
+        Cliente guardado = clienteRepo.findByCorreo(correoDes).orElse(null);
+
+        if (guardado == null){
+            throw new Exception("El cliente no existe");
+        }
+
+        guardado.setEstado(true);
+        clienteRepo.save(guardado);
+
+        crearCuponCliente(1, guardado);
     }
 
     private boolean esRepetido(String correo) {
@@ -116,9 +190,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     public List<Compra> listarComprasPorCorreo(String correo){
         return clienteRepo.obtenerCompras(correo);
     }
-    
+
     @Override
-    public Compra hacerCompra(List<Entrada> entradas, Cliente cliente, List<CompraConfiteria> confiterias, Funcion funcion, CuponCliente cuponCliente) throws Exception {
+    public List<PeliculaFuncion> listarFuncionesPelicula(String nombre) {
+        return peliculaRepo.buscarPeliculas(nombre);
+    }
+
+    @Override
+    public Compra hacerCompra(Cliente cliente, Funcion funcion, MedioPago medioPago, List<CompraConfiteria> confiterias, Integer codigoCupon, List<Entrada> entradas, LocalDateTime fechaCompra) throws Exception {
 
         float total = 0;
 
@@ -134,10 +213,8 @@ public class ClienteServicioImpl implements ClienteServicio {
             total += c.getPrecio() * c.getUnidades();
         }
 
-        total += funcion.getPrecio();
-
-        if (verificarDisponibilidadCupon(cuponCliente.getCodigo())) {
-            redimirCupon(cuponCliente.getCodigo(),total);
+        if (verificarDisponibilidadCupon(codigoCupon)) {
+            redimirCupon(codigoCupon,total);
         }
 
         Compra compra = new Compra();
@@ -147,7 +224,6 @@ public class ClienteServicioImpl implements ClienteServicio {
         compra.setCliente(cliente);
         compra.setFuncion(funcion);
         compra.setCompraConfiterias(confiterias);
-        compra.setCuponCliente(cuponCliente);
 
         Compra registro = compraRepo.save(compra);
 
@@ -161,8 +237,8 @@ public class ClienteServicioImpl implements ClienteServicio {
             entradaRepo.save(e);
         }
 
-
-        if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).isEmpty()){
+        /*
+        if (clienteRepo.obtenerComprasPorEmail(cliente.getCorreo()).size() ==1 ){
             Period periodoVencimiento = Period.ofMonths(1);
             LocalDateTime fechaVencimiento = LocalDateTime.now();
             Cupon cuponPrimeraCompra = new Cupon("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma", 10f, "Primera compra",fechaVencimiento.plus(periodoVencimiento));
@@ -170,21 +246,28 @@ public class ClienteServicioImpl implements ClienteServicio {
             emailServicio.enviarEmail("Primera compra","Obtuvo cupon por realizar la primera compra", cliente.getCorreo());
             cliente.getCuponClientes().add(cuponCliente);
         }
+
+         */
         return  compra;
     }
 
-    private boolean verificarDisponibilidadCupon(Integer codigo) {
+    @Override
+    public CuponCliente validarCupon(Integer codigoCupon) {
+        return null;
+    }
+
+    private boolean verificarDisponibilidadCupon(Integer codigo) { //validar el estadoy la fecha de vencimiento
         CuponCliente cuponCliente = cuponClienteRepo.getReferenceById(codigo);
 
-        if (cuponCliente.getEstado()==true){
+        if (cuponCliente.getEstado()!=true){
             return true;
         }
         return false;
     }
 
     private boolean verificarDisponibilidad(Entrada entrada) {
-        Optional<Entrada> disponibilidadBuscada = entradaRepo.findByFilaAndColumna(entrada.getFila(),entrada.getColumna());
-        if (disponibilidadBuscada != null){
+        Optional<Funcion> disponibilidadSillas = funcionRepo.verificarDisponibilidadSillas(entrada.getFila(), entrada.getColumna());
+        if (disponibilidadSillas == null){
             return true;
         }
         return false;
@@ -225,12 +308,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Compra obtenercompra(Integer codigo) throws Exception {
-        Optional<Compra> guardado = compraRepo.findById(codigo);
-
-        if (guardado.isEmpty()) {
-            throw new Exception("La compra no existe");
-        }
-        return guardado.get();
+        return compraRepo.findById(codigo).orElseThrow(()-> new Exception("No se encontro la compra"));
     }
 
     @Override
@@ -254,8 +332,8 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public CuponCliente obtenerCuponCliente(Integer codigo) throws Exception {
-        Optional<CuponCliente> guardado = cuponClienteRepo.findById(codigo);
+    public Cupon obtenerCupon(Integer codigoCupon) throws Exception {
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
 
         if (guardado.isEmpty()) {
             throw new Exception("El cupon no existe no existe");
@@ -273,5 +351,19 @@ public class ClienteServicioImpl implements ClienteServicio {
         return guardado.get();
     }
 
+    @Override
+    public List<Cupon> listarCuponesCliente(Integer cedula) {
+        return clienteRepo.listarCuponesCliente(cedula);
+    }
+
+    @Override
+    public List<Pelicula> listarPeliculasEstadoCiudad(Integer codigoCiudad, EstadoPelicula estadoPelicula) {
+        return clienteRepo.listarPeliculasEstadoCiudad(codigoCiudad, estadoPelicula);
+    }
+
+    @Override
+    public List<Pelicula> listarPeliculasEstado(EstadoPelicula estadoPelicula) {
+        return clienteRepo.listarPeliculasEstado(estadoPelicula);
+    }
 
 }

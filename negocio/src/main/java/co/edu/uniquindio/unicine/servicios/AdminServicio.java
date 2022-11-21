@@ -16,6 +16,8 @@ public interface AdminServicio {
 
     Ciudad obtenerCiudad(Integer codigoCiudad) throws Exception;
 
+    List<Ciudad> listarCiudades();
+
     //Gestion de peliculas
 
     Pelicula crearPelicula(Pelicula pelicula);
@@ -42,7 +44,7 @@ public interface AdminServicio {
 
     //Gestion de confiteria
 
-    Confiteria crearConfiteria(Confiteria confiteria) throws  Exception;
+    Confiteria crearConfiteria(Confiteria confiteria);
 
     Confiteria actualizarConfiteria(Confiteria confiteria) throws  Exception;
 
@@ -63,4 +65,9 @@ public interface AdminServicio {
     List<AdministradorTeatro> listarAdminsTeatros();
 
     AdministradorTeatro obtenerAdminTeatro(Integer cedulaAdminTeatro) throws  Exception;
+
+    Pelicula obtenerPeliculaNombre(String nombrePelicula) throws Exception;
+
+    Cliente obtenerCliente(String correo) throws Exception;
+
 }

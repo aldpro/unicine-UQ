@@ -2,6 +2,7 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,22 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     private final SalaRepo salaRepo;
     @Autowired
     private final TeatroRepo teatroRepo;
+    @Autowired
+    private final PeliculaRepo peliculaRepo;
 
-    public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo, FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo) {
+    @Autowired
+    private final DistribucionSillaRepo distribucionSillaRepo;
+
+    public AdminTeatroServicioImpl(AdministradorTeatroRepo adminTeatroRepo, HorarioRepo horarioRepo,
+                                   FuncionRepo funcionRepo, SalaRepo salaRepo, TeatroRepo teatroRepo,
+                                   PeliculaRepo peliculaRepo, DistribucionSillaRepo distribucionSillaRepo) {
         this.adminTeatroRepo = adminTeatroRepo;
         this.horarioRepo = horarioRepo;
         this.funcionRepo = funcionRepo;
         this.salaRepo = salaRepo;
         this.teatroRepo = teatroRepo;
+        this.peliculaRepo = peliculaRepo;
+        this.distribucionSillaRepo = distribucionSillaRepo;
     }
 
     @Override
@@ -36,10 +46,14 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("Por favor rellenar todo los campos de texto");
         }
 
-        AdministradorTeatro administradorTeatro = adminTeatroRepo.comprobarAutenticacionAdminTeatro(correo, password);
+        AdministradorTeatro administradorTeatro = adminTeatroRepo.findByCorreo(correo).orElse(null);
 
         if (administradorTeatro == null) {
-            throw new Exception("Los datos de autentificacion son incorrectos");
+            throw new Exception("El correo no existe");
+        }
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        if (!spe.checkPassword(password, administradorTeatro.getPassword())){
+            throw new Exception("La constraseña es incorrecta");
         }
 
         return administradorTeatro;
@@ -80,7 +94,13 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     @Override
-    public Funcion crearFuncion(Funcion funcion) {
+    public Funcion crearFuncion(Funcion funcion) throws Exception {
+
+        Funcion f = funcionRepo.verificarDisponibilidad(funcion.getHorario());
+        if (f != null){
+            throw new Exception("No se puede crear la función en el mismo horario");
+        }
+
         return funcionRepo.save(funcion);
     }
 
@@ -206,5 +226,45 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("Por favor envie un codigo");
         }
         return teatroRepo.findById(codigoTeatro).orElse(null);
+    }
+
+    @Override
+    public Pelicula obtenerPelicula(Integer codigoPelicula) throws Exception {
+        Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) {
+        return teatroRepo.listarTeatroxCiudad(codigoCiudad);
+    }
+
+    @Override
+    public List<DistribucionSilla> listarDistribucionSillas() {
+        return distribucionSillaRepo.findAll();
+    }
+
+    @Override
+    public DistribucionSilla obtenerDistribucionSillas(Integer codigoDistribucionSillas) throws Exception {
+        Optional<DistribucionSilla> guardado = distribucionSillaRepo.findById(codigoDistribucionSillas);
+
+        if (guardado.isEmpty()){
+            throw new Exception("La distribucion de sillas no existe");
+        }
+        return guardado.get();
+    }
+
+    @Override
+    public Horario actualizarHorario(Horario horario) throws Exception {
+        Optional<Horario> guardado = horarioRepo.findById(horario.getCodigo());
+
+        if (guardado.isEmpty()){
+            throw new Exception("El horario no existe");
+        }
+        return horarioRepo.save(horario);
     }
 }

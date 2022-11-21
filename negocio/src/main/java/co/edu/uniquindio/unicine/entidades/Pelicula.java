@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -8,6 +10,7 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -27,27 +30,29 @@ public class Pelicula implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPelicula estado;
 
-    @Column(nullable = false, length = 10)
-    @Enumerated(EnumType.STRING)
-    private GeneroPelicula generoPelicula;
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<GeneroPelicula> generos;
 
     @Column(nullable = false, length = 80)
     private String nombre;
 
-    @ElementCollection
-    private List<String> repartos;
+    @Column(nullable = false)
+    @Lob
+    private String reparto;
 
     @Column(nullable = false)
     @Lob
     private String sinopsis;
 
-    @Column(nullable = false, length = 200)
-    private String urlImagen;
+    @ElementCollection
+    @Column(nullable = false)
+    private Map<String, String> imagenes;
 
     @Column(nullable = false, length = 200)
     private String urlTrailer;
 
-    @Column(nullable = false, precision = 1, scale = 2)
+    //@Column(nullable = false, precision = 1, scale = 2)
     @Max(5)
     @Positive
     private Float puntuacion;
@@ -57,15 +62,20 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, GeneroPelicula generoPelicula, String nombre, List<String> reparto, String sinopsis, String urlImagen, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
-        this.generoPelicula = generoPelicula;
+        this.generos = new ArrayList<>();
         this.nombre = nombre;
-        this.repartos = reparto;
+        this.reparto = reparto;
         this.sinopsis = sinopsis;
-        this.urlImagen = urlImagen;
         this.urlTrailer = urlTrailer;
         this.puntuacion = puntuacion;
-        this.funciones =  new ArrayList<>();
+    }
+    public String getImagenPrincipal(){
+        if (!imagenes.isEmpty()){
+            String primera = imagenes.keySet().toArray()[0].toString();
+            return imagenes.get(primera);
+        }
+        return "";
     }
 }

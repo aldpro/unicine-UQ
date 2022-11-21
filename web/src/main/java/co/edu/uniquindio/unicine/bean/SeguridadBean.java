@@ -31,7 +31,7 @@ public class SeguridadBean implements Serializable {
     private AdminTeatroServicio adminTeatroServicio;
 
     @Getter @Setter
-    private Boolean autenticado;
+    private boolean autenticado;
 
     @Getter @Setter
     private String correo, password;
@@ -108,10 +108,5 @@ public class SeguridadBean implements Serializable {
         return "/index_admin?faces-redirect=true";
     }
 
-    public boolean isAutenticado() {
-        if (autenticado == true){
-            return true;
-        }
-        return false;
-    }
+
 }

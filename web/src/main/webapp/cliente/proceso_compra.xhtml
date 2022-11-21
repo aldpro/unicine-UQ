@@ -24,7 +24,7 @@
 
                         <p:columns id="columnas" var="col" value="#{compraBean.columnas}">
                             <h:panelGrid id="item-silla" columns="1" styleClass="ui-noborder text-center #{compraBean.buscar(fila,col) ? 'silla-elegida' : '' }">
-                                <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila, col)}" update="sillas:mat-sillas:#{fila}:columnas:#{col}:item-silla, detalle_compra"/>
+                                <p:ajax event="click" listener="#{compraBean.seleccionarSilla(fila, col)}" />
                                 <p class="mb-8">#{fila}#{col}</p>
                                 <i class="pi pi-box"/>
                             </h:panelGrid>

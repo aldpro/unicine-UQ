@@ -55,7 +55,7 @@ public class SeguridadFiltro implements Filter {
                     //El usuario no está logueado, entonces se redirecciona al inicio
                     response.sendRedirect(request.getContextPath() + PAGINA_INICIO);
                 }
-            }else   if (requestURI.startsWith("/admin_teatro/") ) {
+            }else if (requestURI.startsWith("/admin_teatro/") ) {
 
                 if (userManager != null) {
                     if (userManager.isAutenticado() && userManager.getTipoSesion().equals("admin_teatro")) {

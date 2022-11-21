@@ -62,7 +62,7 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, String nombre, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, GeneroPelicula accion, String nombre, List<String> listaReparto, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
         this.generos = new ArrayList<>();
         this.nombre = nombre;

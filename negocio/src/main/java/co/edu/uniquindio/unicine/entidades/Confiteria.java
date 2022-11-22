@@ -39,11 +39,13 @@ public class Confiteria implements Serializable {
     private List<CompraConfiteria> compraConfiterias;
 
     @Builder
-    public Confiteria(String nombre, Float precio, String urlImagen) {
+    public Confiteria(String nombre, Float precio, String urlImagen,Map<String, String> imagenes) {
         this.nombre = nombre;
         this.precio = precio;
         this.compraConfiterias =  new ArrayList<>();
+        this.imagenes = imagenes;
     }
+
 
     public String getImagenPrincipal(){
         if (!imagenes.isEmpty()){

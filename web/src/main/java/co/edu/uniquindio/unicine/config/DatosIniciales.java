@@ -70,7 +70,18 @@ public class DatosIniciales implements CommandLineRunner {
                 Map<String, String> imagenesP1 = new HashMap<>();
                 imagenesP1.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667875113/unicine/peliculas/pinocho_wehtj2.jpg",
                         "unicine/peliculas/pinocho_wehtj2");
-
+                Map<String,String> imagenesP2 = new HashMap<>();
+                imagenesP2.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775208/unicine/peliculas/Dragon_Ball_Super_Super_Hero_kgaa1r.jpg"
+                        ,"unicine/peliculas/Dragon_Ball_Super_Super_Hero_kgaa1r");
+                Map<String,String> imagenesP3 = new HashMap<>();
+                imagenesP3.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775212/unicine/peliculas/Smile_dl13uz.jpg"
+                        ,"unicine/peliculas/Smile_dl13uz");
+                Map<String,String> imagenesP4 = new HashMap<>();
+                imagenesP4.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775203/unicine/peliculas/Minions_gqwkoe.jpg"
+                        ,"unicine/peliculas/Minions_gqwkoe");
+                Map<String,String> imagenesP5 = new HashMap<>();
+                imagenesP5.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667775197/unicine/peliculas/Encanto_fhr4vu.jpg"
+                        ,"unicine/peliculas/Encanto_fhr4vu");
 
                 Pelicula peli1 = Pelicula.builder().estado(EstadoPelicula.valueOf("PREVENTA")).nombre("Pinocho")
                         .imagenes(imagenesP1)
@@ -78,18 +89,20 @@ public class DatosIniciales implements CommandLineRunner {
                         sinopsis("En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un giro al abandonar a su padre para unirse a un circo.")
                         .urlTrailer("https://www.youtube.com/embed/TITv1TNi5mI").build();
                 Pelicula peli2 = Pelicula.builder().estado(EstadoPelicula.valueOf("CARTELERA")).nombre("Dragon Ball: Super Hero")
+                        .imagenes(imagenesP2)
                         .puntuacion(3.5f).reparto("	Masako Nozawa, Toshio Furukawa, Ryō Horikawa, Yūko Minaguchi")
                         .sinopsis("La malvada organización Red Ribbon Army se reforma con nuevos y más poderosos androides, Gamma {1} y Gamma {2} para buscar venganza.")
                         .urlTrailer("https://www.youtube.com/embed/lXLPVQ-WrU4").build();
                 Pelicula peli3 = Pelicula.builder().estado(EstadoPelicula.valueOf("CARTELERA")).nombre("Smile").puntuacion(4.0f).reparto("Sosie Bacon, Jessie T Usher")
+                        .imagenes(imagenesP3)
                         .sinopsis("Después de ser testigo de un extraño y traumático accidente que involucró a una paciente, la Dr. Rose Cotter (Sosie Bacon) empieza a experimentar sucesos aterradores que no puede explicarse. A medida que el terror comienza a apoderarse de su vida, Rose debe enfrentarse a su pasado para sobrevivir y escapar de su horrible nueva realidad.")
                         .urlTrailer("https://www.youtube.com/embed/yhKiQGJop_8").build();
                 Pelicula peli4 = Pelicula.builder().estado(EstadoPelicula.valueOf("CARTELERA")).nombre("Minions")
-                        .puntuacion(4.5f).reparto("Sandra Bullock, Jon Hamm, Michael Keaton")
+                        .imagenes(imagenesP4).puntuacion(4.5f).reparto("Sandra Bullock, Jon Hamm, Michael Keaton")
                         .sinopsis("En los años 70, Gru crece siendo un gran admirador de <<Los salvajes seis>>, un supergrupo de villanos. Para demostrarles que puede ser malvado, Gru idea un plan con la esperanza de formar parte de la banda. Por suerte, cuenta con la ayuda de sus fieles seguidores, los Minions, siempre dispuestos a sembrar el caos.")
                         .urlTrailer("https://www.youtube.com/embed/W27moupirnI").build();
                 Pelicula peli5 = Pelicula.builder().estado(EstadoPelicula.valueOf("PREVENTA")).nombre("Encanto").puntuacion(4.1f)
-                        .reparto("Stephanie Beatriz, María Cecilia Botero, John Leguizamo")
+                        .imagenes(imagenesP5) .reparto("Stephanie Beatriz, María Cecilia Botero, John Leguizamo")
                         .sinopsis("En lo alto de las montañas de Colombia hay un lugar encantado llamado Encanto. Aquí, en una casa mágica, vive la extraordinaria familia Madrigal donde todos tienen habilidades fantásticas.")
                         .urlTrailer("https://www.youtube.com/embed/SAH_W9q_brE").build();
 
@@ -99,6 +112,8 @@ public class DatosIniciales implements CommandLineRunner {
                 adminServicio.crearPelicula(peli4);
                 adminServicio.crearPelicula(peli5);
 
+
+
                 Cupon cup1 = Cupon.builder().descripcion("Cupon del 15% de descuento por registrarse por primera vez en nuestra plataforma").descuento(15.0f)
                         .criterio("Primer registro").fechaVencimiento(LocalDateTime.parse("2022-12-25T20:00:00")).build();
                 Cupon cup2 = Cupon.builder().descripcion("Cupon del 10% de descuento por realizar una primera compra por medio de nuestra plataforma")
@@ -107,15 +122,36 @@ public class DatosIniciales implements CommandLineRunner {
                 adminServicio.crearCupon(cup1);
                 adminServicio.crearCupon(cup2);
 
-                Confiteria conf1 = Confiteria.builder().nombre("Combo para niños").precio(15000f)
+
+                Map<String, String> imagenC1 = new HashMap<>();
+                imagenC1.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg"
+                        ,"unicine/confiteria/combo_ni%C3%B1os_ydpbay");
+
+                Map<String, String> imagenC2 = new HashMap<>();
+                imagenC2.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg"
+                        ,"unicine/confiteria/combo_para_dos_r5rvxp");
+
+                Map<String, String> imagenC3 = new HashMap<>();
+                imagenC3.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg"
+                        ,"unicine/confiteria/crispeta_2gaseosas_vnrpli");
+
+                Map<String, String> imagenC4 = new HashMap<>();
+                imagenC4.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg"
+                        ,"unicine/confiteria/combo_para_dos_r5rvxp");
+
+                Map<String, String> imagenC5 = new HashMap<>();
+                imagenC5.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg"
+                        ,"unicine/confiteria/nevado_arequipe_afpfeo");
+
+                Confiteria conf1 = Confiteria.builder().nombre("Combo para niños").precio(15000f).imagenes(imagenC1)
                         .urlImagen("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/combo_ni%C3%B1os_ydpbay.jpg").build();
-                Confiteria conf2 = Confiteria.builder().nombre("Combo para dos").precio(49900f)
+                Confiteria conf2 = Confiteria.builder().nombre("Combo para dos").precio(49900f).imagenes(imagenC2)
                         .urlImagen("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg").build();
-                Confiteria conf3 = Confiteria.builder().nombre("Crispeta + Dos Gaseosas").precio(29800f)
+                Confiteria conf3 = Confiteria.builder().nombre("Crispeta + Dos Gaseosas").precio(29800f).imagenes(imagenC3)
                         .urlImagen("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927564/unicine/confiteria/crispeta_2gaseosas_vnrpli.jpg").build();
-                Confiteria conf4 = Confiteria.builder().nombre("Gaseosa + Perro caliente + Crispeta + KitKat").precio(19900f)
+                Confiteria conf4 = Confiteria.builder().nombre("Gaseosa + Perro caliente + Crispeta + KitKat").precio(19900f).imagenes(imagenC4)
                         .urlImagen("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/combo_para_dos_r5rvxp.jpg").build();
-                Confiteria conf5 = Confiteria.builder().nombre("Nevado de arequipe").precio(6000f)
+                Confiteria conf5 = Confiteria.builder().nombre("Nevado de arequipe").precio(6000f).imagenes(imagenC5)
                         .urlImagen("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667927565/unicine/confiteria/nevado_arequipe_afpfeo.jpg").build();
 
                 adminServicio.crearConfiteria(conf1);

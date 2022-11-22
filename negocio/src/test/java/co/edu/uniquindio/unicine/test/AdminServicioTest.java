@@ -60,9 +60,9 @@ public class AdminServicioTest {
         listaReparto.add("Brad Pitt");
         listaReparto.add("Margot Robbie");
 
-        Pelicula pelicula = new Pelicula(EstadoPelicula.CARTELERA, GeneroPelicula.ACCION, "Nueva pelicula", listaReparto, "Un nuevo amane...", "nuevapelicula.png", "www.youtube.nuevapelicula", 3.5f);
-        Pelicula peliculaRegistrada = adminServicio.crearPelicula(pelicula);
-        Assertions.assertNotNull(peliculaRegistrada);
+        //Pelicula pelicula = new Pelicula(EstadoPelicula.CARTELERA, GeneroPelicula.ACCION, "Nueva pelicula", listaReparto, "Un nuevo amane...", "nuevapelicula.png", "www.youtube.nuevapelicula", 3.5f);
+        //Pelicula peliculaRegistrada = adminServicio.crearPelicula(pelicula);
+        //Assertions.assertNotNull(peliculaRegistrada);
     }
 
     @Test

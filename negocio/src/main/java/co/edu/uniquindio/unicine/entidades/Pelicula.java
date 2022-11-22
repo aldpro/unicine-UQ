@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,15 +63,17 @@ public class Pelicula implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Pelicula(EstadoPelicula estado, GeneroPelicula accion, String nombre, List<String> listaReparto, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
+    public Pelicula(EstadoPelicula estado, GeneroPelicula accion, Map<String, String> imagenes, String nombre, List<String> listaReparto, String reparto, String sinopsis, String urlTrailer, Float puntuacion) {
         this.estado = estado;
         this.generos = new ArrayList<>();
+        this.imagenes = imagenes;
         this.nombre = nombre;
         this.reparto = reparto;
         this.sinopsis = sinopsis;
         this.urlTrailer = urlTrailer;
         this.puntuacion = puntuacion;
     }
+
     public String getImagenPrincipal(){
         if (!imagenes.isEmpty()){
             String primera = imagenes.keySet().toArray()[0].toString();

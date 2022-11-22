@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class DatosIniciales implements CommandLineRunner {
@@ -65,7 +67,11 @@ public class DatosIniciales implements CommandLineRunner {
 
                 adminServicio.crearAministrador(admin1);
 
+                Map<String, String> imagenesP1 = new HashMap<>();
+                imagenesP1.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667875113/unicine/peliculas/pinocho_wehtj2.jpg", "unicine/peliculas/pinocho_wehtj2");
+
                 Pelicula peli1 = Pelicula.builder().estado(EstadoPelicula.valueOf("PREVENTA")).nombre("Pinocho")
+                        .imagenes(imagenesP1)
                         .puntuacion(4.2f).reparto("Tom Hanks, Cynthia Erivo, Luke Evans").
                         sinopsis("En un pueblo italiano, el títere de madera Pinocho cobra vida gracias al Hada Azul. Pinocho se esfuerza por comportarse como un niño de carne y hueso, pero su vida da un giro al abandonar a su padre para unirse a un circo.")
                         .urlTrailer("https://www.youtube.com/embed/TITv1TNi5mI").build();

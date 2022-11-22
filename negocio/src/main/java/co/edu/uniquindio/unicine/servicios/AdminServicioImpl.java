@@ -206,6 +206,9 @@ public class AdminServicioImpl implements AdminServicio{
         Optional<AdministradorTeatro> cedulaRegistrada = administradorTeatroRepo.findById(administradorTeatro.getCedula());
         Optional<AdministradorTeatro> correoRegistrado = administradorTeatroRepo.findByCorreo(administradorTeatro.getCorreo());
 
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        administradorTeatro.setPassword(spe.encryptPassword(administradorTeatro.getPassword()));
+
         if (cedulaRegistrada.isPresent()) {
             throw new Exception("Esta cedula ya esta registrada");
         }
@@ -271,6 +274,14 @@ public class AdminServicioImpl implements AdminServicio{
             throw new Exception("El cliente no existe");
         }
         return guardado.get();
+    }
+
+    @Override
+    public Administrador crearAministrador(Administrador administrador) throws Exception {
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        administrador.setPassword(spe.encryptPassword(administrador.getPassword()));
+
+        return administradorRepo.save(administrador);
     }
 
 }

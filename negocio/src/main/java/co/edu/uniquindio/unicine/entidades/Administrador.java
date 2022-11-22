@@ -12,4 +12,8 @@ import java.io.Serializable;
 @ToString
 public class Administrador extends Persona implements Serializable {
 
+    @Builder
+    public Administrador(Integer cedula, String nombre, String correo, String password) {
+        super(cedula, nombre, correo, password);
+    }
 }

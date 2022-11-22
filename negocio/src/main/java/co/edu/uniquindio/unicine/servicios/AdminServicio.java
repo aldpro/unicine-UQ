@@ -70,4 +70,6 @@ public interface AdminServicio {
 
     Cliente obtenerCliente(String correo) throws Exception;
 
+    Administrador crearAministrador(Administrador administrador) throws Exception;
+
 }

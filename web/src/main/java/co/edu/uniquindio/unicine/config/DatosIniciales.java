@@ -118,6 +118,7 @@ public class DatosIniciales implements CommandLineRunner {
             Teatro teatro4 = Teatro.builder().direccion("Carrera 7 # B 12-13 Sur").telefono("3001247585").ciudad(c3).administradorTeatro(adminTeatro4).build();
             Teatro teatro5 = Teatro.builder().direccion("Carrera 9 # 4-7 Oeste").telefono("3186347896").ciudad(c2).administradorTeatro(adminTeatro5).build();
             Teatro teatro6 = Teatro.builder().direccion("Calle 4 # 4-2 Sur").telefono("3178532410").ciudad(c1).administradorTeatro(adminTeatro6).build();
+            adminTeatro2.getTeatros().add(teatro1);
 
             adminTeatroServicio.crearTeatro(teatro1);
             adminTeatroServicio.crearTeatro(teatro2);
@@ -173,6 +174,8 @@ public class DatosIniciales implements CommandLineRunner {
             adminTeatroServicio.crearFuncion(funcion5);
             adminTeatroServicio.crearFuncion(funcion6);
             adminTeatroServicio.crearFuncion(funcion7);
+
+            adminServicio.actualizarAdminTeatro(adminTeatro2);
 
         }
     }

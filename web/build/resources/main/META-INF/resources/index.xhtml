@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="ubicacion">
+
+        <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" style="" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="resources/img/ubicacion-icon.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+            </a>
+            <ul id="Ubicacion" class="dropdown-menu text-small" onclick="event.stopPropagation()" style="--bs-dropdown-border-radius: 1rem; transform: translate(-270px,35px); min-width: 20rem">
+
+                <h1 class="h3 mb-3 fw-normal" style="text-align: center">Dirección: </h1>
+
+                <div class="mb-2" align="center">
+                    <h:form>
+                        <p:outputLabel for="ciudad_origen" value="Elegir ciudad: "/>
+                        <hr style="margin: 0rem 0; color: white; padding-bottom: 5px"/>
+                        <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                            <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true" itemValue="#{null}"/>
+                            <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                            <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="listas_peliculas_Cartelera,listas_peliculas_Proximamente" />
+                        </p:selectOneMenu>
+                    </h:form>
+                </div>
+            </ul>
+        </div>
+
+    </ui:define>
+    <ui:define name="content">
+
+        <div>
+            <div class="carousel-home">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i"  >
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="#{i.index}" class="#{i.index == 0 ? 'active' : '' }" aria-current="true" aria-label="Slide #{i.index}">
+                            </button>
+                        </p:repeat>
+                    </div>
+                    <div class="carousel-inner">
+                        <p:repeat value="#{inicioBean.imagenesCarousel}" var="imagen" varStatus="i" >
+
+                            <div class="carousel-item #{i.index == 0 ? 'active' : '' }">
+                                <img src="#{imagen}" alt="Texto" class="img-carousel" />
+
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Unicine</h5>
+                                    <p>Anímate a ver nuestras mejores peliculas :).</p>
+                                </div>
+                            </div>
+
+                        </p:repeat>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div jsf:id="listas_peliculas_Cartelera" class="container">
+
+                <div class="Cartelera">
+                    <h2 class="mt-5 mb-5" >En cartelera</h2>
+                    <div class="row">
+                        <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                            <div class="col-md-6">
+                                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                    <div class="col p-4 d-flex flex-column position-static">
+                                        <strong class="d-inline-block mb-2 text-primary">
+                                            <p:repeat value="#{pelicula.generos}" var="genero">
+                                                <p:chip label="#{genero}" styleClass="mr-2"/>
+                                            </p:repeat>
+                                        </strong>
+                                        <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                        <p class="card-text mb-auto">#{pelicula.reparto}</p>
+                                        <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}&amp;ciudad_id=#{inicioBean.ciudad.codigo}" class="stretched-link">Ver más</a>
+                                    </div>
+                                    <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
+                                        <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:repeat>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
+            <hr class="mt-5"/>
+
+            <div jsf:id="listas_peliculas_Proximamente" class="container">
+                <h2 class="mt-5 mb-5" >Proximamente</h2>
+                <div class="row">
+                    <p:repeat value="#{inicioBean.peliculasEstrenar}" var="pelicula">
+                        <div class="col-md-6">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <strong class="d-inline-block mb-2 text-primary"><p:repeat value="#{pelicula.generos}" var="genero"><p:chip label="#{genero}" style="margin-top: 5px; margin-right: 5px" styleClass="mr-2"/></p:repeat></strong>
+                                    <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                    <p class="card-text mb-auto">#{pelicula.reparto}</p>
+                                    <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}&amp;ciudad_id=#{inicioBean.ciudad.codigo}" class="stretched-link">Ver más</a>
+                                </div>
+                                <div class="col-auto d-none d-lg-block" style="width: 200px; height: 300px">
+                                    <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}" style="height: 100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+
+
+        <p:dialog widgetVar="dialogo_ciudad" modal="true" visible="#{seguridadBean.ciudadSeleccionada == null ? 'true' : 'false'}" header="Seleccione una ciudad: ">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="ciudad" value="Ciudad: "/>
+
+                    <p:selectOneMenu id="ciudad" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione una ciudad"  noSelectionOption="true" itemValue="#{null}"/>
+                        <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad}"/>
+                        <p:ajax event="change" listener="#{inicioBean.elegirCiudad}" update="@form, listas_peliculas_Cartelera, listas_peliculas_Proximamente"/>
+                    </p:selectOneMenu>
+
+                    <p:message for="ciudad" />
+
+                </h:panelGrid>
+                <p:commandButton value="seleccionar ciudad" action="#{seguridadBean.seleccionarCiudad(inicioBean.ciudad)}" styleClass="mt-4" icon="pi pi-check"  oncomplete="PF('dialogo_ciudad').hide()"/>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>
+
+
+</html>

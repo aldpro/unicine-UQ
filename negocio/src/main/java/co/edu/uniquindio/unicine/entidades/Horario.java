@@ -42,13 +42,12 @@ public class Horario implements Serializable {
     @ToString.Exclude
     private List<Funcion> funciones;
 
+
     @Builder
-    public Horario(LocalDate fechaInicio, LocalDate fechaFin, String hora, List<Dias> dias) {
+    public Horario(LocalDate fechaInicio, LocalDate fechaFin, String hora) {
         this.fechaInicio = fechaInicio;
         this.hora = hora;
         this.fechaFin = fechaFin;
-        this.funciones =  new ArrayList<>();
-        this.dias = dias;
     }
 
 }

@@ -61,7 +61,7 @@ public class DatosIniciales implements CommandLineRunner {
                 adminServicio.crearAdminTeatro(adminTeatro5);
                 adminServicio.crearAdminTeatro(adminTeatro6);
 
-                Administrador admin1 = Administrador.builder().nombre("Henry").correo("henrya.barraganp@uqvirtual.edu.co").password("1234").build();
+                Administrador admin1 = Administrador.builder().cedula(87783).nombre("Henry").correo("henrya.barraganp@uqvirtual.edu.co").password("1234").build();
 
                 adminServicio.crearAministrador(admin1);
 
@@ -180,9 +180,6 @@ public class DatosIniciales implements CommandLineRunner {
                 adminTeatroServicio.crearFuncion(funcion7);
 
                 adminServicio.actualizarAdminTeatro(adminTeatro2);
-
-                System.out.println("Peliculas:");
-                System.out.println( adminServicio.listarPeliculas() );
 
             }
 

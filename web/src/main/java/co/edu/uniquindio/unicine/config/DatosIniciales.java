@@ -36,6 +36,7 @@ public class DatosIniciales implements CommandLineRunner {
             Ciudad c3 = Ciudad.builder().nombre("Cali").build();
             Ciudad c4 = Ciudad.builder().nombre("Bogota").build();
             Ciudad c5 = Ciudad.builder().nombre("Choco").build();
+            Ciudad c6 = Ciudad.builder().nombre("Manizales").build();
 
             adminServicio.crearCiudad(c1);
             adminServicio.crearCiudad(c2);

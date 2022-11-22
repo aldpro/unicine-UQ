@@ -68,7 +68,9 @@ public class DatosIniciales implements CommandLineRunner {
                 adminServicio.crearAministrador(admin1);
 
                 Map<String, String> imagenesP1 = new HashMap<>();
-                imagenesP1.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667875113/unicine/peliculas/pinocho_wehtj2.jpg", "unicine/peliculas/pinocho_wehtj2");
+                imagenesP1.put("https://res.cloudinary.com/dwu4xtiun/image/upload/v1667875113/unicine/peliculas/pinocho_wehtj2.jpg",
+                        "unicine/peliculas/pinocho_wehtj2");
+
 
                 Pelicula peli1 = Pelicula.builder().estado(EstadoPelicula.valueOf("PREVENTA")).nombre("Pinocho")
                         .imagenes(imagenesP1)

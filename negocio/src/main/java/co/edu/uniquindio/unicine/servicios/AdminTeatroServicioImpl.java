@@ -96,10 +96,10 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Funcion crearFuncion(Funcion funcion) throws Exception {
 
-        Funcion f = funcionRepo.verificarDisponibilidad(funcion.getHorario().getCodigo());
+        /*Funcion f = funcionRepo.verificarDisponibilidad(funcion.getHorario().getCodigo());
         if (f != null){
             throw new Exception("No se puede crear la función en el mismo horario");
-        }
+        }*/
 
         return funcionRepo.save(funcion);
     }

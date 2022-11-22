@@ -7,8 +7,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +20,6 @@ public class Horario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(name = "id")
     private Integer codigo;
 
     @Column(nullable = false)

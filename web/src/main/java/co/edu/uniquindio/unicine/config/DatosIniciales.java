@@ -149,12 +149,12 @@ public class DatosIniciales implements CommandLineRunner {
                 adminTeatroServicio.crearSala(sala7);
                 adminTeatroServicio.crearSala(sala8);
 
-                Horario hora1 = Horario.builder().fechaFin(LocalDate.parse("2022-12-20")).fechaInicio(LocalDate.parse("2022-12-20")).hora("20:00").build();
-                Horario hora2 = Horario.builder().fechaFin(LocalDate.parse("2022-12-15")).fechaInicio(LocalDate.parse("2022-12-15")).hora("21:00").build();
-                Horario hora3 = Horario.builder().fechaFin(LocalDate.parse("2022-12-16")).fechaInicio(LocalDate.parse("2022-12-16")).hora("22:00").build();
-                Horario hora4 = Horario.builder().fechaFin(LocalDate.parse("2022-12-17")).fechaInicio(LocalDate.parse("2022-12-17")).hora("20:00").build();
-                Horario hora5 = Horario.builder().fechaFin(LocalDate.parse("2022-12-22")).fechaInicio(LocalDate.parse("2022-12-22")).hora("20:00").build();
-                Horario hora6 = Horario.builder().fechaFin(LocalDate.parse("2022-12-17")).fechaInicio(LocalDate.parse("2022-12-17")).hora("20:00").build();
+                Horario hora1 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 20) ).fechaInicio(LocalDate.of(2022, 12, 20)).hora("20:00").build();
+                Horario hora2 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 15)).fechaInicio(LocalDate.of(2022, 12, 15)).hora("21:00").build();
+                Horario hora3 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 16)).fechaInicio(LocalDate.of(2022, 12, 16)).hora("22:00").build();
+                Horario hora4 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 17)).fechaInicio(LocalDate.of(2022, 12, 17)).hora("20:00").build();
+                Horario hora5 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 22)).fechaInicio(LocalDate.of(2022, 12, 22)).hora("20:00").build();
+                Horario hora6 = Horario.builder().fechaFin(LocalDate.of(2022, 12, 17)).fechaInicio(LocalDate.of(2022, 12, 17)).hora("20:00").build();
 
                 adminTeatroServicio.crearHorario(hora1);
                 adminTeatroServicio.crearHorario(hora2);

@@ -73,7 +73,6 @@ public class SeguridadBean implements Serializable {
 
         if (!correo.isEmpty() && !password.isEmpty()){
             try {
-                System.out.println("HOLA");
                 persona = adminServicio.iniciarSesion(correo,password);
                 if (persona == null){
                     persona = adminTeatroServicio.validarLogin(correo,password);

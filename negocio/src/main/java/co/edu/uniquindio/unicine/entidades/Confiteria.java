@@ -17,6 +17,7 @@ import java.util.Map;
 @ToString
 public class Confiteria implements Serializable {
 
+    //:)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include

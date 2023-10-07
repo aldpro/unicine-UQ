@@ -258,4 +258,10 @@ public class AdminServicioTest {
             Assertions.assertTrue(true);
         }
     }
+
+    //CAMBIO EJEMPLO
+
+    public AdminServicioTest() {
+        super();
+    }
 }
